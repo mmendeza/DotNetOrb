@@ -1,0 +1,38 @@
+﻿module Chat
+{
+
+	exception MaxUsersReached
+	{
+		long numUsers;
+	};
+
+	exception UserNotAuthenticated
+	{		
+	};
+
+	enum ColorEnum {
+		Default,
+		Green,
+		Yellow,
+		Red
+	};
+
+	struct Message
+	{
+		string from;
+		ColorEnum color;
+		wstring text;
+	};
+
+	interface Client {
+		readonly attribute string Name;
+		void SendMessage(in Message msg);
+	};
+
+	interface Server {
+		readonly attribute string Name;
+		boolean RegisterUser(in Client clientRef, out long sessionId) raises(MaxUsersReached);
+		void UnregisterUser(in long sessionId);
+		void BroadcastMessage(in long sessionId, in Message msg) raises(UserNotAuthenticated);
+	};
+};

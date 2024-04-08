@@ -1,0 +1,134 @@
+﻿module Test {
+
+	interface BasicTypesIfz 
+	{
+		typedef fixed <5,2> fixedT;
+
+		attribute int8 a_sbyte;
+		typedef sequence<int8> SbyteSeq;
+		attribute SbyteSeq a_sbyte_seq;
+
+		attribute uint8 a_byte;
+		typedef sequence<uint8> ByteSeq;
+		attribute ByteSeq a_byte_seq;
+
+		attribute short a_short;
+		typedef sequence<short> ShortSeq;
+		attribute ShortSeq a_short_seq;
+
+		attribute unsigned short a_ushort;
+		typedef sequence<unsigned short> UshortSeq;
+		attribute UshortSeq a_ushort_seq;
+
+		attribute long a_long;
+		typedef sequence<long> LongSeq;
+		attribute LongSeq a_long_seq;
+
+		attribute unsigned long a_ulong;
+		typedef sequence<unsigned long> UlongSeq;
+		attribute UlongSeq a_ulong_seq;
+
+		attribute long long a_long_long;
+		typedef sequence<long long> LongLongSeq;
+		attribute LongLongSeq a_long_long_seq;
+
+		attribute unsigned long long a_ulong_long;
+		typedef sequence<unsigned long long> UlongSongSeq;
+		attribute UlongSongSeq a_ulong_long_seq;
+
+		attribute float a_float;
+		typedef sequence<float> FloatSeq;
+		attribute FloatSeq a_float_seq;
+
+		attribute double a_double;
+		typedef sequence<double> DoubleSeq;
+		attribute DoubleSeq a_double_seq;
+
+		attribute char a_char;
+		typedef sequence<char> CharSeq;
+		attribute CharSeq a_char_seq;
+
+		attribute wchar a_wchar;
+		typedef sequence<wchar> WCharSeq;
+		attribute WCharSeq a_wchar_seq;
+
+		attribute string a_string;
+		typedef sequence<string> StringSeq;
+		attribute StringSeq a_string_seq;
+
+		attribute wstring a_wstring;
+		typedef sequence<wstring> WStringSeq;
+		attribute WStringSeq a_wstring_seq;
+
+		attribute boolean a_boolean;
+		typedef sequence<boolean> BoolSeq;
+		attribute BoolSeq a_boolean_seq;
+
+		attribute octet a_octet;
+		typedef sequence<octet> OctetSeq;
+		attribute OctetSeq a_octet_seq;
+
+		attribute fixedT a_fixed;
+		typedef sequence<fixedT> FixedSeq;
+		attribute FixedSeq a_fixed_seq;
+	};
+
+	interface Recursive
+	{
+		struct Foo; // Forward declaration; Foo is incomplete
+		typedef sequence<Foo> FooSeq;  // incomplete sequence type
+		struct Foo {
+			long value;
+			FooSeq chain; // incomplete seq. type used as struct member; OK
+		};
+
+		union Bar; // Forward declaration
+		typedef sequence<Bar> BarSeq;
+
+		union Bar switch (long) { // Define incomplete union
+		case 0:
+			long l_mem;
+		case 1:
+			struct Foo {
+				double d_mem;
+				BarSeq nested; // OK, recurse on enclosing
+				// incomplete type
+			} s_mem;
+		};
+
+		Foo SendFoo(in Foo f);
+
+		Bar SendBar(in Bar b);
+
+		@ami
+		any SendAny(in any a);
+	};
+
+	module VT
+	{
+		valuetype ManagerRecord;
+
+		valuetype EmployeeRecord
+		{
+			public ManagerRecord manager;
+			// state definition 
+			private string name; 
+			private string email; 
+			private string SSN; 
+			// initializer
+			factory init(in string name, in string SSN); 
+		};
+
+		valuetype ManagerRecord : truncatable EmployeeRecord
+		{ 
+			// state definition
+			public sequence<EmployeeRecord> direct_reports;
+		};
+
+		interface ValueTypesIfz
+		{
+			ManagerRecord GetRecord(in ManagerRecord record);
+		};
+	};
+
+};

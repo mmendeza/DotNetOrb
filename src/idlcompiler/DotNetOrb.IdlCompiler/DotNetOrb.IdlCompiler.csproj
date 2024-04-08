@@ -1,0 +1,50 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+	<AssemblyVersion>$(MajorVersion).0.0.0</AssemblyVersion>
+	<Version>1.0.1</Version>
+	<Title>DotNetOrb IDL Compiler</Title>
+	<Copyright>Copyright (c) DotNetOrb Team (dotnetorb@gmail.com)</Copyright>
+	<Authors>dotnetorb</Authors>
+	<Description>A compiler for DotNetOrb IDL files</Description>
+	<PackageReadmeFile>README.md</PackageReadmeFile>
+	<PackageTags>CORBA;ORB;IDL;.NET;COMPILER</PackageTags>
+	<PackAsTool>True</PackAsTool>
+	<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+	<RepositoryUrl>https://github.com/dotnetorb/DotNetOrb</RepositoryUrl>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="TestInterface.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Symbols\IDLSymbol.cs~RF51dab6.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\LICENSE.txt">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\..\..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Antlr4.Runtime.Standard" Version="4.13.1" />
+  </ItemGroup>
+
+</Project>

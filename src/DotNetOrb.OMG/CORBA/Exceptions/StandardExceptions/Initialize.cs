@@ -1,0 +1,20 @@
+﻿// Copyright (c) DotNetOrb Team (dotnetorb@gmail.com). All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
+using System;
+
+namespace CORBA
+{
+    public class Initialize : CORBA.SystemException
+    {
+        public Initialize() : base(null, 0, CompletionStatus.No) { }
+
+        public Initialize(int minor, CompletionStatus completed) : base(null, minor, completed) { }
+
+        public Initialize(string reason) : base(reason, 0, CompletionStatus.No) { }
+
+        public Initialize(string reason, int minor, CompletionStatus completed) : base(reason, minor, completed) { }
+
+        public Initialize(string reason, int minor, CompletionStatus completed, Exception? innerException) : base(reason, minor, completed, innerException) { }
+    }
+}

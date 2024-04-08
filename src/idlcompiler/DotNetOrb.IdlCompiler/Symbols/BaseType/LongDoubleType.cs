@@ -1,0 +1,72 @@
+﻿// Copyright (c) DotNetOrb Team (dotnetorb@gmail.com). All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
+using System.Collections.Generic;
+using System.IO;
+
+namespace DotNetOrb.IdlCompiler.Symbols
+{
+    public class LongDoubleType: BaseType, IBasicType
+    {        
+        public LongDoubleType(string name, bool dotNetNaming, List<Annotation> annotations = null) : base(name, dotNetNaming, annotations)
+        {
+
+        }
+
+        public override int TCKind
+        {
+            get
+            {
+                return 25;
+            }            
+        }
+
+        public override string IDLType
+        {
+            get
+            {
+                return Name;
+            }
+        }
+
+        public override string MappedType
+        {
+            get
+            {
+                return "decimal";
+            }
+        }
+
+        public override void PrintRead(string indent, TextWriter sw, string streamName, string varName, int iteration)
+        {
+            sw.WriteLine($"{indent}{varName} = {streamName}.ReadLongDouble();");
+        }
+
+        public override void PrintWrite(string indent, TextWriter sw, string streamName, string varName, int iteration)
+        {
+            sw.WriteLine($"{indent}{streamName}.WriteLongDouble({varName});");
+        }
+
+        public override void PrintExtract(string indent, TextWriter sw, string anyName, string varName, string type = null)
+        {
+            sw.WriteLine($"{indent}{varName} = {anyName}.ExtractLongDouble();");
+                
+        }
+
+        public override void PrintInsert(string indent, TextWriter sw, string anyName, string varName)
+        {
+            sw.WriteLine($"{indent}{anyName}.InsertLongDouble({varName});");
+        }
+
+        public void PrintReadArray(string indent, TextWriter sw, string streamName, string varName, string length)
+        {
+            sw.WriteLine($"{indent}{streamName}.ReadLongDoubleArray(ref {varName}, 0, {length});");
+        }
+
+        public void PrintWriteArray(string indent, TextWriter sw, string streamName, string varName, string length)
+        {
+            sw.WriteLine($"{indent}{streamName}.WriteLongDoubleArray({varName}, 0, {length});");
+        }
+
+    }
+}

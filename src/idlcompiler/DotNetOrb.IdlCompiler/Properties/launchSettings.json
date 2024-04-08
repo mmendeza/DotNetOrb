@@ -1,0 +1,40 @@
+{
+  "profiles": {
+    "DotNetOrb.IdlCompiler": {
+      "commandName": "Project",
+      "commandLineArgs": "-i ..\\..\\..\\..\\..\\DotNetOrb.OMG\\idls\\\r\n-o ..\\..\\..\\..\\..\\DotNetOrb.OMG\\compiled_idls\\\r\n..\\..\\..\\..\\..\\DotNetOrb.OMG\\idls\\orb.idl\r\n..\\..\\..\\..\\..\\DotNetOrb.OMG\\idls\\CONV_FRAME.idl\r\n..\\..\\..\\..\\..\\DotNetOrb.OMG\\idls\\ETF.idl\r\n..\\..\\..\\..\\..\\DotNetOrb.OMG\\idls\\IOP.idl\r\n..\\..\\..\\..\\..\\DotNetOrb.OMG\\idls\\IIOP.idl\r\n..\\..\\..\\..\\..\\DotNetOrb.OMG\\idls\\CSIIOP.idl\r\n..\\..\\..\\..\\..\\DotNetOrb.OMG\\idls\\SSLIOP.idl\r\n..\\..\\..\\..\\..\\DotNetOrb.OMG\\idls\\MIOP.idl\r\n..\\..\\..\\..\\..\\DotNetOrb.OMG\\idls\\PortableGroup.idl\r\n..\\..\\..\\..\\..\\DotNetOrb.OMG\\idls\\Messaging.idl\r\n..\\..\\..\\..\\..\\DotNetOrb.OMG\\idls\\MessageRouting.idl\r\n..\\..\\..\\..\\..\\DotNetOrb.OMG\\idls\\PortableInterceptor.idl\r\n..\\..\\..\\..\\..\\DotNetOrb.OMG\\idls\\Compression.idl\r\n..\\..\\..\\..\\..\\DotNetOrb.OMG\\idls\\ZIOP.idl\r\n..\\..\\..\\..\\..\\DotNetOrb.OMG\\idls\\BidirPolicy.idl\r\n..\\..\\..\\..\\..\\DotNetOrb.OMG\\idls\\SSLPolicy.idl\r\n..\\..\\..\\..\\..\\DotNetOrb.OMG\\idls\\DynamicAny.idl\r\n..\\..\\..\\..\\..\\DotNetOrb.OMG\\idls\\imr.idl\r\n..\\..\\..\\..\\..\\DotNetOrb.OMG\\idls\\ServerObject.idl\r\n..\\..\\..\\..\\..\\DotNetOrb.OMG\\idls\\ImplRepo.idl"
+    },
+    "ORB": {
+      "commandName": "Project",
+      "commandLineArgs": "E:\\DotNetOrb\\DotNetOrb.Core\\CORBA\\idls\\omg\\orb.idl"
+    },
+    "CustomerService": {
+      "commandName": "Project",
+      "commandLineArgs": "E:\\DotNetOrb\\DotNetOrb.IdlCompiler\\TestIDL\\Test1.idl"
+    },
+    "ETF": {
+      "commandName": "Project",
+      "commandLineArgs": "-i E:\\DotNetOrb\\DotNetOrb.Core\\CORBA\\idls\\omg E:\\DotNetOrb\\DotNetOrb.Core\\CORBA\\idls\\omg\\ETF.idl"
+    },
+    "GIOP": {
+      "commandName": "Project",
+      "commandLineArgs": "-i E:\\DotNetOrb\\DotNetOrb.OMG\\idls\\\r\n-o E:\\DotNetOrb\\DotNetOrb.OMG\\compiled_idls\\\r\nE:\\DotNetOrb\\DotNetOrb.OMG\\idls\\GIOP.idl"
+    },
+    "MyServer": {
+      "commandName": "Project",
+      "commandLineArgs": "E:\\DotNetOrb\\DotNetOrb.IdlCompiler\\TestIDL\\MyServer.idl"
+    },
+    "Profile 1": {
+      "commandName": "Project",
+      "commandLineArgs": "E:\\DotNetOrb\\DotNetOrb.IdlCompiler\\TestIDL\\Test1.idl"
+    },
+    "PG": {
+      "commandName": "Project",
+      "commandLineArgs": "-i ..\\..\\..\\..\\PGTest\\idls\\\r\n-o ..\\..\\..\\..\\PGTest\\compiled_idls\\\r\n..\\..\\..\\..\\PGTest\\idls\\DISTPGIf.idl"
+    },
+    "Test": {
+      "commandName": "Project",
+      "commandLineArgs": "-i ..\\..\\..\\..\\DotNetOrb.Test\\idls\\\r\n-o ..\\..\\..\\..\\DotNetOrb.Test\\compiled_idls\\\r\n..\\..\\..\\..\\DotNetOrb.Test\\idls\\test.idl"
+    }
+  }
+}

@@ -1,0 +1,664 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{683BD857-7308-44ED-8EE7-5F9DCD17ECF4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DotNetOrb.Core</RootNamespace>
+    <AssemblyName>DotNetOrb.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <LangVersion>11.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DotNetty.Buffers, Version=0.7.5.0, Culture=neutral, PublicKeyToken=bc13ca065fa06c29, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\DotNetty.Buffers.0.7.5\lib\net472\DotNetty.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetty.Codecs, Version=0.7.5.0, Culture=neutral, PublicKeyToken=bc13ca065fa06c29, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\DotNetty.Codecs.0.7.5\lib\net472\DotNetty.Codecs.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetty.Common, Version=0.7.5.0, Culture=neutral, PublicKeyToken=bc13ca065fa06c29, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\DotNetty.Common.0.7.5\lib\net472\DotNetty.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetty.Handlers, Version=0.7.5.0, Culture=neutral, PublicKeyToken=bc13ca065fa06c29, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\DotNetty.Handlers.0.7.5\lib\net472\DotNetty.Handlers.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetty.Transport, Version=0.7.5.0, Culture=neutral, PublicKeyToken=bc13ca065fa06c29, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\DotNetty.Transport.0.7.5\lib\net472\DotNetty.Transport.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Bcl.AsyncInterfaces.8.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Extensions.Configuration.8.0.0\lib\net462\Microsoft.Extensions.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Abstractions, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Extensions.Configuration.Abstractions.8.0.0\lib\net462\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.FileExtensions, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Extensions.Configuration.FileExtensions.8.0.0\lib\net462\Microsoft.Extensions.Configuration.FileExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Extensions.Configuration.Json.8.0.0\lib\net462\Microsoft.Extensions.Configuration.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Extensions.DependencyInjection.5.0.0\lib\net461\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.5.0.0\lib\net461\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.FileProviders.Abstractions, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Extensions.FileProviders.Abstractions.8.0.0\lib\net462\Microsoft.Extensions.FileProviders.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.FileProviders.Physical, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Extensions.FileProviders.Physical.8.0.0\lib\net462\Microsoft.Extensions.FileProviders.Physical.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.FileSystemGlobbing, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Extensions.FileSystemGlobbing.8.0.0\lib\net462\Microsoft.Extensions.FileSystemGlobbing.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Extensions.Logging.5.0.0\lib\net461\Microsoft.Extensions.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Extensions.Logging.Abstractions.5.0.0\lib\net461\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Options, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Extensions.Options.5.0.0\lib\net461\Microsoft.Extensions.Options.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Extensions.Primitives.8.0.0\lib\net462\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Collections.Immutable, Version=1.2.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\System.Collections.Immutable.1.5.0\lib\netstandard2.0\System.Collections.Immutable.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.ConfigurationManager, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\System.Configuration.ConfigurationManager.8.0.0\lib\net462\System.Configuration.ConfigurationManager.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\System.Diagnostics.DiagnosticSource.5.0.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Encodings.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\System.Text.Encodings.Web.8.0.0\lib\net462\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\System.Text.Json.8.0.0\lib\net462\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\DotNetOrb.Core\Any.cs">
+      <Link>Any.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\BasicAdapter.cs">
+      <Link>BasicAdapter.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\BufferManager\DefaultExpansionPolicy.cs">
+      <Link>BufferManager\DefaultExpansionPolicy.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\BufferManager\DoubleExpansionPolicy.cs">
+      <Link>BufferManager\DoubleExpansionPolicy.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\BufferManager\IExpansionPolicy.cs">
+      <Link>BufferManager\IExpansionPolicy.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\BufferManager\LinearExpansionPolicy.cs">
+      <Link>BufferManager\LinearExpansionPolicy.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\CDR\CDRInputStream.cs">
+      <Link>CDR\CDRInputStream.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\CDR\CDROutputStream.cs">
+      <Link>CDR\CDROutputStream.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\CDR\CodeSet.cs">
+      <Link>CDR\CodeSet.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\CDR\EncapsulationInfo.cs">
+      <Link>CDR\EncapsulationInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\Config\ConfigException.cs">
+      <Link>Config\ConfigException.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\Config\Configuration.cs">
+      <Link>Config\Configuration.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\Config\IConfigurable.cs">
+      <Link>Config\IConfigurable.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\Config\IConfiguration.cs">
+      <Link>Config\IConfiguration.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\DataInputStream.cs">
+      <Link>DataInputStream.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\DataOutputStream.cs">
+      <Link>DataOutputStream.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\DefaultProfileSelector.cs">
+      <Link>DefaultProfileSelector.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\DefaultValueFactory.cs">
+      <Link>DefaultValueFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\Delegate.cs">
+      <Link>Delegate.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\DII\Request.cs">
+      <Link>DII\Request.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\DSI\ServerRequest.cs">
+      <Link>DSI\ServerRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\DynAny\DynAny.cs">
+      <Link>DynAny\DynAny.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\DynAny\DynAnyFactoryImpl.cs">
+      <Link>DynAny\DynAnyFactoryImpl.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\DynAny\DynArray.cs">
+      <Link>DynAny\DynArray.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\DynAny\DynEnum.cs">
+      <Link>DynAny\DynEnum.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\DynAny\DynFixed.cs">
+      <Link>DynAny\DynFixed.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\DynAny\DynSequence.cs">
+      <Link>DynAny\DynSequence.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\DynAny\DynStruct.cs">
+      <Link>DynAny\DynStruct.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\DynAny\DynUnion.cs">
+      <Link>DynAny\DynUnion.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\DynAny\DynValue.cs">
+      <Link>DynAny\DynValue.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\EmptyLogger.cs">
+      <Link>EmptyLogger.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\ETF\ListenEndpoint.cs">
+      <Link>ETF\ListenEndpoint.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\ETF\Listener.cs">
+      <Link>ETF\Listener.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\ETF\ProfileBase.cs">
+      <Link>ETF\ProfileBase.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\ETF\ProtocolAddressBase.cs">
+      <Link>ETF\ProtocolAddressBase.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\GIOP\AddressingDisposition.cs">
+      <Link>GIOP\AddressingDisposition.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\GIOP\ClientConnection.cs">
+      <Link>GIOP\ClientConnection.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\GIOP\ClientLocalChannelHandler.cs">
+      <Link>GIOP\ClientLocalChannelHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\GIOP\ClientLocalConnection.cs">
+      <Link>GIOP\ClientLocalConnection.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\GIOP\ConnectionManager.cs">
+      <Link>GIOP\ConnectionManager.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\GIOP\GIOPBiDirClientHandler.cs">
+      <Link>GIOP\GIOPBiDirClientHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\GIOP\GIOPBiDirServerHandler.cs">
+      <Link>GIOP\GIOPBiDirServerHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\GIOP\GIOPCancelRequestMessage.cs">
+      <Link>GIOP\GIOPCancelRequestMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\GIOP\GIOPChannelHandler.cs">
+      <Link>GIOP\GIOPChannelHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\GIOP\GIOPCodec.cs">
+      <Link>GIOP\GIOPCodec.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\GIOP\GIOPCodeSetClientHandler.cs">
+      <Link>GIOP\GIOPCodeSetClientHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\GIOP\GIOPCodeSetServerHandler.cs">
+      <Link>GIOP\GIOPCodeSetServerHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\GIOP\GIOPConnection.cs">
+      <Link>GIOP\GIOPConnection.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\GIOP\GIOPDecoder.cs">
+      <Link>GIOP\GIOPDecoder.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\GIOP\GIOPEncoder.cs">
+      <Link>GIOP\GIOPEncoder.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\GIOP\GIOPFragmentedMessage.cs">
+      <Link>GIOP\GIOPFragmentedMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\GIOP\GIOPFragmentMessage.cs">
+      <Link>GIOP\GIOPFragmentMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\GIOP\GIOPHeader.cs">
+      <Link>GIOP\GIOPHeader.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\GIOP\GIOPLocateReplyMessage.cs">
+      <Link>GIOP\GIOPLocateReplyMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\GIOP\GIOPLocateRequestMessage.cs">
+      <Link>GIOP\GIOPLocateRequestMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\GIOP\GIOPMessage.cs">
+      <Link>GIOP\GIOPMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\GIOP\GIOPReplyMessage.cs">
+      <Link>GIOP\GIOPReplyMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\GIOP\GIOPRequestMessage.cs">
+      <Link>GIOP\GIOPRequestMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\GIOP\GIOPServiceContextMessage.cs">
+      <Link>GIOP\GIOPServiceContextMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\GIOP\IConnectionFactory.cs">
+      <Link>GIOP\IConnectionFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\GIOP\IConnectionListener.cs">
+      <Link>GIOP\IConnectionListener.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\GIOP\InvocationPolicies.cs">
+      <Link>GIOP\InvocationPolicies.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\GIOP\LocateReplyInputStream.cs">
+      <Link>GIOP\LocateReplyInputStream.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\GIOP\LocateReplyOutputStream.cs">
+      <Link>GIOP\LocateReplyOutputStream.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\GIOP\LocateRequestInputStream.cs">
+      <Link>GIOP\LocateRequestInputStream.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\GIOP\LocateRequestOutputStream.cs">
+      <Link>GIOP\LocateRequestOutputStream.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\GIOP\ReplyInputStream.cs">
+      <Link>GIOP\ReplyInputStream.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\GIOP\ReplyOutputStream.cs">
+      <Link>GIOP\ReplyOutputStream.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\GIOP\RequestInputStream.cs">
+      <Link>GIOP\RequestInputStream.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\GIOP\RequestOutputStream.cs">
+      <Link>GIOP\RequestOutputStream.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\GIOP\ServerConnection.cs">
+      <Link>GIOP\ServerConnection.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\GIOP\ServerLocalChannelHandler.cs">
+      <Link>GIOP\ServerLocalChannelHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\GIOP\ServerLocalConnection.cs">
+      <Link>GIOP\ServerLocalConnection.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\GIOP\TransportManager.cs">
+      <Link>GIOP\TransportManager.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\IIOP\AssociationOptions.cs">
+      <Link>IIOP\AssociationOptions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\IIOP\ClientIIOPChannelHandler.cs">
+      <Link>IIOP\ClientIIOPChannelHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\IIOP\ClientIIOPConnection.cs">
+      <Link>IIOP\ClientIIOPConnection.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\IIOP\CommonInteroperabilityOptions.cs">
+      <Link>IIOP\CommonInteroperabilityOptions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\IIOP\IIOPAddress.cs">
+      <Link>IIOP\IIOPAddress.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\IIOP\IIOPConnectionFactory.cs">
+      <Link>IIOP\IIOPConnectionFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\IIOP\IIOPListener.cs">
+      <Link>IIOP\IIOPListener.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\IIOP\IIOPProfile.cs">
+      <Link>IIOP\IIOPProfile.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\IIOP\IPAddressExtensions.cs">
+      <Link>IIOP\IPAddressExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\IIOP\SecurityServiceOptions.cs">
+      <Link>IIOP\SecurityServiceOptions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\IIOP\ServerIIOPChannelHandler.cs">
+      <Link>IIOP\ServerIIOPChannelHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\IIOP\ServerIIOPConnection.cs">
+      <Link>IIOP\ServerIIOPConnection.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\IIORMutator.cs">
+      <Link>IIORMutator.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\ILogger.cs">
+      <Link>ILogger.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\ImR\IImRAccess.cs">
+      <Link>ImR\IImRAccess.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\ImR\ImRAccess.cs">
+      <Link>ImR\ImRAccess.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\ImR\TAO\ImRAccess.cs">
+      <Link>ImR\TAO\ImRAccess.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\ImR\TAO\ServerObject.cs">
+      <Link>ImR\TAO\ServerObject.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\IProfileSelector.cs">
+      <Link>IProfileSelector.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\MIOP\MIOPProfile.cs">
+      <Link>MIOP\MIOPProfile.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\ObjectKeyMap.cs">
+      <Link>ObjectKeyMap.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\ORB.cs">
+      <Link>ORB.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\ORBConstants.cs">
+      <Link>ORBConstants.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\ParsedIOR.cs">
+      <Link>ParsedIOR.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\POA\AOM.cs">
+      <Link>POA\AOM.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\POA\Current.cs">
+      <Link>POA\Current.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\POA\DefaultRPPoolManage.cs">
+      <Link>POA\DefaultRPPoolManage.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\POA\EventMulticaster.cs">
+      <Link>POA\EventMulticaster.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\POA\Exceptions\ApplicationException.cs">
+      <Link>POA\Exceptions\ApplicationException.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\POA\Exceptions\CompletionRequestedException.cs">
+      <Link>POA\Exceptions\CompletionRequestedException.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\POA\Exceptions\InactiveException.cs">
+      <Link>POA\Exceptions\InactiveException.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\POA\Exceptions\IncorrectApplicationException.cs">
+      <Link>POA\Exceptions\IncorrectApplicationException.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\POA\Exceptions\ParentIsHoldingException.cs">
+      <Link>POA\Exceptions\ParentIsHoldingException.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\POA\Exceptions\POAInternalException.cs">
+      <Link>POA\Exceptions\POAInternalException.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\POA\Exceptions\ResourceLimitReachedException.cs">
+      <Link>POA\Exceptions\ResourceLimitReachedException.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\POA\Exceptions\ShutdownInProgressException.cs">
+      <Link>POA\Exceptions\ShutdownInProgressException.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\POA\IAOMListener.cs">
+      <Link>POA\IAOMListener.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\POA\IEventListener.cs">
+      <Link>POA\IEventListener.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\POA\IInvocationContext.cs">
+      <Link>POA\IInvocationContext.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\POA\IPOAListener.cs">
+      <Link>POA\IPOAListener.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\POA\IPOAManagerMonitor.cs">
+      <Link>POA\IPOAManagerMonitor.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\POA\IPOAMonitor.cs">
+      <Link>POA\IPOAMonitor.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\POA\IRPPoolManagerListener.cs">
+      <Link>POA\IRPPoolManagerListener.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\POA\LocalInvocationContext.cs">
+      <Link>POA\LocalInvocationContext.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\POA\POA.cs">
+      <Link>POA\POA.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\POA\POAConstants.cs">
+      <Link>POA\POAConstants.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\POA\POAManager.cs">
+      <Link>POA\POAManager.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\POA\POAManagerMonitor.cs">
+      <Link>POA\POAManagerMonitor.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\POA\POAMonitor.cs">
+      <Link>POA\POAMonitor.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\POA\Policies\IdAssignmentPolicy.cs">
+      <Link>POA\Policies\IdAssignmentPolicy.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\POA\Policies\IdUniquenessPolicy.cs">
+      <Link>POA\Policies\IdUniquenessPolicy.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\POA\Policies\ImplicitActivationPolicy.cs">
+      <Link>POA\Policies\ImplicitActivationPolicy.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\POA\Policies\LifespanPolicy.cs">
+      <Link>POA\Policies\LifespanPolicy.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\POA\Policies\RequestProcessingPolicy.cs">
+      <Link>POA\Policies\RequestProcessingPolicy.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\POA\Policies\ServantRetentionPolicy.cs">
+      <Link>POA\Policies\ServantRetentionPolicy.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\POA\Policies\SSLPolicy.cs">
+      <Link>POA\Policies\SSLPolicy.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\POA\Policies\ThreadPolicy.cs">
+      <Link>POA\Policies\ThreadPolicy.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\POA\RequestController.cs">
+      <Link>POA\RequestController.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\POA\RequestProcessor.cs">
+      <Link>POA\RequestProcessor.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\POA\RequestQueue.cs">
+      <Link>POA\RequestQueue.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\POA\RequestQueueListener.cs">
+      <Link>POA\RequestQueueListener.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\POA\RPPoolManager.cs">
+      <Link>POA\RPPoolManager.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\POA\RPPoolManagerFactory.cs">
+      <Link>POA\RPPoolManagerFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\POA\SharedRPPoolManager.cs">
+      <Link>POA\SharedRPPoolManager.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\POA\SingleThreadedRPPoolManager.cs">
+      <Link>POA\SingleThreadedRPPoolManager.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\POA\Util\ByteArrayKey.cs">
+      <Link>POA\Util\ByteArrayKey.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\POA\Util\IdUtil.cs">
+      <Link>POA\Util\IdUtil.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\POA\Util\POAUtil.cs">
+      <Link>POA\Util\POAUtil.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\POA\Util\StringPair.cs">
+      <Link>POA\Util\StringPair.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\Policies\BidirectionalPolicy.cs">
+      <Link>Policies\BidirectionalPolicy.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\Policies\BidirectionalPolicyFactory.cs">
+      <Link>Policies\BidirectionalPolicyFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\Policies\ClientProtocolPolicy.cs">
+      <Link>Policies\ClientProtocolPolicy.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\Policies\MaxHopsPolicy.cs">
+      <Link>Policies\MaxHopsPolicy.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\Policies\PolicyManager.cs">
+      <Link>Policies\PolicyManager.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\Policies\PolicyUtil.cs">
+      <Link>Policies\PolicyUtil.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\Policies\QueueOrderPolicy.cs">
+      <Link>Policies\QueueOrderPolicy.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\Policies\RebindPolicy.cs">
+      <Link>Policies\RebindPolicy.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\Policies\RelativeRequestTimeoutPolicy.cs">
+      <Link>Policies\RelativeRequestTimeoutPolicy.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\Policies\RelativeRoundtripTimeoutPolicy.cs">
+      <Link>Policies\RelativeRoundtripTimeoutPolicy.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\Policies\ReplyEndTimePolicy.cs">
+      <Link>Policies\ReplyEndTimePolicy.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\Policies\ReplyPriorityPolicy.cs">
+      <Link>Policies\ReplyPriorityPolicy.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\Policies\ReplyStartTimePolicy.cs">
+      <Link>Policies\ReplyStartTimePolicy.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\Policies\RequestEndTimePolicy.cs">
+      <Link>Policies\RequestEndTimePolicy.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\Policies\RequestPriorityPolicy.cs">
+      <Link>Policies\RequestPriorityPolicy.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\Policies\RequestStartTimePolicy.cs">
+      <Link>Policies\RequestStartTimePolicy.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\Policies\RoutingPolicy.cs">
+      <Link>Policies\RoutingPolicy.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\Policies\SyncScopePolicy.cs">
+      <Link>Policies\SyncScopePolicy.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\RepositoryId.cs">
+      <Link>RepositoryId.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\ServantDelegate.cs">
+      <Link>ServantDelegate.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\SpecificProfileSelector.cs">
+      <Link>SpecificProfileSelector.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\SyncScope.cs">
+      <Link>SyncScope.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\SystemExceptionHelper.cs">
+      <Link>SystemExceptionHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\TaggedComponentList.cs">
+      <Link>TaggedComponentList.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\UserExceptionHelper.cs">
+      <Link>UserExceptionHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\Util\CorbaLoc.cs">
+      <Link>Util\CorbaLoc.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\Util\ObjectUtil.cs">
+      <Link>Util\ObjectUtil.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\Util\Time.cs">
+      <Link>Util\Time.cs</Link>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DotNetOrb.OMG\DotNetOrb.OMG.csproj">
+      <Project>{53fa5355-2a45-4d7b-a6ae-88d3ad8d4228}</Project>
+      <Name>DotNetOrb.OMG</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -1,0 +1,48 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Antlr4 Include="IDLPreprocessorLexer.g4">
+			<Package>DotNetOrb.IdlCompiler</Package>
+			<Visitor>true</Visitor>
+			<Error>false</Error>
+			<AntOutDir>..\DotNetOrb.IdlCompiler</AntOutDir>
+			<Listener>true</Listener>
+			<GAtn>false</GAtn>
+		</Antlr4>
+		<Antlr4 Include="IDLPreprocessorParser.g4">
+			<Listener>true</Listener>
+			<Visitor>true</Visitor>
+			<GAtn>false</GAtn>
+			<Package>DotNetOrb.IdlCompiler</Package>
+			<Error>false</Error>
+			<AntOutDir>..\DotNetOrb.IdlCompiler</AntOutDir>
+		</Antlr4>
+		<Antlr4 Include="IDLLexer.g4">
+			<Package>DotNetOrb.IdlCompiler</Package>
+			<Visitor>true</Visitor>
+			<Error>false</Error>
+			<AntOutDir>..\DotNetOrb.IdlCompiler</AntOutDir>
+			<Listener>true</Listener>
+			<GAtn>false</GAtn>
+		</Antlr4>
+		<Antlr4 Include="IDLParser.g4">
+			<Listener>true</Listener>
+			<Visitor>true</Visitor>
+			<GAtn>false</GAtn>
+			<Package>DotNetOrb.IdlCompiler</Package>
+			<Error>false</Error>
+			<AntOutDir>..\DotNetOrb.IdlCompiler</AntOutDir>
+		</Antlr4>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Antlr4.Runtime.Standard" Version="4.13.1" />
+		<PackageReference Include="Antlr4BuildTasks" Version="12.8.0">
+			<PrivateAssets>all</PrivateAssets>
+		</PackageReference>
+	</ItemGroup>
+</Project>

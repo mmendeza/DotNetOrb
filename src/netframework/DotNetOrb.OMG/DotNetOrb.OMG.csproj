@@ -1,0 +1,432 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{53FA5355-2A45-4D7B-A6AE-88D3AD8D4228}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DotNetOrb.OMG</RootNamespace>
+    <AssemblyName>DotNetOrb.OMG</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <LangVersion>11.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\Any.cs">
+      <Link>CORBA\Any.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\ARG_IN.cs">
+      <Link>CORBA\ARG_IN.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\ARG_IN_OUT.cs">
+      <Link>CORBA\ARG_IN_OUT.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\ARG_OUT.cs">
+      <Link>CORBA\ARG_OUT.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\Attributes\DecimalPrecisionAttribute.cs">
+      <Link>CORBA\Attributes\DecimalPrecisionAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\Attributes\HelperAttribute.cs">
+      <Link>CORBA\Attributes\HelperAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\Attributes\IdlNameAttribute.cs">
+      <Link>CORBA\Attributes\IdlNameAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\Attributes\InterfaceTypeAttribute.cs">
+      <Link>CORBA\Attributes\InterfaceTypeAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\Attributes\OrderAttribute.cs">
+      <Link>CORBA\Attributes\OrderAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\Attributes\RepositoryIDAttribute.cs">
+      <Link>CORBA\Attributes\RepositoryIDAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\Attributes\StubAttribute.cs">
+      <Link>CORBA\Attributes\StubAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\Attributes\ThrowsIdlsExceptionAttribute.cs">
+      <Link>CORBA\Attributes\ThrowsIdlsExceptionAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\Attributes\TruncatableAttribute.cs">
+      <Link>CORBA\Attributes\TruncatableAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\Attributes\ValueFactoryAttribute.cs">
+      <Link>CORBA\Attributes\ValueFactoryAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\Attributes\WideCharAttribute.cs">
+      <Link>CORBA\Attributes\WideCharAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\ContextList.cs">
+      <Link>CORBA\ContextList.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\Environment.cs">
+      <Link>CORBA\Environment.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\ExceptionList.cs">
+      <Link>CORBA\ExceptionList.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\Exceptions\ApplicationException.cs">
+      <Link>CORBA\Exceptions\ApplicationException.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\Exceptions\BadKind.cs">
+      <Link>CORBA\Exceptions\BadKind.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\Exceptions\Bounds.cs">
+      <Link>CORBA\Exceptions\Bounds.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\Exceptions\InvalidName.cs">
+      <Link>CORBA\Exceptions\InvalidName.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\Exceptions\RemarshalException.cs">
+      <Link>CORBA\Exceptions\RemarshalException.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\Exceptions\RuntimeException.cs">
+      <Link>CORBA\Exceptions\RuntimeException.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\Exceptions\StandardExceptions\BadInvOrder.cs">
+      <Link>CORBA\Exceptions\StandardExceptions\BadInvOrder.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\Exceptions\StandardExceptions\BadOperation.cs">
+      <Link>CORBA\Exceptions\StandardExceptions\BadOperation.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\Exceptions\StandardExceptions\BadParam.cs">
+      <Link>CORBA\Exceptions\StandardExceptions\BadParam.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\Exceptions\StandardExceptions\BadTypeCode.cs">
+      <Link>CORBA\Exceptions\StandardExceptions\BadTypeCode.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\Exceptions\StandardExceptions\CodeSetIncompatible.cs">
+      <Link>CORBA\Exceptions\StandardExceptions\CodeSetIncompatible.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\Exceptions\StandardExceptions\CommFailure.cs">
+      <Link>CORBA\Exceptions\StandardExceptions\CommFailure.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\Exceptions\StandardExceptions\DataConversion.cs">
+      <Link>CORBA\Exceptions\StandardExceptions\DataConversion.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\Exceptions\StandardExceptions\IndirectionException.cs">
+      <Link>CORBA\Exceptions\StandardExceptions\IndirectionException.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\Exceptions\StandardExceptions\Initialize.cs">
+      <Link>CORBA\Exceptions\StandardExceptions\Initialize.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\Exceptions\StandardExceptions\Internal.cs">
+      <Link>CORBA\Exceptions\StandardExceptions\Internal.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\Exceptions\StandardExceptions\IntfRepos.cs">
+      <Link>CORBA\Exceptions\StandardExceptions\IntfRepos.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\Exceptions\StandardExceptions\InvObjRef.cs">
+      <Link>CORBA\Exceptions\StandardExceptions\InvObjRef.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\Exceptions\StandardExceptions\Marshal.cs">
+      <Link>CORBA\Exceptions\StandardExceptions\Marshal.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\Exceptions\StandardExceptions\NoImplement.cs">
+      <Link>CORBA\Exceptions\StandardExceptions\NoImplement.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\Exceptions\StandardExceptions\NoMemory.cs">
+      <Link>CORBA\Exceptions\StandardExceptions\NoMemory.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\Exceptions\StandardExceptions\NoPermission.cs">
+      <Link>CORBA\Exceptions\StandardExceptions\NoPermission.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\Exceptions\StandardExceptions\NoResources.cs">
+      <Link>CORBA\Exceptions\StandardExceptions\NoResources.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\Exceptions\StandardExceptions\ObjAdapter.cs">
+      <Link>CORBA\Exceptions\StandardExceptions\ObjAdapter.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\Exceptions\StandardExceptions\ObjectNotExist.cs">
+      <Link>CORBA\Exceptions\StandardExceptions\ObjectNotExist.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\Exceptions\StandardExceptions\SystemException.cs">
+      <Link>CORBA\Exceptions\StandardExceptions\SystemException.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\Exceptions\StandardExceptions\Timeout.cs">
+      <Link>CORBA\Exceptions\StandardExceptions\Timeout.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\Exceptions\StandardExceptions\Transient.cs">
+      <Link>CORBA\Exceptions\StandardExceptions\Transient.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\Exceptions\StandardExceptions\Unknown.cs">
+      <Link>CORBA\Exceptions\StandardExceptions\Unknown.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\Exceptions\UnknownUserException.cs">
+      <Link>CORBA\Exceptions\UnknownUserException.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\Exceptions\UserException.cs">
+      <Link>CORBA\Exceptions\UserException.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\Exceptions\WrongTransaction.cs">
+      <Link>CORBA\Exceptions\WrongTransaction.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\IBoxedValueHelper.cs">
+      <Link>CORBA\IBoxedValueHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\IContext.cs">
+      <Link>CORBA\IContext.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\ICustomMarshal.cs">
+      <Link>CORBA\ICustomMarshal.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\ICustomValue.cs">
+      <Link>CORBA\ICustomValue.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\IDataInputStream.cs">
+      <Link>CORBA\IDataInputStream.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\IDataOutputStream.cs">
+      <Link>CORBA\IDataOutputStream.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\IDelegate.cs">
+      <Link>CORBA\IDelegate.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\IIDLEntity.cs">
+      <Link>CORBA\IIDLEntity.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\IInputStream.cs">
+      <Link>CORBA\IInputStream.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\IInvokeHandler.cs">
+      <Link>CORBA\IInvokeHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\ILocalInterface.cs">
+      <Link>CORBA\ILocalInterface.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\IObject.cs">
+      <Link>CORBA\IObject.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\IOutputStream.cs">
+      <Link>CORBA\IOutputStream.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\IRequest.cs">
+      <Link>CORBA\IRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\IResponseHandler.cs">
+      <Link>CORBA\IResponseHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\IServantObject.cs">
+      <Link>CORBA\IServantObject.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\IServerRequest.cs">
+      <Link>CORBA\IServerRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\IStreamable.cs">
+      <Link>CORBA\IStreamable.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\IStreamableValue.cs">
+      <Link>CORBA\IStreamableValue.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\IValueBase.cs">
+      <Link>CORBA\IValueBase.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\IValueBaseHelper.cs">
+      <Link>CORBA\IValueBaseHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\IValueFactory.cs">
+      <Link>CORBA\IValueFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\IValueOutputStream.cs">
+      <Link>CORBA\IValueOutputStream.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\LocalObject.cs">
+      <Link>CORBA\LocalObject.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\NamedValue.cs">
+      <Link>CORBA\NamedValue.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\NVList.cs">
+      <Link>CORBA\NVList.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\Object.cs">
+      <Link>CORBA\Object.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\ORB.cs">
+      <Link>CORBA\ORB.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\StringValueHelper.cs">
+      <Link>CORBA\StringValueHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\TypeCodes\AbstractInterfaceTypeCode.cs">
+      <Link>CORBA\TypeCodes\AbstractInterfaceTypeCode.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\TypeCodes\AliasTypeCode.cs">
+      <Link>CORBA\TypeCodes\AliasTypeCode.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\TypeCodes\ArrayTypeCode.cs">
+      <Link>CORBA\TypeCodes\ArrayTypeCode.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\TypeCodes\ComplexTypeCode.cs">
+      <Link>CORBA\TypeCodes\ComplexTypeCode.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\TypeCodes\EnumTypeCode.cs">
+      <Link>CORBA\TypeCodes\EnumTypeCode.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\TypeCodes\ExceptionTypeCode.cs">
+      <Link>CORBA\TypeCodes\ExceptionTypeCode.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\TypeCodes\FixedTypeCode.cs">
+      <Link>CORBA\TypeCodes\FixedTypeCode.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\TypeCodes\LocalInterfaceTypeCode.cs">
+      <Link>CORBA\TypeCodes\LocalInterfaceTypeCode.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\TypeCodes\NativeTypeCode.cs">
+      <Link>CORBA\TypeCodes\NativeTypeCode.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\TypeCodes\ObjectReferenceTypeCode.cs">
+      <Link>CORBA\TypeCodes\ObjectReferenceTypeCode.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\TypeCodes\RecursiveTypeCode.cs">
+      <Link>CORBA\TypeCodes\RecursiveTypeCode.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\TypeCodes\SequenceTypeCode.cs">
+      <Link>CORBA\TypeCodes\SequenceTypeCode.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\TypeCodes\StringTypeCode.cs">
+      <Link>CORBA\TypeCodes\StringTypeCode.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\TypeCodes\StructTypeCode.cs">
+      <Link>CORBA\TypeCodes\StructTypeCode.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\TypeCodes\TypeCode.cs">
+      <Link>CORBA\TypeCodes\TypeCode.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\TypeCodes\UnionTypeCode.cs">
+      <Link>CORBA\TypeCodes\UnionTypeCode.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\TypeCodes\ValueBoxTypeCode.cs">
+      <Link>CORBA\TypeCodes\ValueBoxTypeCode.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\TypeCodes\ValueModifier.cs">
+      <Link>CORBA\TypeCodes\ValueModifier.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\TypeCodes\ValueTypeCode.cs">
+      <Link>CORBA\TypeCodes\ValueTypeCode.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\TypeCodes\WStringTypeCode.cs">
+      <Link>CORBA\TypeCodes\WStringTypeCode.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\CORBA\WStringValueHelper.cs">
+      <Link>CORBA\WStringValueHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\PortableServer\DynamicImplementation.cs">
+      <Link>PortableServer\DynamicImplementation.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\PortableServer\IDelegate.cs">
+      <Link>PortableServer\IDelegate.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\PortableServer\Servant.cs">
+      <Link>PortableServer\Servant.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.OMG\PortableServer\ServantLocator\ServantLocator.cs">
+      <Link>PortableServer\ServantLocator\ServantLocator.cs</Link>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="compiled_idls\**\*.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="idls\BiDirPolicy.idl" />
+    <Content Include="idls\Compression.idl" />
+    <Content Include="idls\CONV_FRAME.idl" />
+    <Content Include="idls\CORBA_Context.idl" />
+    <Content Include="idls\CORBA_Current.idl" />
+    <Content Include="idls\CORBA_CustomMarshal.idl" />
+    <Content Include="idls\CORBA_DomainManager.idl" />
+    <Content Include="idls\CORBA_InterfaceRepository.idl" />
+    <Content Include="idls\CORBA_NVList.idl" />
+    <Content Include="idls\CORBA_Object.idl" />
+    <Content Include="idls\CORBA_ORB.idl" />
+    <Content Include="idls\CORBA_ORB_init.idl" />
+    <Content Include="idls\CORBA_Policy.idl" />
+    <Content Include="idls\CORBA_Pollable.idl" />
+    <Content Include="idls\CORBA_Request.idl" />
+    <Content Include="idls\CORBA_ServerRequest.idl" />
+    <Content Include="idls\CORBA_StandardExceptions.idl" />
+    <Content Include="idls\CORBA_Stream.idl" />
+    <Content Include="idls\CORBA_TypeCode.idl" />
+    <Content Include="idls\CORBA_ValueBase.idl" />
+    <Content Include="idls\CosBridgeAdmin.idl" />
+    <Content Include="idls\CosCollection.idl" />
+    <Content Include="idls\CosConcurrencyControl.idl" />
+    <Content Include="idls\CosEventChannelAdmin.idl" />
+    <Content Include="idls\CosEventComm.idl" />
+    <Content Include="idls\CosNaming.idl" />
+    <Content Include="idls\CosNotification.idl" />
+    <Content Include="idls\CosNotifyChannelAdmin.idl" />
+    <Content Include="idls\CosNotifyComm.idl" />
+    <Content Include="idls\CosNotifyFilter.idl" />
+    <Content Include="idls\CosTime.idl" />
+    <Content Include="idls\CosTrading.idl" />
+    <Content Include="idls\CosTransactions.idl" />
+    <Content Include="idls\CosTypedEventChannelAdmin.idl" />
+    <Content Include="idls\CosTypedEventComm.idl" />
+    <Content Include="idls\CosTypedNotifyChannelAdmin.idl" />
+    <Content Include="idls\CosTypedNotifyComm.idl" />
+    <Content Include="idls\CSI.idl" />
+    <Content Include="idls\CSIIOP.idl" />
+    <Content Include="idls\Dynamic.idl" />
+    <Content Include="idls\DynamicAny.idl" />
+    <Content Include="idls\ETF.idl" />
+    <Content Include="idls\Frequently Asked Questions.html" />
+    <Content Include="idls\FT.idl" />
+    <Content Include="idls\GIOP.idl" />
+    <Content Include="idls\GSSUP.idl" />
+    <Content Include="idls\IIOP.idl" />
+    <Content Include="idls\imr.idl" />
+    <Content Include="idls\IOP.idl" />
+    <Content Include="idls\IOP_DCE.idl" />
+    <Content Include="idls\MessageRouting.idl" />
+    <Content Include="idls\Messaging.idl" />
+    <Content Include="idls\MGM.idl" />
+    <Content Include="idls\MIOP.idl" />
+    <Content Include="idls\orb.idl" />
+    <Content Include="idls\PortableGroup.idl" />
+    <Content Include="idls\PortableInterceptor.idl" />
+    <Content Include="idls\PortableServer.idl" />
+    <Content Include="idls\pseudo_orb.idl" />
+    <Content Include="idls\RTCORBA.idl" />
+    <Content Include="idls\Security.idl" />
+    <Content Include="idls\SendingContext.idl" />
+    <Content Include="idls\SSLIOP.idl" />
+    <Content Include="idls\SSLPolicy.idl" />
+    <Content Include="idls\TimeBase.idl" />
+    <Content Include="idls\ZIOP.idl" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
