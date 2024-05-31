@@ -14,12 +14,6 @@ We welcome contributions from the community to help improve and expand the funct
 
 If you encounter any issues or have suggestions for new features, please feel free to open an issue or submit a pull request.  
 
-## Sponsorship
-
-Maintaining and developing this library takes time and effort. By sponsoring this project, you not only support its ongoing development but also ensure its continued improvement and maintenance. If you find this library useful and would like to contribute to its development, please consider sponsoring us. 
-
-[![Sponsor](https://img.shields.io/badge/Sponsor-Donate-yellow.svg)](link_to_sponsorship_page)
-
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
