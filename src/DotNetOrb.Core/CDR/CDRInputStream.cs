@@ -746,8 +746,8 @@ namespace DotNetOrb.Core.CDR
         {
             HandleChunking();
 
-            int remainder = 8 - Index % 8;
-            if (remainder != 8)
+            int remainder = 4 - Index % 4;
+            if (remainder != 4)
             {
                 Index += remainder;
                 Pos += remainder;
@@ -985,7 +985,7 @@ namespace DotNetOrb.Core.CDR
             else
             {
                 throw new Marshal("unexpected string terminator value " + Buffer.GetByte(stringTerminatorPosition).ToString("X") + " at buffer index " + stringTerminatorPosition);
-            }
+              }
 
             // Optimize for empty strings.
             if (size == 0)
