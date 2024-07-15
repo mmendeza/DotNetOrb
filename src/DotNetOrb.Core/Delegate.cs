@@ -927,6 +927,14 @@ namespace DotNetOrb.Core
                         forwardReference = (CORBA.Object?)fre.ForwardReference;
                         throw new RemarshalException();
                     }
+                    else if (ex is CORBA.ApplicationException aex)
+                    {
+                        if (logger.IsDebugEnabled)
+                        {
+                            logger.Debug("Received CORBA Application exception " + aex.Id);
+                        }
+                        throw aex;
+                    }
                 }
                 return t.Result;
             });
