@@ -17,6 +17,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using static PortableServer.POA;
+using System.IO;
 
 namespace DotNetOrb.Core.GIOP
 {
@@ -88,6 +89,11 @@ namespace DotNetOrb.Core.GIOP
         {
             if (message is RequestOutputStream requestStream)
             {
+                //int length = requestStream.Buffer.ReadableBytes;
+                //byte[] traceBuffer = new byte[length];
+                //requestStream.Buffer.GetBytes(requestStream.Buffer.ReaderIndex, traceBuffer);
+                //var path = @"L:\logs\request_" + requestStream.RequestId + "_" + requestStream.Operation + "_" + DateTime.Now.ToFileTime();
+                //File.WriteAllBytes(path, traceBuffer);                
                 var giopMessage = new GIOPRequestMessage(orb, requestStream.Buffer);
                 return context.WriteAsync(giopMessage);
             }
@@ -164,6 +170,7 @@ namespace DotNetOrb.Core.GIOP
                             var reply = (GIOPReplyMessage)message;
                             reply.Retain();
                             var inputStream = new ReplyInputStream(orb, reply.RequestId, reply.Header.GIOPVersion.Minor, reply.Header.IsLittleEndian, reply.Content, reply.ReplyStatus, reply.ServiceContextList);
+                            int length = inputStream.Buffer.ReadableBytes;
                             var codeSet = context.GetAttribute(GIOPConnection.TCSAttrKey).Get();
                             if (codeSet != null)
                             {

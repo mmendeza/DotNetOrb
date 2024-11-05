@@ -8,7 +8,7 @@ namespace DotNetOrb.IdlCompiler.Symbols
 {
     public class AnyType: BaseType
     {        
-        public AnyType(string name, bool dotNetNaming, List<Annotation> annotations = null) : base(name, dotNetNaming, annotations)
+        public AnyType(string name, List<Annotation> annotations = null) : base(name, annotations)
         {
 
         }

@@ -1,333 +1,327 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-	<Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
-	<PropertyGroup>
-		<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-		<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-		<ProjectGuid>{1E43E083-B5FE-41F8-B6C0-3D4AC8FD4B41}</ProjectGuid>
-		<OutputType>Exe</OutputType>
-		<AppDesignerFolder>Properties</AppDesignerFolder>
-		<RootNamespace>DotNetOrb.IdlCompiler</RootNamespace>
-		<AssemblyName>DotNetOrb.IdlCompiler</AssemblyName>
-		<TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-		<LangVersion>11.0</LangVersion>
-		<Nullable>enable</Nullable>
-		<FileAlignment>512</FileAlignment>
-		<Deterministic>true</Deterministic>
-	</PropertyGroup>
-	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-		<DebugSymbols>true</DebugSymbols>
-		<DebugType>full</DebugType>
-		<Optimize>false</Optimize>
-		<OutputPath>bin\Debug\</OutputPath>
-		<DefineConstants>DEBUG;TRACE</DefineConstants>
-		<ErrorReport>prompt</ErrorReport>
-		<WarningLevel>4</WarningLevel>
-	</PropertyGroup>
-	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-		<DebugType>pdbonly</DebugType>
-		<Optimize>true</Optimize>
-		<OutputPath>bin\Release\</OutputPath>
-		<DefineConstants>TRACE</DefineConstants>
-		<ErrorReport>prompt</ErrorReport>
-		<WarningLevel>4</WarningLevel>
-	</PropertyGroup>
-	<ItemGroup>
-		<Reference Include="Antlr4.Runtime.Standard, Version=4.13.1.0, Culture=neutral, PublicKeyToken=e78b2c5abd1fcb3f, processorArchitecture=MSIL">
-			<HintPath>..\..\..\packages\Antlr4.Runtime.Standard.4.13.1\lib\net45\Antlr4.Runtime.Standard.dll</HintPath>
-		</Reference>
-		<Reference Include="System" />
-		<Reference Include="System.Core" />
-		<Reference Include="System.Xml.Linq" />
-		<Reference Include="System.Data.DataSetExtensions" />
-		<Reference Include="Microsoft.CSharp" />
-		<Reference Include="System.Data" />
-		<Reference Include="System.Net.Http" />
-		<Reference Include="System.Xml" />
-	</ItemGroup>
-	<ItemGroup>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Program.cs">
-			<Link>Program.cs</Link>
-		</Compile>
-		<Compile Include="Properties\AssemblyInfo.cs" />
-	</ItemGroup>
-	<ItemGroup>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\CodeGenerator.cs">
-			<Link>CodeGenerator.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\ErrorListener.cs">
-			<Link>ErrorListener.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\IdlCompilerException.cs">
-			<Link>IdlCompilerException.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\IDLLexer.cs">
-			<Link>IDLLexer.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\IDLNamespaceListenerImpl.cs">
-			<Link>IDLNamespaceListenerImpl.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\IDLParser.cs">
-			<Link>IDLParser.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\IDLParserBaseListener.cs">
-			<Link>IDLParserBaseListener.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\IDLParserBaseVisitor.cs">
-			<Link>IDLParserBaseVisitor.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\IDLParserListener.cs">
-			<Link>IDLParserListener.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\IDLParserVisitor.cs">
-			<Link>IDLParserVisitor.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\IDLPreprocessorLexer.cs">
-			<Link>IDLPreprocessorLexer.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\IDLPreprocessorParser.cs">
-			<Link>IDLPreprocessorParser.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\IDLPreprocessorParserBaseListener.cs">
-			<Link>IDLPreprocessorParserBaseListener.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\IDLPreprocessorParserBaseVisitor.cs">
-			<Link>IDLPreprocessorParserBaseVisitor.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\IDLPreprocessorParserListener.cs">
-			<Link>IDLPreprocessorParserListener.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\IDLPreprocessorParserVisitor.cs">
-			<Link>IDLPreprocessorParserVisitor.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\IDLPreprocessorVisitorImpl.cs">
-			<Link>IDLPreprocessorVisitorImpl.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\IDLVisitorImpl.cs">
-			<Link>IDLVisitorImpl.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\ParseTreeListener.cs">
-			<Link>ParseTreeListener.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Program.cs">
-			<Link>Program.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\Annotation.cs">
-			<Link>Symbols\Annotation.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\AnnotationMember.cs">
-			<Link>Symbols\AnnotationMember.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\AnnotationType.cs">
-			<Link>Symbols\AnnotationType.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\ArrayType.cs">
-			<Link>Symbols\ArrayType.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\AttributeType.cs">
-			<Link>Symbols\AttributeType.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\BaseType\AnyType.cs">
-			<Link>Symbols\BaseType\AnyType.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\BaseType\BaseType.cs">
-			<Link>Symbols\BaseType\BaseType.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\BaseType\BooleanType.cs">
-			<Link>Symbols\BaseType\BooleanType.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\BaseType\CharType.cs">
-			<Link>Symbols\BaseType\CharType.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\BaseType\DoubleType.cs">
-			<Link>Symbols\BaseType\DoubleType.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\BaseType\FloatType.cs">
-			<Link>Symbols\BaseType\FloatType.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\BaseType\LongDoubleType.cs">
-			<Link>Symbols\BaseType\LongDoubleType.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\BaseType\LongLongType.cs">
-			<Link>Symbols\BaseType\LongLongType.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\BaseType\LongType.cs">
-			<Link>Symbols\BaseType\LongType.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\BaseType\NativeType.cs">
-			<Link>Symbols\BaseType\NativeType.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\BaseType\ObjectType.cs">
-			<Link>Symbols\BaseType\ObjectType.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\BaseType\OctetType.cs">
-			<Link>Symbols\BaseType\OctetType.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\BaseType\ShortType.cs">
-			<Link>Symbols\BaseType\ShortType.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\BaseType\SignedByteType.cs">
-			<Link>Symbols\BaseType\SignedByteType.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\BaseType\TypeCodeType.cs">
-			<Link>Symbols\BaseType\TypeCodeType.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\BaseType\ValueBaseType.cs">
-			<Link>Symbols\BaseType\ValueBaseType.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\BitField.cs">
-			<Link>Symbols\BitField.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\BitMask.cs">
-			<Link>Symbols\BitMask.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\BitSet.cs">
-			<Link>Symbols\BitSet.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\BitValue.cs">
-			<Link>Symbols\BitValue.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\CaseStatement.cs">
-			<Link>Symbols\CaseStatement.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\Constant.cs">
-			<Link>Symbols\Constant.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\Enumeration.cs">
-			<Link>Symbols\Enumeration.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\Enumerator.cs">
-			<Link>Symbols\Enumerator.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\ExceptionSymbol.cs">
-			<Link>Symbols\ExceptionSymbol.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\FixedPointType.cs">
-			<Link>Symbols\FixedPointType.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\IBasicType.cs">
-			<Link>Symbols\IBasicType.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\IDLSymbol.cs">
-			<Link>Symbols\IDLSymbol.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\IFwdDeclSymbol.cs">
-			<Link>Symbols\IFwdDeclSymbol.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\IIDLSymbol.cs">
-			<Link>Symbols\IIDLSymbol.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\Initializer.cs">
-			<Link>Symbols\Initializer.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\Interface.cs">
-			<Link>Symbols\Interface.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\IScopeSymbol.cs">
-			<Link>Symbols\IScopeSymbol.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\ITypeSymbol.cs">
-			<Link>Symbols\ITypeSymbol.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\Literal\BooleanLiteral.cs">
-			<Link>Symbols\Literal\BooleanLiteral.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\Literal\CharLiteral.cs">
-			<Link>Symbols\Literal\CharLiteral.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\Literal\EnumValLiteral.cs">
-			<Link>Symbols\Literal\EnumValLiteral.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\Literal\FloatLiteral.cs">
-			<Link>Symbols\Literal\FloatLiteral.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\Literal\IntegerLiteral.cs">
-			<Link>Symbols\Literal\IntegerLiteral.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\Literal\Literal.cs">
-			<Link>Symbols\Literal\Literal.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\Literal\StringLiteral.cs">
-			<Link>Symbols\Literal\StringLiteral.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\Map.cs">
-			<Link>Symbols\Map.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\Member.cs">
-			<Link>Symbols\Member.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\Module.cs">
-			<Link>Symbols\Module.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\Operation.cs">
-			<Link>Symbols\Operation.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\OperationParameter.cs">
-			<Link>Symbols\OperationParameter.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\RecursiveType.cs">
-			<Link>Symbols\RecursiveType.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\Scope.cs">
-			<Link>Symbols\Scope.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\Sequence.cs">
-			<Link>Symbols\Sequence.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\StateMember.cs">
-			<Link>Symbols\StateMember.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\StringType.cs">
-			<Link>Symbols\StringType.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\Struct.cs">
-			<Link>Symbols\Struct.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\TypeDefinition.cs">
-			<Link>Symbols\TypeDefinition.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\Union.cs">
-			<Link>Symbols\Union.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\UserExceptionType.cs">
-			<Link>Symbols\UserExceptionType.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\ValueType.cs">
-			<Link>Symbols\ValueType.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\WStringType.cs">
-			<Link>Symbols\WStringType.cs</Link>
-		</Compile>
-		<Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Utils.cs">
-			<Link>Utils.cs</Link>
-		</Compile>
-	</ItemGroup>
-	<ItemGroup>
-		<None Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\IDLLexer.interp">
-			<Link>IDLLexer.interp</Link>
-		</None>
-		<None Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\IDLLexer.tokens">
-			<Link>IDLLexer.tokens</Link>
-		</None>
-		<None Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\IDLParser.interp">
-			<Link>IDLParser.interp</Link>
-		</None>
-		<None Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\IDLParser.tokens">
-			<Link>IDLParser.tokens</Link>
-		</None>
-		<None Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\IDLPreprocessorLexer.interp">
-			<Link>IDLPreprocessorLexer.interp</Link>
-		</None>
-		<None Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\IDLPreprocessorLexer.tokens">
-			<Link>IDLPreprocessorLexer.tokens</Link>
-		</None>
-		<None Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\IDLPreprocessorParser.interp">
-			<Link>IDLPreprocessorParser.interp</Link>
-		</None>
-		<None Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\IDLPreprocessorParser.tokens">
-			<Link>IDLPreprocessorParser.tokens</Link>
-		</None>
-		<None Include="packages.config" />
-	</ItemGroup>
-	<Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1E43E083-B5FE-41F8-B6C0-3D4AC8FD4B41}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DotNetOrb.IdlCompiler</RootNamespace>
+    <AssemblyName>DotNetOrb.IdlCompiler</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <LangVersion>11.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr4.Runtime.Standard, Version=4.13.1.0, Culture=neutral, PublicKeyToken=e78b2c5abd1fcb3f, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Antlr4.Runtime.Standard.4.13.1\lib\net45\Antlr4.Runtime.Standard.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\CodeGenerator.cs">
+      <Link>CodeGenerator.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\ErrorListener.cs">
+      <Link>ErrorListener.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\IdlCompilerException.cs">
+      <Link>IdlCompilerException.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\IDLLexer.cs">
+      <Link>IDLLexer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\IDLNamespaceListenerImpl.cs">
+      <Link>IDLNamespaceListenerImpl.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\IDLParser.cs">
+      <Link>IDLParser.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\IDLParserBaseListener.cs">
+      <Link>IDLParserBaseListener.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\IDLParserBaseVisitor.cs">
+      <Link>IDLParserBaseVisitor.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\IDLParserListener.cs">
+      <Link>IDLParserListener.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\IDLParserVisitor.cs">
+      <Link>IDLParserVisitor.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\IDLPreprocessorLexer.cs">
+      <Link>IDLPreprocessorLexer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\IDLPreprocessorParser.cs">
+      <Link>IDLPreprocessorParser.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\IDLPreprocessorParserBaseListener.cs">
+      <Link>IDLPreprocessorParserBaseListener.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\IDLPreprocessorParserBaseVisitor.cs">
+      <Link>IDLPreprocessorParserBaseVisitor.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\IDLPreprocessorParserListener.cs">
+      <Link>IDLPreprocessorParserListener.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\IDLPreprocessorParserVisitor.cs">
+      <Link>IDLPreprocessorParserVisitor.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\IDLPreprocessorVisitorImpl.cs">
+      <Link>IDLPreprocessorVisitorImpl.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\IDLVisitorImpl.cs">
+      <Link>IDLVisitorImpl.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\ParseTreeListener.cs">
+      <Link>ParseTreeListener.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Compiler.cs">
+      <Link>Compiler.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\Annotation.cs">
+      <Link>Symbols\Annotation.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\AnnotationMember.cs">
+      <Link>Symbols\AnnotationMember.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\AnnotationType.cs">
+      <Link>Symbols\AnnotationType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\ArrayType.cs">
+      <Link>Symbols\ArrayType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\AttributeType.cs">
+      <Link>Symbols\AttributeType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\BaseType\AnyType.cs">
+      <Link>Symbols\BaseType\AnyType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\BaseType\BaseType.cs">
+      <Link>Symbols\BaseType\BaseType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\BaseType\BooleanType.cs">
+      <Link>Symbols\BaseType\BooleanType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\BaseType\CharType.cs">
+      <Link>Symbols\BaseType\CharType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\BaseType\DoubleType.cs">
+      <Link>Symbols\BaseType\DoubleType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\BaseType\FloatType.cs">
+      <Link>Symbols\BaseType\FloatType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\BaseType\LongDoubleType.cs">
+      <Link>Symbols\BaseType\LongDoubleType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\BaseType\LongLongType.cs">
+      <Link>Symbols\BaseType\LongLongType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\BaseType\LongType.cs">
+      <Link>Symbols\BaseType\LongType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\BaseType\NativeType.cs">
+      <Link>Symbols\BaseType\NativeType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\BaseType\ObjectType.cs">
+      <Link>Symbols\BaseType\ObjectType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\BaseType\OctetType.cs">
+      <Link>Symbols\BaseType\OctetType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\BaseType\ShortType.cs">
+      <Link>Symbols\BaseType\ShortType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\BaseType\SignedByteType.cs">
+      <Link>Symbols\BaseType\SignedByteType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\BaseType\TypeCodeType.cs">
+      <Link>Symbols\BaseType\TypeCodeType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\BaseType\ValueBaseType.cs">
+      <Link>Symbols\BaseType\ValueBaseType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\BitField.cs">
+      <Link>Symbols\BitField.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\BitMask.cs">
+      <Link>Symbols\BitMask.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\BitSet.cs">
+      <Link>Symbols\BitSet.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\BitValue.cs">
+      <Link>Symbols\BitValue.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\CaseStatement.cs">
+      <Link>Symbols\CaseStatement.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\Constant.cs">
+      <Link>Symbols\Constant.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\Enumeration.cs">
+      <Link>Symbols\Enumeration.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\Enumerator.cs">
+      <Link>Symbols\Enumerator.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\ExceptionSymbol.cs">
+      <Link>Symbols\ExceptionSymbol.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\FixedPointType.cs">
+      <Link>Symbols\FixedPointType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\IBasicType.cs">
+      <Link>Symbols\IBasicType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\IDLSymbol.cs">
+      <Link>Symbols\IDLSymbol.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\IFwdDeclSymbol.cs">
+      <Link>Symbols\IFwdDeclSymbol.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\IIDLSymbol.cs">
+      <Link>Symbols\IIDLSymbol.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\Initializer.cs">
+      <Link>Symbols\Initializer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\Interface.cs">
+      <Link>Symbols\Interface.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\IScopeSymbol.cs">
+      <Link>Symbols\IScopeSymbol.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\ITypeSymbol.cs">
+      <Link>Symbols\ITypeSymbol.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\Literal\BooleanLiteral.cs">
+      <Link>Symbols\Literal\BooleanLiteral.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\Literal\CharLiteral.cs">
+      <Link>Symbols\Literal\CharLiteral.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\Literal\EnumValLiteral.cs">
+      <Link>Symbols\Literal\EnumValLiteral.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\Literal\FloatLiteral.cs">
+      <Link>Symbols\Literal\FloatLiteral.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\Literal\IntegerLiteral.cs">
+      <Link>Symbols\Literal\IntegerLiteral.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\Literal\Literal.cs">
+      <Link>Symbols\Literal\Literal.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\Literal\StringLiteral.cs">
+      <Link>Symbols\Literal\StringLiteral.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\Map.cs">
+      <Link>Symbols\Map.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\Member.cs">
+      <Link>Symbols\Member.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\Module.cs">
+      <Link>Symbols\Module.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\Operation.cs">
+      <Link>Symbols\Operation.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\OperationParameter.cs">
+      <Link>Symbols\OperationParameter.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\RecursiveType.cs">
+      <Link>Symbols\RecursiveType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\Scope.cs">
+      <Link>Symbols\Scope.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\Sequence.cs">
+      <Link>Symbols\Sequence.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\StateMember.cs">
+      <Link>Symbols\StateMember.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\StringType.cs">
+      <Link>Symbols\StringType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\Struct.cs">
+      <Link>Symbols\Struct.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\TypeDefinition.cs">
+      <Link>Symbols\TypeDefinition.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\Union.cs">
+      <Link>Symbols\Union.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\UserExceptionType.cs">
+      <Link>Symbols\UserExceptionType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\ValueType.cs">
+      <Link>Symbols\ValueType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Symbols\WStringType.cs">
+      <Link>Symbols\WStringType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\Utils.cs">
+      <Link>Utils.cs</Link>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\IDLLexer.interp">
+      <Link>IDLLexer.interp</Link>
+    </None>
+    <None Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\IDLLexer.tokens">
+      <Link>IDLLexer.tokens</Link>
+    </None>
+    <None Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\IDLParser.interp">
+      <Link>IDLParser.interp</Link>
+    </None>
+    <None Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\IDLParser.tokens">
+      <Link>IDLParser.tokens</Link>
+    </None>
+    <None Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\IDLPreprocessorLexer.interp">
+      <Link>IDLPreprocessorLexer.interp</Link>
+    </None>
+    <None Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\IDLPreprocessorLexer.tokens">
+      <Link>IDLPreprocessorLexer.tokens</Link>
+    </None>
+    <None Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\IDLPreprocessorParser.interp">
+      <Link>IDLPreprocessorParser.interp</Link>
+    </None>
+    <None Include="..\..\idlcompiler\DotNetOrb.IdlCompiler\IDLPreprocessorParser.tokens">
+      <Link>IDLPreprocessorParser.tokens</Link>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

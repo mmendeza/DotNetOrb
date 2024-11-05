@@ -9,7 +9,7 @@ namespace DotNetOrb.IdlCompiler.Symbols
 {
     public class NativeType: BaseType
     {        
-        public NativeType(string name, bool dotNetNaming, List<Annotation> annotations = null) : base(name, dotNetNaming, annotations)
+        public NativeType(string name, List<Annotation> annotations = null) : base(name, annotations)
         {
 
         }

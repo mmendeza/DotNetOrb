@@ -28,7 +28,7 @@ namespace DotNetOrb.IdlCompiler.Symbols
             }
         }
 
-        public RecursiveType(ITypeSymbol actualType, string name, Scope parentScope, bool dotNetNaming, List<Annotation> annotations = null) : base(name, dotNetNaming, annotations)
+        public RecursiveType(ITypeSymbol actualType, string name, Scope parentScope, List<Annotation> annotations = null) : base(name, annotations)
         {
             ActualType = actualType;
         }                

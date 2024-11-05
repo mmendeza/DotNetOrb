@@ -8,7 +8,7 @@ namespace DotNetOrb.IdlCompiler.Symbols
 {
     public class ValueBaseType: BaseType
     {        
-        public ValueBaseType(string name, bool dotNetNaming, List<Annotation> annotations = null) : base(name, dotNetNaming, annotations)
+        public ValueBaseType(string name,List<Annotation> annotations = null) : base(name, annotations)
         {
 
         }

@@ -11,7 +11,7 @@ using System.IO;
 [assembly: CLSCompliant(false)]
 namespace DotNetOrb.IdlCompiler
 {
-    class Program
+    class Compiler
     {
         private static Dictionary<string, string> predefinedSymbols = new Dictionary<string, string>();
         private static List<DirectoryInfo> includeDirs = new List<DirectoryInfo>();
@@ -19,9 +19,11 @@ namespace DotNetOrb.IdlCompiler
         private static DirectoryInfo outputDir = new DirectoryInfo(".");
         private static bool isHelpRequested = false;
         private static string error;
-        private static SequenceType sequenceType = SequenceType.Array;
-        private static bool ami = false;
-        private static bool dotNetNaming = true;
+
+        public static SequenceType SequenceType = SequenceType.Array;
+        public static bool Ami = false;
+        public static bool DotNetNaming = true;
+        public static bool TypeCodeFullNamespace = false;
 
         public static void PrintHelp()
         {
@@ -39,6 +41,7 @@ namespace DotNetOrb.IdlCompiler
             Console.WriteLine("-sequence_type [array | list]            type of sequence fields: array (default) or List");
             Console.WriteLine("-ami                                     generate async methods");
             Console.WriteLine("-naming_scheme [dotnet | idl]            respect original idl names or convert to dotnet naming (default)");
+            Console.WriteLine("-full-typecode-namespaces                add full namespace to typecode name");
         }
 
         static void Main(string[] args)
@@ -199,7 +202,7 @@ namespace DotNetOrb.IdlCompiler
                     IParseTree tree = parser.specification();
                     if (parser.NumberOfSyntaxErrors == 0)
                     {
-                        var visitor = new IDLVisitorImpl(file, scope, includeDirs, importNamespaces, symbolTable, sequenceType, ami, dotNetNaming);
+                        var visitor = new IDLVisitorImpl(file, scope, includeDirs, importNamespaces, symbolTable);
                         visitor.Visit(tree);
                     }
                     else
@@ -265,7 +268,7 @@ namespace DotNetOrb.IdlCompiler
                         case "array":
                             break;
                         case "list":
-                            sequenceType = SequenceType.List; break;
+                            SequenceType = SequenceType.List; break;
                         default:
                             error = String.Format("Error: invalid option {0}", type);
                             break;
@@ -278,10 +281,10 @@ namespace DotNetOrb.IdlCompiler
                     switch (type.ToLower())
                     {
                         case "idl":
-                            dotNetNaming = false;
+                            DotNetNaming = false;
                             break;
                         case "dotnet":
-                            dotNetNaming = true;
+                            DotNetNaming = true;
                             break;
                         default:
                             error = String.Format("Error: invalid option {0}", type);
@@ -291,7 +294,12 @@ namespace DotNetOrb.IdlCompiler
                 else if (args[i].Equals("-ami"))
                 {
                     i++;
-                    ami = true;
+                    Ami = true;
+                }
+                else if (args[i].Equals("-full-typecode-namespaces"))
+                {
+                    i++;
+                    TypeCodeFullNamespace = true;
                 }
                 else
                 {

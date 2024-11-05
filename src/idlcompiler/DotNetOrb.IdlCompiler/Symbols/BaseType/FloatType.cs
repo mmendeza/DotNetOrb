@@ -8,7 +8,7 @@ namespace DotNetOrb.IdlCompiler.Symbols
 {
     public class FloatType: BaseType, IBasicType
     {        
-        public FloatType(string name, bool dotNetNaming, List<Annotation> annotations = null) : base(name, dotNetNaming, annotations)
+        public FloatType(string name, List<Annotation> annotations = null) : base(name, annotations)
         {
 
         }

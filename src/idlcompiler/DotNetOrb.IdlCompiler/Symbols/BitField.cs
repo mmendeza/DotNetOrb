@@ -10,7 +10,7 @@ namespace DotNetOrb.IdlCompiler.Symbols
         public ITypeSymbol DataType { get; set; }
         public int Length { get; set; }
 
-        public BitField(string name, bool dotNetNaming, List<Annotation> annotations = null) : base(name, dotNetNaming, annotations)
+        public BitField(string name, List<Annotation> annotations = null) : base(name, annotations)
         {        
         }
     }

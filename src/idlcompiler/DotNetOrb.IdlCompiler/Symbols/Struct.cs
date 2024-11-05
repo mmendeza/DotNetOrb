@@ -69,7 +69,7 @@ namespace DotNetOrb.IdlCompiler.Symbols
             }
         }
 
-        public Struct(string name, bool dotNetNaming, List<Annotation> annotations = null) : base(name, dotNetNaming, annotations)
+        public Struct(string name, List<Annotation> annotations = null) : base(name, annotations)
         {         
         }
 
@@ -474,7 +474,7 @@ namespace DotNetOrb.IdlCompiler.Symbols
 
         private void PrintTypeCodeExp(string indent, StreamWriter stream)
         {
-            stream.Write($"{indent}type = CORBA.ORB.Init().CreateStructTc({FullHelperName}.Id(), \"{Name}\", new CORBA.StructMember[] {{");
+            stream.Write($"{indent}type = CORBA.ORB.Init().CreateStructTc({FullHelperName}.Id(), \"{(Compiler.TypeCodeFullNamespace ? FullName : Name)}\", new CORBA.StructMember[] {{");
             var sbase = Base;
             while (sbase != null)
             {

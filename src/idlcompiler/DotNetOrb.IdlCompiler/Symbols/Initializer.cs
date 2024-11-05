@@ -12,7 +12,7 @@ namespace DotNetOrb.IdlCompiler.Symbols
         public Scope NamingScope { get; set; }        
         public List<ExceptionSymbol> Raises { get; set; }
 
-        public Initializer(string name, bool dotNetNaming, List<Annotation> annotations = null) : base(name, dotNetNaming, annotations)
+        public Initializer(string name, List<Annotation> annotations = null) : base(name, annotations)
         {
             Raises = new List<ExceptionSymbol>();
         }

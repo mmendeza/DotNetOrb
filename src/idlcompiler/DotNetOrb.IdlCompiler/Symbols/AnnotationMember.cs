@@ -10,7 +10,7 @@ namespace DotNetOrb.IdlCompiler.Symbols
         public ITypeSymbol DataType { get; set; }
         public Literal DefaultValue { get; set; }
 
-        public AnnotationMember(string name, bool dotNetNaming, List<Annotation> annotations = null) : base(name, dotNetNaming, annotations)
+        public AnnotationMember(string name, List<Annotation> annotations = null) : base(name, annotations)
         {
         }
 

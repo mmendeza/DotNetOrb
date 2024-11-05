@@ -21,7 +21,7 @@ namespace DotNetOrb.IdlCompiler.Symbols
             }
         }
 
-        public OctetType(string name, bool dotNetNaming, List<Annotation> annotations = null) : base(name, dotNetNaming, annotations)
+        public OctetType(string name, List<Annotation> annotations = null) : base(name, annotations)
         {
 
         }

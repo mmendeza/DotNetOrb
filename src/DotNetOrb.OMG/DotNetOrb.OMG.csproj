@@ -10,7 +10,7 @@
     <Copyright>Copyright (c) DotNetOrb Team (dotnetorb@gmail.com)</Copyright>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageTags>CORBA;ORB;IDL;.NET</PackageTags>
-    <RepositoryUrl>https://github.com/dotnetorb/DotNetOrb</RepositoryUrl>
+    <RepositoryUrl>https://github.com/mmendeza/DotNetOrb</RepositoryUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 

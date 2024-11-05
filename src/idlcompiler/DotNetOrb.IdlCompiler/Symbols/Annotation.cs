@@ -26,7 +26,7 @@ namespace DotNetOrb.IdlCompiler.Symbols
         private IDictionary<string, Literal> parameters = new Dictionary<string, Literal>();
         public IDictionary<string, Literal> Parameters { get => parameters; }
 
-        public Annotation(string name, bool dotNetNaming): base(name, dotNetNaming) { }
+        public Annotation(string name) : base(name) { }
 
         public override string ToString()
         {
@@ -58,7 +58,7 @@ namespace DotNetOrb.IdlCompiler.Symbols
 
         private string GetAttributeName(string name)
         {
-            if (dotNetNaming)
+            if (Compiler.DotNetNaming)
             {
                 name = Utils.ToPascalCase(Name);
             }

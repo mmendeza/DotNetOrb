@@ -19,7 +19,7 @@ namespace DotNetOrb.IdlCompiler.Symbols
             }
         }
 
-        public Enumerator(Enumeration enumeration, string name, bool dotNetNaming, List<Annotation> annotations = null) : base(name, dotNetNaming, annotations)        
+        public Enumerator(Enumeration enumeration, string name, List<Annotation> annotations = null) : base(name, annotations)        
         {
             Enumeration = enumeration;            
         }

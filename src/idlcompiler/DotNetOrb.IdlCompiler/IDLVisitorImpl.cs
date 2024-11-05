@@ -22,9 +22,6 @@ namespace DotNetOrb.IdlCompiler
 
         private StringBuilder output = new StringBuilder();
 
-        private bool dotNetNaming;
-        private bool ami;
-
         private string prefix;
 
         private List<DirectoryInfo> includeDirs;
@@ -33,13 +30,9 @@ namespace DotNetOrb.IdlCompiler
 
         private Dictionary<string, string> symbolTable;
 
-        private SequenceType defaultSeqType;
 
-        public IDLVisitorImpl(FileInfo file, Scope scope, List<DirectoryInfo> includeDirs, Dictionary<string, HashSet<string>> importNamespaces, Dictionary<string, string> symbolTable, SequenceType defaultSeqType, bool ami, bool dotNetNaming)
+        public IDLVisitorImpl(FileInfo file, Scope scope, List<DirectoryInfo> includeDirs, Dictionary<string, HashSet<string>> importNamespaces, Dictionary<string, string> symbolTable)
         {
-            this.defaultSeqType = defaultSeqType;
-            this.dotNetNaming = dotNetNaming;
-            this.ami = ami;
             this.includeDirs = includeDirs;
             this.importNamespaces = importNamespaces;
             this.symbolTable = symbolTable;
@@ -136,7 +129,7 @@ namespace DotNetOrb.IdlCompiler
                 IParseTree tree = parser.specification();
                 if (parser.NumberOfSyntaxErrors == 0)
                 {
-                    var visitor = new IDLVisitorImpl(fileToInclude, currentScope, includeDirs, importNamespaces, symbolTable, defaultSeqType, ami, dotNetNaming);
+                    var visitor = new IDLVisitorImpl(fileToInclude, currentScope, includeDirs, importNamespaces, symbolTable);
                     visitor.Visit(tree);
                 }
                 else
@@ -188,7 +181,7 @@ namespace DotNetOrb.IdlCompiler
                         IParseTree tree = parser.specification();
                         if (parser.NumberOfSyntaxErrors == 0)
                         {                            
-                            var visitor = new IDLVisitorImpl(fileToInclude, currentScope, includeDirs, importNamespaces, symbolTable, defaultSeqType, ami, dotNetNaming);
+                            var visitor = new IDLVisitorImpl(fileToInclude, currentScope, includeDirs, importNamespaces, symbolTable);
                             visitor.Visit(tree);
                         }
                         else
@@ -230,7 +223,7 @@ namespace DotNetOrb.IdlCompiler
                 }
                 else
                 {
-                    var module = new Module(name, dotNetNaming, annotations);
+                    var module = new Module(name, annotations);
                     currentScope.AddSymbolDefinition(module);
                     SetTypeInfo(module);
                     currentScope = module.NamingScope;
@@ -297,7 +290,7 @@ namespace DotNetOrb.IdlCompiler
                 {
                     if (forwardDecl.KW_STRUCT() != null)
                     {
-                        var structure = new Struct(forwardDecl.ID().GetText(), dotNetNaming);
+                        var structure = new Struct(forwardDecl.ID().GetText());
                         structure.IsForwardDeclaration = true;
                         currentScope.AddSymbolDefinition(structure);
                         SetTypeInfo(structure);
@@ -305,7 +298,7 @@ namespace DotNetOrb.IdlCompiler
                     }
                     else if (forwardDecl.KW_UNION() != null)
                     {
-                        var union = new Union(forwardDecl.ID().GetText(), dotNetNaming);
+                        var union = new Union(forwardDecl.ID().GetText());
                         union.IsForwardDeclaration = true;
                         currentScope.AddSymbolDefinition(union);
                         SetTypeInfo(union);
@@ -318,7 +311,7 @@ namespace DotNetOrb.IdlCompiler
                     var declarators = nativeType.simple_declarators().ID();
                     foreach (var decl in declarators)
                     {
-                        var native = new NativeType(decl.GetText(), dotNetNaming, annaps);
+                        var native = new NativeType(decl.GetText(), annaps);
                         currentScope.AddSymbolDefinition(native);
                         SetTypeInfo(native);
                     }
@@ -335,7 +328,7 @@ namespace DotNetOrb.IdlCompiler
         {
             try
             {
-                var ex = new ExceptionSymbol(context.ID().GetText(), dotNetNaming, GetAnnotations(context.annapps(), currentScope));
+                var ex = new ExceptionSymbol(context.ID().GetText(), GetAnnotations(context.annapps(), currentScope));
                 currentScope.AddSymbolDefinition(ex);
                 SetTypeInfo(ex);
                 AddMembers(context.member(), ex.NamingScope);
@@ -355,7 +348,7 @@ namespace DotNetOrb.IdlCompiler
                 var forwardDecl = context.forward_decl();
                 if (forwardDecl != null)
                 {
-                    var ifz = new Interface(forwardDecl.ID().GetText(), dotNetNaming, annotations);
+                    var ifz = new Interface(forwardDecl.ID().GetText(), annotations);
                     ifz.IsAbstract = forwardDecl.KW_ABSTRACT() != null;
                     ifz.IsLocal = forwardDecl.KW_LOCAL() != null;
                     ifz.IsForwardDeclaration = true;
@@ -366,7 +359,7 @@ namespace DotNetOrb.IdlCompiler
                 if (interfaceDecl != null)
                 {
                     var ifzHeader = interfaceDecl.interface_header();
-                    var ifz = new Interface(ifzHeader.ID().GetText(), dotNetNaming, annotations);
+                    var ifz = new Interface(ifzHeader.ID().GetText(), annotations);
                     ifz.IsAbstract = ifzHeader.KW_ABSTRACT() != null;
                     ifz.IsLocal = ifzHeader.KW_LOCAL() != null;
                     var ifzInheritance = ifzHeader.interface_inheritance_spec();
@@ -419,7 +412,7 @@ namespace DotNetOrb.IdlCompiler
                     foreach (var simpleDecl in declarators)
                     {
                         var name = simpleDecl.ID().GetText();
-                        var attribute = new AttributeType(name, dotNetNaming, true, annapps);
+                        var attribute = new AttributeType(name, true, annapps);
                         attribute.GetRaises = exceptions;
                         attribute.DataType = dataType;
                         currentScope.AddSymbolDefinition(attribute);
@@ -449,7 +442,7 @@ namespace DotNetOrb.IdlCompiler
                     foreach (var simpleDecl in declarators)
                     {
                         var name = simpleDecl.ID().GetText();
-                        var attribute = new AttributeType(name, dotNetNaming, false, annapps);
+                        var attribute = new AttributeType(name, false, annapps);
                         attribute.DataType = dataType;
                         attribute.GetRaises = getRaises;
                         attribute.SetRaises = setRaises;
@@ -469,7 +462,7 @@ namespace DotNetOrb.IdlCompiler
             try
             {
                 var annotations = GetAnnotations(context.annapps(), currentScope);
-                var operation = new Operation(context.ID().GetText(), dotNetNaming, ami, annotations);
+                var operation = new Operation(context.ID().GetText(), Compiler.Ami, annotations);
                 var opAttribute = context.op_attribute();
                 if (opAttribute != null)
                 {
@@ -495,7 +488,7 @@ namespace DotNetOrb.IdlCompiler
                 foreach (var paramDecl in parameters)
                 {
                     var annapps = GetAnnotations(paramDecl.annapps(), currentScope);
-                    var parameter = new OperationParameter(paramDecl.simple_declarator().ID().GetText(), dotNetNaming, annapps);
+                    var parameter = new OperationParameter(paramDecl.simple_declarator().ID().GetText(), annapps);
                     var paramAttribute = paramDecl.param_attribute();
                     switch (paramAttribute.GetText())
                     {
@@ -532,7 +525,7 @@ namespace DotNetOrb.IdlCompiler
                 var valueBox = context.value_box_decl();
                 if (valueBox != null)
                 {
-                    var valueType = new Symbols.ValueType(valueBox.ID().GetText(), dotNetNaming, annotations);
+                    var valueType = new Symbols.ValueType(valueBox.ID().GetText(), annotations);
                     currentScope.AddSymbolDefinition(valueType);
                     SetTypeInfo(valueType);
                     var typeSpec = GetTypeSymbol(valueBox.type_spec(), currentScope);
@@ -543,7 +536,7 @@ namespace DotNetOrb.IdlCompiler
                 var forwardDecl = context.value_forward_decl();
                 if (forwardDecl != null)
                 {
-                    var valueType = new Symbols.ValueType(forwardDecl.ID().GetText(), dotNetNaming, annotations);
+                    var valueType = new Symbols.ValueType(forwardDecl.ID().GetText(), annotations);
                     valueType.IsForwardDeclaration = true;
                     if (forwardDecl.KW_ABSTRACT() != null)
                     {
@@ -555,7 +548,7 @@ namespace DotNetOrb.IdlCompiler
                 var valueAbs = context.value_abs_decl();
                 if (valueAbs != null)
                 {
-                    var valueType = new Symbols.ValueType(valueAbs.ID().GetText(), dotNetNaming, annotations);
+                    var valueType = new Symbols.ValueType(valueAbs.ID().GetText(), annotations);
                     valueType.IsAbstract = true;
                     GetInheritance(valueType, valueAbs.value_inheritance_spec());
                     currentScope.AddSymbolDefinition(valueType);
@@ -568,7 +561,7 @@ namespace DotNetOrb.IdlCompiler
                 if (valueDecl != null)
                 {
                     var valueHeader = valueDecl.value_header();
-                    var valueType = new Symbols.ValueType(valueHeader.ID().GetText(), dotNetNaming, annotations);
+                    var valueType = new Symbols.ValueType(valueHeader.ID().GetText(), annotations);
                     if (valueHeader.KW_CUSTOM() != null)
                     {
                         valueType.IsCustom = true;
@@ -596,7 +589,7 @@ namespace DotNetOrb.IdlCompiler
                 if (definition != null)
                 {
                     var header = definition.annotation_header();
-                    var annotationType = new AnnotationType(header.ID().GetText(), dotNetNaming);
+                    var annotationType = new AnnotationType(header.ID().GetText());
                     var inheritance = header.annotation_inheritance_spec();
                     if (inheritance != null)
                     {
@@ -630,15 +623,15 @@ namespace DotNetOrb.IdlCompiler
                                 }
                                 else
                                 {
-                                    memberType = BaseType.CreateBaseType(constType.GetSourceText(), dotNetNaming);
+                                    memberType = BaseType.CreateBaseType(constType.GetSourceText());
                                 }
                             }
                             var anyType = member.annotation_member_type().any_type();
                             if (anyType != null)
                             {
-                                memberType = BaseType.CreateBaseType(anyType.GetSourceText(), dotNetNaming);
+                                memberType = BaseType.CreateBaseType(anyType.GetSourceText());
                             }
-                            var annotationMember = new AnnotationMember(member.simple_declarator().ID().GetText(), dotNetNaming);
+                            var annotationMember = new AnnotationMember(member.simple_declarator().ID().GetText());
                             annotationMember.DataType = memberType;
                             var constExp = member.const_exp();
                             if (constExp != null)
@@ -667,7 +660,7 @@ namespace DotNetOrb.IdlCompiler
                 var fwdDecl = context.annotation_forward_dcl();
                 if (fwdDecl != null)
                 {
-                    var annotationType = new AnnotationType(fwdDecl.ID().GetText(), dotNetNaming);
+                    var annotationType = new AnnotationType(fwdDecl.ID().GetText());
                     annotationType.IsForwardDeclaration = true;
                     currentScope.AddSymbolDefinition(annotationType);
                     SetTypeInfo(annotationType);
@@ -697,7 +690,7 @@ namespace DotNetOrb.IdlCompiler
                     if (simpleDecl != null)
                     {
                         var memberId = simpleDecl.GetText();
-                        var member = new StateMember(memberId, dotNetNaming, annotations);
+                        var member = new StateMember(memberId, annotations);
                         member.IsPublic = isPublic;
                         member.DataType = memberSymbolType;
                         currentScope.AddSymbolDefinition(member);
@@ -710,7 +703,7 @@ namespace DotNetOrb.IdlCompiler
                             var arrayDecl = complexDecl.array_declarator();
                             var array = GetArrayType(complexDecl.array_declarator(), currentScope);
                             var memberId = arrayDecl.ID().GetText();
-                            var member = new StateMember(memberId, dotNetNaming, annotations);
+                            var member = new StateMember(memberId, annotations);
                             member.IsPublic = isPublic;
                             array.DataType = memberSymbolType;
                             member.DataType = array;
@@ -730,13 +723,13 @@ namespace DotNetOrb.IdlCompiler
         {
             try
             {
-                var initializer = new Initializer(context.ID().GetText(), dotNetNaming, GetAnnotations(context.annapps(), currentScope));
+                var initializer = new Initializer(context.ID().GetText(), GetAnnotations(context.annapps(), currentScope));
                 currentScope.AddSymbolDefinition(initializer);
                 var parameters = context.init_param_decls().init_param_decl();
                 foreach (var paramDecl in parameters)
                 {
                     var annotations = GetAnnotations(paramDecl.annapps(), currentScope);
-                    var parameter = new OperationParameter(paramDecl.simple_declarator().ID().GetText(), dotNetNaming, annotations);
+                    var parameter = new OperationParameter(paramDecl.simple_declarator().ID().GetText(), annotations);
                     parameter.Direction = ParameterDirection.IN;
                     parameter.DataType = GetParamTypeSymbol(paramDecl.param_type_spec(), initializer.NamingScope);
                     initializer.NamingScope.AddSymbolDefinition(parameter);
@@ -904,7 +897,7 @@ namespace DotNetOrb.IdlCompiler
                 var baseType = context.base_type_spec();
                 if (baseType != null)
                 {
-                    return BaseType.CreateBaseType(baseType.GetSourceText(), dotNetNaming);
+                    return BaseType.CreateBaseType(baseType.GetSourceText());
                 }
                 var stringType = context.string_type();
                 if (stringType != null)
@@ -913,9 +906,9 @@ namespace DotNetOrb.IdlCompiler
                     if (length != null)
                     {
                         var constExp = GetConstantExpValue(length.const_exp(), scope);
-                        return new StringType(constExp.GetIntValue(), dotNetNaming);
+                        return new StringType(constExp.GetIntValue());
                     }
-                    return new StringType(dotNetNaming);
+                    return new StringType();
                 }
                 var wStringType = context.wide_string_type();
                 if (wStringType != null)
@@ -924,9 +917,9 @@ namespace DotNetOrb.IdlCompiler
                     if (length != null)
                     {
                         var constExp = GetConstantExpValue(length.const_exp(), scope);
-                        return new WStringType(constExp.GetIntValue(), dotNetNaming);
+                        return new WStringType(constExp.GetIntValue());
                     }
-                    return new WStringType(dotNetNaming);
+                    return new WStringType();
                 }
                 var scopedName = context.scoped_name();
                 if (scopedName != null)
@@ -964,7 +957,7 @@ namespace DotNetOrb.IdlCompiler
             var baseType = context.base_type_spec();
             if (baseType != null)
             {
-                return BaseType.CreateBaseType(baseType.GetSourceText(), dotNetNaming);
+                return BaseType.CreateBaseType(baseType.GetSourceText());
             }
             var scopedName = context.scoped_name();
             if (scopedName != null)
@@ -975,12 +968,12 @@ namespace DotNetOrb.IdlCompiler
                 {
                     if (resolvedType is Sequence seq)
                     {
-                        var recursiveType = new RecursiveType(seq.DataType, seq.DataType.Name, scope, dotNetNaming, new List<Annotation>());
-                        return new Sequence(recursiveType, seq.SequenceType, dotNetNaming, seq.Annotations);
+                        var recursiveType = new RecursiveType(seq.DataType, seq.DataType.Name, scope, new List<Annotation>());
+                        return new Sequence(recursiveType, seq.SequenceType, seq.Annotations);
                     }
                     else
                     {
-                        return new RecursiveType(resolvedType, resolvedType.Name, scope, dotNetNaming, new List<Annotation>());
+                        return new RecursiveType(resolvedType, resolvedType.Name, scope, new List<Annotation>());
                     }                    
                 }
                 else
@@ -997,7 +990,7 @@ namespace DotNetOrb.IdlCompiler
                     var simpleType = sequenceType.simple_type_spec();
                     var typeSymbol = GetSimpleTypeSymbol(simpleType, scope);
                     var length = sequenceType.positive_int_const();
-                    var sequence = new Sequence(typeSymbol, defaultSeqType, dotNetNaming);
+                    var sequence = new Sequence(typeSymbol, Compiler.SequenceType);
                     if (length != null)
                     {
                         var constExp = GetConstantExpValue(length.const_exp(), scope);
@@ -1021,7 +1014,7 @@ namespace DotNetOrb.IdlCompiler
                     var dataType = mapType.simple_type_spec(1);
                     var dataTypeSymbol = GetSimpleTypeSymbol(dataType, scope);
                     var length = sequenceType.positive_int_const();
-                    var map = new Map(keyTypeSymbol, dataTypeSymbol, dotNetNaming);
+                    var map = new Map(keyTypeSymbol, dataTypeSymbol);
                     if (length != null)
                     {
                         var constExp = GetConstantExpValue(length.const_exp(), scope);
@@ -1045,14 +1038,14 @@ namespace DotNetOrb.IdlCompiler
                         var constExp = GetConstantExpValue(length.const_exp(), scope);
                         if (constExp.GetIntValue() > 0)
                         {
-                            return new StringType(constExp.GetIntValue(), dotNetNaming);
+                            return new StringType(constExp.GetIntValue());
                         }
                         else
                         {
                             ThrowIdlCompilerException("Length must be a positive integer", context);
                         }
                     }
-                    return new StringType(dotNetNaming);
+                    return new StringType();
                 }
                 var wStringType = templateType.wide_string_type();
                 if (wStringType != null)
@@ -1063,14 +1056,14 @@ namespace DotNetOrb.IdlCompiler
                         var constExp = GetConstantExpValue(length.const_exp(), scope);
                         if (constExp.GetIntValue() > 0)
                         {
-                            return new WStringType(constExp.GetIntValue(), dotNetNaming);
+                            return new WStringType(constExp.GetIntValue());
                         }
                         else
                         {
                             ThrowIdlCompilerException("Length must be a positive integer", context);
                         }
                     }
-                    return new WStringType(dotNetNaming);
+                    return new WStringType();
                 }
                 var fixedType = templateType.fixed_pt_type();
                 if (fixedType != null)
@@ -1085,7 +1078,7 @@ namespace DotNetOrb.IdlCompiler
                     {
                         ThrowIdlCompilerException("Fractional digits must be a positive integer", context);
                     }
-                    return new FixedPointType(digits.GetIntValue(), fractionalDigits.GetIntValue(), dotNetNaming);
+                    return new FixedPointType(digits.GetIntValue(), fractionalDigits.GetIntValue());
 
                 }
             }
@@ -1139,7 +1132,7 @@ namespace DotNetOrb.IdlCompiler
                     if (simpleDecl != null)
                     {
                         var name = simpleDecl.GetText();
-                        var typeDef = new TypeDefinition(name, dotNetNaming, annaps);
+                        var typeDef = new TypeDefinition(name, annaps);
                         typeDef.DataType = typeSymbol;
                         scope.AddSymbolDefinition(typeDef);
                         SetTypeInfo(typeDef);
@@ -1155,7 +1148,7 @@ namespace DotNetOrb.IdlCompiler
                             {
                                 var array = GetArrayType(arrayDecl, scope);
                                 var name = arrayDecl.ID().GetText();
-                                var typeDef = new TypeDefinition(name, dotNetNaming, annaps);
+                                var typeDef = new TypeDefinition(name, annaps);
                                 array.DataType = typeSymbol;
                                 typeDef.DataType = array;
                                 scope.AddSymbolDefinition(typeDef);
@@ -1173,7 +1166,7 @@ namespace DotNetOrb.IdlCompiler
         {
             var constType = context.const_type();
             var annotations = GetAnnotations(context.annapps(), scope);
-            var constant = new Constant(context.ID().GetText(), dotNetNaming, annotations);
+            var constant = new Constant(context.ID().GetText(), annotations);
             var scopedName = constType.scoped_name();
             ITypeSymbol type;
             if (scopedName != null)
@@ -1182,7 +1175,7 @@ namespace DotNetOrb.IdlCompiler
             }
             else
             {
-                type = BaseType.CreateBaseType(constType.GetSourceText(), dotNetNaming);
+                type = BaseType.CreateBaseType(constType.GetSourceText());
             }
             constant.DataType = type;
             constant.Value = GetConstantExpValue(context.const_exp(), scope);
@@ -1193,7 +1186,7 @@ namespace DotNetOrb.IdlCompiler
         private Struct GetStructTypeSymbol(IDLParser.Struct_typeContext context, Scope scope)
         {
             var annapps = GetAnnotations(context.annapps(), scope);
-            var structure = new Struct(context.ID().GetText(), dotNetNaming, annapps);
+            var structure = new Struct(context.ID().GetText(), annapps);
             structure = (Struct)scope.AddSymbolDefinition(structure);
             SetTypeInfo(structure);
             var inherits = context.scoped_name();
@@ -1228,7 +1221,7 @@ namespace DotNetOrb.IdlCompiler
                     if (simpleDecl != null)
                     {
                         var memberId = simpleDecl.GetText();
-                        var member = new Member(memberId, scope, dotNetNaming, GetAnnotations(memberCtx.annapps(), scope));
+                        var member = new Member(memberId, scope, GetAnnotations(memberCtx.annapps(), scope));
                         member.DataType = memberSymbolType;
                         scope.AddSymbolDefinition(member);
                     }
@@ -1240,7 +1233,7 @@ namespace DotNetOrb.IdlCompiler
                             var arrayDecl = complexDecl.array_declarator();
                             if (arrayDecl != null)
                             {
-                                var array = new ArrayType(dotNetNaming);
+                                var array = new ArrayType();
                                 var memberId = arrayDecl.ID().GetText();
                                 var fixedArraySize = arrayDecl.fixed_array_size();
                                 foreach (var dim in fixedArraySize)
@@ -1252,7 +1245,7 @@ namespace DotNetOrb.IdlCompiler
                                     }
                                     array.Dimensions.Add(constExp.GetIntValue());
                                 }
-                                var member = new Member(memberId, scope, dotNetNaming, GetAnnotations(memberCtx.annapps(), scope));
+                                var member = new Member(memberId, scope, GetAnnotations(memberCtx.annapps(), scope));
                                 array.DataType = memberSymbolType;
                                 member.DataType = array;
                                 scope.AddSymbolDefinition(member);
@@ -1266,7 +1259,7 @@ namespace DotNetOrb.IdlCompiler
         private Union GetUnionTypeSymbol(IDLParser.Union_typeContext context, Scope scope)
         {
             var annapps = GetAnnotations(context.annapps(), scope);
-            var union = new Union(context.ID().GetText(), dotNetNaming, annapps);
+            var union = new Union(context.ID().GetText(), annapps);
             union = (Union)scope.AddSymbolDefinition(union);
             SetTypeInfo(union);
             var switchType = context.switch_type_spec();
@@ -1282,7 +1275,7 @@ namespace DotNetOrb.IdlCompiler
             }
             else
             {
-                union.Discriminator = BaseType.CreateBaseType(switchType.GetSourceText(), dotNetNaming);
+                union.Discriminator = BaseType.CreateBaseType(switchType.GetSourceText());
             }
             var switchBody = context.switch_body();
             var stmts = switchBody.case_stmt();
@@ -1297,7 +1290,7 @@ namespace DotNetOrb.IdlCompiler
                 if (simpleDecl != null)
                 {
                     var memberId = simpleDecl.GetText();
-                    caseStmt = new CaseStatement(memberId, union.NamingScope, dotNetNaming, annotationsStmt);
+                    caseStmt = new CaseStatement(memberId, union.NamingScope, annotationsStmt);
                     caseStmt.DataType = stmtType;
                     union.NamingScope.AddSymbolDefinition(caseStmt);
                 }
@@ -1311,7 +1304,7 @@ namespace DotNetOrb.IdlCompiler
                         {
                             var array = GetArrayType(arrayDecl, union.NamingScope);
                             var memberId = arrayDecl.ID().GetText();
-                            caseStmt = new CaseStatement(memberId, union.NamingScope, dotNetNaming, annotationsStmt);
+                            caseStmt = new CaseStatement(memberId, union.NamingScope, annotationsStmt);
                             array.DataType = stmtType;
                             caseStmt.DataType = array;
                             union.NamingScope.AddSymbolDefinition(caseStmt);
@@ -1363,7 +1356,7 @@ namespace DotNetOrb.IdlCompiler
 
         private ArrayType GetArrayType(IDLParser.Array_declaratorContext context, Scope scope)
         {
-            var array = new ArrayType(dotNetNaming);
+            var array = new ArrayType();
             var fixedArraySize = context.fixed_array_size();
             foreach (var dim in fixedArraySize)
             {
@@ -1383,7 +1376,7 @@ namespace DotNetOrb.IdlCompiler
         private Enumeration GetEnumerationTypeSymbol(IDLParser.Enum_typeContext context, Scope scope)
         {
             var annapps = GetAnnotations(context.annapps(), scope);
-            var enumeration = new Enumeration(context.ID().GetText(), dotNetNaming, annapps);
+            var enumeration = new Enumeration(context.ID().GetText(), annapps);
             var bitBound = GetAnnotation("bit_bound", annapps);
             if (bitBound != null)
             {
@@ -1395,7 +1388,7 @@ namespace DotNetOrb.IdlCompiler
             var enumerators = context.enumerator();
             foreach (var e in enumerators)
             {
-                var enumerator = new Enumerator(enumeration, e.ID().GetText(), dotNetNaming, GetAnnotations(e.annapps(), scope));
+                var enumerator = new Enumerator(enumeration, e.ID().GetText(), GetAnnotations(e.annapps(), scope));
                 var value = GetAnnotation("value", enumerator.Annotations);
                 if (value != null)
                 {
@@ -1412,7 +1405,7 @@ namespace DotNetOrb.IdlCompiler
         private BitSet GetBitSetTypeSymbol(IDLParser.Bitset_typeContext context, Scope scope)
         {
             var annapps = GetAnnotations(context.annapps(), scope);
-            var bitSet = new BitSet(context.ID().GetText(), dotNetNaming, annapps);
+            var bitSet = new BitSet(context.ID().GetText(), annapps);
             scope.AddSymbolDefinition(bitSet);
             SetTypeInfo(bitSet);
             var scopedName = context.scoped_name();
@@ -1451,33 +1444,33 @@ namespace DotNetOrb.IdlCompiler
                 var typeSpec = bitFieldSpec.bitfield_type_spec();
                 if (typeSpec != null)
                 {
-                    bfType = BaseType.CreateBaseType(typeSpec.GetSourceText(), dotNetNaming);
+                    bfType = BaseType.CreateBaseType(typeSpec.GetSourceText());
                 }
                 else
                 {
                     if (length == 1)
                     {
-                        bfType = BaseType.CreateBaseType("boolean", dotNetNaming);
+                        bfType = BaseType.CreateBaseType("boolean");
                     }
                     else if (length <= 8)
                     {
-                        bfType = BaseType.CreateBaseType("octet", dotNetNaming);
+                        bfType = BaseType.CreateBaseType("octet");
                     }
                     else if (length <= 16)
                     {
-                        bfType = BaseType.CreateBaseType("unsigned short", dotNetNaming);
+                        bfType = BaseType.CreateBaseType("unsigned short");
                     }
                     else if (length <= 32)
                     {
-                        bfType = BaseType.CreateBaseType("unsigned long", dotNetNaming);
+                        bfType = BaseType.CreateBaseType("unsigned long");
                     }
                     else if (length <= 64)
                     {
-                        bfType = BaseType.CreateBaseType("unsigned long long", dotNetNaming);
+                        bfType = BaseType.CreateBaseType("unsigned long long");
                     }
                     else
                     {
-                        bfType = BaseType.CreateBaseType("unsigned long long", dotNetNaming);
+                        bfType = BaseType.CreateBaseType("unsigned long long");
                     }
                 }
                 var simpleDecl = bitfield.simple_declarators();
@@ -1486,7 +1479,7 @@ namespace DotNetOrb.IdlCompiler
                     var ids = simpleDecl.ID();
                     foreach (var id in ids)
                     {
-                        var bf = new BitField(id.GetText(), dotNetNaming, annapps);
+                        var bf = new BitField(id.GetText(), annapps);
                         bf.Length = (int)length;
                         bf.DataType = bfType;
                         bitSet.NamingScope.AddSymbolDefinition(bf);
@@ -1499,7 +1492,7 @@ namespace DotNetOrb.IdlCompiler
         private BitMask GetBitMaskTypeSymbol(IDLParser.Bitmask_typeContext context, Scope scope)
         {
             var annapps = GetAnnotations(context.annapps(), scope);
-            var bitMask = new BitMask(context.ID().GetText(), dotNetNaming, annapps);
+            var bitMask = new BitMask(context.ID().GetText(), annapps);
             var bitBound = GetAnnotation("bit_bound", annapps);
             if (bitBound != null)
             {
@@ -1511,7 +1504,7 @@ namespace DotNetOrb.IdlCompiler
             var bitValues = context.bit_value();
             foreach (var bv in bitValues)
             {
-                var value = new BitValue(bv.ID().GetText(), dotNetNaming, GetAnnotations(bv.annapps(), scope));
+                var value = new BitValue(bv.ID().GetText(), GetAnnotations(bv.annapps(), scope));
                 var position = GetAnnotation("position", value.Annotations);
                 if (position != null)
                 {
@@ -1800,7 +1793,7 @@ namespace DotNetOrb.IdlCompiler
                 foreach (var ann in annotations)
                 {
                     var name = ann.scoped_name();
-                    var a = new Annotation(name.GetText(), dotNetNaming);
+                    var a = new Annotation(name.GetText());
                     var parameters = ann.annotation_appl_params();
                     if (parameters != null)
                     {

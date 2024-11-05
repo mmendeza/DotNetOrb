@@ -13,7 +13,7 @@
 	<PackageTags>CORBA;ORB;IDL;.NET;COMPILER</PackageTags>
 	<PackAsTool>True</PackAsTool>
 	<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
-	<RepositoryUrl>https://github.com/dotnetorb/DotNetOrb</RepositoryUrl>
+	<RepositoryUrl>https://github.com/mmendeza/DotNetOrb</RepositoryUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

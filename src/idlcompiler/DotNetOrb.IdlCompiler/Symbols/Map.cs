@@ -79,7 +79,7 @@ namespace DotNetOrb.IdlCompiler.Symbols
             return attributes;
         }
 
-        public Map(ITypeSymbol keyType, ITypeSymbol dataType, bool dotNetNaming, List<Annotation> annotations = null) : base("map", dotNetNaming, annotations)
+        public Map(ITypeSymbol keyType, ITypeSymbol dataType, List<Annotation> annotations = null) : base("map", annotations)
         {
             KeyDataType = keyType;
             DataType = dataType;

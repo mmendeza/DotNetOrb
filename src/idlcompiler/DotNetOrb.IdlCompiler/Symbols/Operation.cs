@@ -18,7 +18,7 @@ namespace DotNetOrb.IdlCompiler.Symbols
         public List<ExceptionSymbol> Raises { get; set; }
         public List<string> Context { get; set; }
 
-        public Operation(string name, bool dotNetNaming, bool isAsync, List<Annotation> annotations = null ) : base(name, dotNetNaming, annotations)
+        public Operation(string name, bool isAsync, List<Annotation> annotations = null ) : base(name, annotations)
         {
             Raises = new List<ExceptionSymbol>();
             Context = new List<string>();
@@ -206,7 +206,7 @@ namespace DotNetOrb.IdlCompiler.Symbols
                 returnType = $"Task<({String.Join(", ", returnParameters.Select(p => $"{p.type} {p.name}"))})>";
             }            
 
-            stream.Write($"{indent}public {(String.IsNullOrEmpty(modifier) ? "" : modifier + " ")}{returnType} {(dotNetNaming ? GetMappedName("", "Async") : GetMappedName("", "_async"))}(");
+            stream.Write($"{indent}public {(String.IsNullOrEmpty(modifier) ? "" : modifier + " ")}{returnType} {(Compiler.DotNetNaming ? GetMappedName("", "Async") : GetMappedName("", "_async"))}(");
             var parameters = new List<string>();
             foreach (IDLSymbol child in NamingScope.Symbols.Values)
             {

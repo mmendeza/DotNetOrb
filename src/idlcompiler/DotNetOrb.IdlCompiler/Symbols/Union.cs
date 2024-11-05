@@ -70,7 +70,7 @@ namespace DotNetOrb.IdlCompiler.Symbols
             }
         }
         
-        public Union(string name, bool dotNetNaming, List<Annotation> annotations = null) : base(name, dotNetNaming, annotations)
+        public Union(string name, List<Annotation> annotations = null) : base(name, annotations)
         {
         }
 
@@ -189,7 +189,7 @@ namespace DotNetOrb.IdlCompiler.Symbols
                         }
                         
                         stream.WriteLine($"{indent}members.Add(new CORBA.UnionMember(\"{c.Name}\", anyLabel, {c.DataType.TypeCodeExp}, null));");
-                        stream.WriteLine($"{indent}type = CORBA.ORB.Init().CreateUnionTc({FullHelperName}.Id(), \"{Name}\", {Discriminator.TypeCodeExp}, members.ToArray());");
+                        stream.WriteLine($"{indent}type = CORBA.ORB.Init().CreateUnionTc({FullHelperName}.Id(), \"{(Compiler.TypeCodeFullNamespace ? FullName : Name)}\", {Discriminator.TypeCodeExp}, members.ToArray());");
                     }
                 }
             }

@@ -56,7 +56,7 @@ namespace DotNetOrb.IdlCompiler.Symbols
         }
 
 
-        public ArrayType(bool dotNetNaming, List<Annotation> annotations = null) : base("array", dotNetNaming, annotations)
+        public ArrayType(List<Annotation> annotations = null) : base("array", annotations)
         {
             Dimensions = new List<long>();
         }

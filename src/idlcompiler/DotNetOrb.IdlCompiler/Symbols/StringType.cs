@@ -63,12 +63,12 @@ namespace DotNetOrb.IdlCompiler.Symbols
             }
         }
 
-        public StringType(long length, bool dotNetNaming, List<Annotation> annotations = null) : base("string", dotNetNaming, annotations)
+        public StringType(long length, List<Annotation> annotations = null) : base("string", annotations)
         {
             Length = length;
         }
 
-        public StringType(bool dotNetNaming, List<Annotation> annotations = null) : base("string", dotNetNaming, annotations)
+        public StringType(List<Annotation> annotations = null) : base("string", annotations)
         {
         }
 

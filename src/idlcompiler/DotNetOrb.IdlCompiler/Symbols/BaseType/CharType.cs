@@ -19,7 +19,7 @@ namespace DotNetOrb.IdlCompiler.Symbols
                 return false;
             }
         }
-        public CharType(string name, bool dotNetNaming, List<Annotation> annotations = null) : base(name, dotNetNaming, annotations)
+        public CharType(string name, List<Annotation> annotations = null) : base(name, annotations)
         {
 
         }

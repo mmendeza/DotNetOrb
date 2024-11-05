@@ -13,7 +13,7 @@ namespace DotNetOrb.IdlCompiler.Symbols
         public Scope NamingScope { get; set; }
         public bool IsForwardDeclaration { get => true; }
 
-        public Module(string name, bool dotNetNaming, List<Annotation> annotations = null) : base(name, dotNetNaming, annotations)
+        public Module(string name,  List<Annotation> annotations = null) : base(name, annotations)
         {
         }
 
@@ -24,7 +24,7 @@ namespace DotNetOrb.IdlCompiler.Symbols
         public override string GetMappedName(string prefix = "", string suffix = "")
         {
             var name = Name;
-            if (dotNetNaming)
+            if (Compiler.DotNetNaming)
             {
                 name = Utils.ToPascalCase(Name);
             }

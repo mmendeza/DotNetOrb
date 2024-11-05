@@ -9,7 +9,7 @@ namespace DotNetOrb.IdlCompiler.Symbols
     {
         public byte Position { get; set; }
 
-        public BitValue(string name, bool dotNetNaming, List<Annotation> annotations = null) : base(name, dotNetNaming, annotations)
+        public BitValue(string name, List<Annotation> annotations = null) : base(name, annotations)
         {
         }
     }

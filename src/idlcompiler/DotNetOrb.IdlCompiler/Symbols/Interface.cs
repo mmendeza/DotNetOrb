@@ -15,7 +15,7 @@ namespace DotNetOrb.IdlCompiler.Symbols
         public bool IsForwardDeclaration { get; set; }
         public List<Interface> Inherits { get; set; }
 
-        public Interface(string name, bool dotNetNaming, List<Annotation> annotations = null) : base(name, dotNetNaming, annotations)
+        public Interface(string name, List<Annotation> annotations = null) : base(name, annotations)
         {
             Inherits = new List<Interface>();
         }
@@ -382,15 +382,15 @@ namespace DotNetOrb.IdlCompiler.Symbols
         {
             if (IsAbstract)
             {
-                stream.WriteLine($"{indent}type = CORBA.ORB.Init().CreateAbstractInterfaceTc(\"{RepositoryId}\", \"{Name}\");");
+                stream.WriteLine($"{indent}type = CORBA.ORB.Init().CreateAbstractInterfaceTc(\"{RepositoryId}\", \"{(Compiler.TypeCodeFullNamespace ? FullName : Name)}\");");
             }
             else if (IsLocal)
             {
-                stream.WriteLine($"{indent}type = CORBA.ORB.Init().CreateLocalInterfaceTc(\"{RepositoryId}\", \"{Name}\");");
+                stream.WriteLine($"{indent}type = CORBA.ORB.Init().CreateLocalInterfaceTc(\"{RepositoryId}\", \"{(Compiler.TypeCodeFullNamespace ? FullName : Name)}\");");
             }
             else
             {
-                stream.WriteLine($"{indent}type = CORBA.ORB.Init().CreateInterfaceTc(\"{RepositoryId}\", \"{Name}\");");
+                stream.WriteLine($"{indent}type = CORBA.ORB.Init().CreateInterfaceTc(\"{RepositoryId}\", \"{(Compiler.TypeCodeFullNamespace ? FullName : Name)}\");");
             }
         }
 

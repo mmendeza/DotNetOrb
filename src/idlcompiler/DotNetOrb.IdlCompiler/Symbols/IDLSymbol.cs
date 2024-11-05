@@ -11,7 +11,6 @@ namespace DotNetOrb.IdlCompiler.Symbols
 {
     public abstract class IDLSymbol: IIDLSymbol
     {
-        protected readonly bool dotNetNaming;
         private string typePrefix;
         public string TypePrefix 
         {
@@ -89,10 +88,9 @@ namespace DotNetOrb.IdlCompiler.Symbols
 
         public bool IsIncluded { get; set; }
 
-        public IDLSymbol(string name, bool dotNetNaming, List<Annotation> annotations = null)
+        public IDLSymbol(string name, List<Annotation> annotations = null)
         {
             this.name = name;           
-            this.dotNetNaming = dotNetNaming;
             this.annotations = annotations ?? new List<Annotation>();
         }
 
@@ -150,7 +148,7 @@ namespace DotNetOrb.IdlCompiler.Symbols
         public virtual string GetMappedName(string prefix = "", string suffix = "")
         {
             var name = Name;            
-            if (dotNetNaming)
+            if (Compiler.DotNetNaming)
             {
                 name = Utils.ToPascalCase(Name);
             }

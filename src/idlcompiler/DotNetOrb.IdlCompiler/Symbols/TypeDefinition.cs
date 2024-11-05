@@ -63,7 +63,7 @@ namespace DotNetOrb.IdlCompiler.Symbols
             }
         }
         
-        public TypeDefinition(string name, bool dotNetNaming, List<Annotation> annotations = null) : base(name, dotNetNaming, annotations)
+        public TypeDefinition(string name, List<Annotation> annotations = null) : base(name, annotations)
         {
         }
 
@@ -155,7 +155,7 @@ namespace DotNetOrb.IdlCompiler.Symbols
 
         private void PrintTypeCodeExp(string indent, StreamWriter stream)
         {
-            stream.WriteLine($"{indent}type = CORBA.ORB.Init().CreateAliasTc({FullHelperName}.Id(), \"{Name}\", {DataType.TypeCodeExp});");
+            stream.WriteLine($"{indent}type = CORBA.ORB.Init().CreateAliasTc({FullHelperName}.Id(), \"{(Compiler.TypeCodeFullNamespace ? FullName : Name)}\", {DataType.TypeCodeExp});");
         }
 
         private void GenerateHelper(DirectoryInfo currentDir)

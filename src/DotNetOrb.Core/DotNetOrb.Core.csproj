@@ -14,7 +14,7 @@
     <PackageTags>CORBA;ORB;IDL;.NET</PackageTags>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <IncludeSymbols>False</IncludeSymbols>
-    <RepositoryUrl>https://github.com/dotnetorb/DotNetOrb</RepositoryUrl>
+    <RepositoryUrl>https://github.com/mmendeza/DotNetOrb</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>

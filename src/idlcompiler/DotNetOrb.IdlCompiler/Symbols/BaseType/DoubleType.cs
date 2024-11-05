@@ -8,7 +8,7 @@ namespace DotNetOrb.IdlCompiler.Symbols
 {
     public class DoubleType: BaseType, IBasicType
     {        
-        public DoubleType(string name, bool dotNetNaming, List<Annotation> annotations = null) : base(name, dotNetNaming, annotations)
+        public DoubleType(string name, List<Annotation> annotations = null) : base(name, annotations)
         {
 
         }

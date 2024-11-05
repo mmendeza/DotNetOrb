@@ -38,57 +38,57 @@ namespace DotNetOrb.IdlCompiler.Symbols
         public const string TYPECODE = "TypeCode";
 
 
-        protected BaseType(string name, bool dotNetNaming, List<Annotation> annotations = null) : base(name, dotNetNaming, annotations)
+        protected BaseType(string name, List<Annotation> annotations = null) : base(name, annotations)
         {
         }
 
-        public static BaseType CreateBaseType(string name, bool dotNetNaming, List<Annotation> annotations = null)
+        public static BaseType CreateBaseType(string name, List<Annotation> annotations = null)
         {
             name = Regex.Replace(name, @"\s+", " ").Trim();
             switch (name)
             {
                 case INT8:
-                    return new SignedByteType(name, dotNetNaming, annotations);
+                    return new SignedByteType(name, annotations);
                 case UINT8:
                 case OCTET:
-                    return new OctetType(name, dotNetNaming, annotations);
+                    return new OctetType(name, annotations);
                 case SHORT:
                 case UNSIGNED_SHORT:                    
                 case INT16:
                 case UINT16:
-                    return new ShortType(name, dotNetNaming, annotations);
+                    return new ShortType(name, annotations);
                 case LONG:                    
                 case INT32:                    
                 case UNSIGNED_LONG:                    
                 case UINT32:
-                    return new LongType(name, dotNetNaming, annotations);
+                    return new LongType(name, annotations);
                 case LONG_LONG:                    
                 case INT64:                    
                 case UNSIGNED_LONG_LONG:                    
                 case UINT64:
-                    return new LongLongType(name, dotNetNaming, annotations);
+                    return new LongLongType(name, annotations);
                 case FLOAT:
-                    return new FloatType(name, dotNetNaming, annotations);
+                    return new FloatType(name, annotations);
                 case DOUBLE:
-                    return new DoubleType(name, dotNetNaming, annotations);
+                    return new DoubleType(name, annotations);
                 case LONG_DOUBLE:
                     //throw new IdlCompilerException("long double not supported");
-                    return new LongDoubleType(name, dotNetNaming, annotations);
+                    return new LongDoubleType(name, annotations);
                 case CHAR:                    
                 case WCHAR:
-                    return new CharType(name, dotNetNaming, annotations);
+                    return new CharType(name, annotations);
                 case BOOLEAN:
-                    return new BooleanType(name, dotNetNaming, annotations);
+                    return new BooleanType(name, annotations);
                 case OBJECT:
-                    return new ObjectType(name, dotNetNaming, annotations);
+                    return new ObjectType(name, annotations);
                 case VALUE_BASE:
-                    return new ValueBaseType(name, dotNetNaming, annotations);
+                    return new ValueBaseType(name, annotations);
                 case ANY:
-                    return new AnyType(name, dotNetNaming, annotations);
+                    return new AnyType(name, annotations);
                 case NATIVE:
-                    return new NativeType(name, dotNetNaming, annotations);
+                    return new NativeType(name, annotations);
                 case TYPECODE:
-                    return new TypeCodeType(name, dotNetNaming, annotations);
+                    return new TypeCodeType(name, annotations);
                 default:
                     throw new IdlCompilerException("Unknown base type");
             }

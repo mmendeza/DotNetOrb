@@ -15,7 +15,7 @@ namespace DotNetOrb.IdlCompiler.Symbols
         public List<ExceptionSymbol> GetRaises { get; set; }
         public List<ExceptionSymbol> SetRaises { get; set; }
 
-        public AttributeType(string name, bool dotNetNaming, bool readOnly, List<Annotation> annotations = null) : base(name, dotNetNaming, annotations)
+        public AttributeType(string name, bool readOnly, List<Annotation> annotations = null) : base(name, annotations)
         {
             IsReadOnly = readOnly;  
             GetRaises = new List<ExceptionSymbol>();

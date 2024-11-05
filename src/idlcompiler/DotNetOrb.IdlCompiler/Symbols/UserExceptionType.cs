@@ -8,7 +8,7 @@ namespace DotNetOrb.IdlCompiler.Symbols
 {
     public class UserExceptionType: ExceptionSymbol
     {        
-        public UserExceptionType(bool dotNetNaming, List<Annotation> annotations = null) : base("UserException", dotNetNaming, annotations)
+        public UserExceptionType(List<Annotation> annotations = null) : base("UserException", annotations)
         {
 
         }

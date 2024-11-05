@@ -8,7 +8,7 @@ namespace DotNetOrb.IdlCompiler.Symbols
 {
     public class LongDoubleType: BaseType, IBasicType
     {        
-        public LongDoubleType(string name, bool dotNetNaming, List<Annotation> annotations = null) : base(name, dotNetNaming, annotations)
+        public LongDoubleType(string name, List<Annotation> annotations = null) : base(name, annotations)
         {
 
         }

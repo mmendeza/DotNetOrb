@@ -8,7 +8,7 @@ namespace DotNetOrb.IdlCompiler.Symbols
 {
     public class TypeCodeType: BaseType, IFwdDeclSymbol
     {        
-        public TypeCodeType(string name, bool dotNetNaming, List<Annotation> annotations = null) : base(name, dotNetNaming, annotations)
+        public TypeCodeType(string name, List<Annotation> annotations = null) : base(name, annotations)
         {
 
         }

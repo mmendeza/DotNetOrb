@@ -14,7 +14,7 @@ namespace DotNetOrb.IdlCompiler.Symbols
         public List<AnnotationType> Inherits { get; set; }
 
 
-        public AnnotationType(string name, bool dotNetNaming, List<Annotation> annotations = null) : base(name, dotNetNaming, annotations)
+        public AnnotationType(string name, List<Annotation> annotations = null) : base(name, annotations)
         {
             Inherits = new List<AnnotationType>();
         }

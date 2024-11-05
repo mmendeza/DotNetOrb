@@ -93,7 +93,7 @@ namespace DotNetOrb.IdlCompiler.Symbols
             }
         }
 
-        public Sequence(ITypeSymbol dataType, SequenceType defaultSeqType, bool dotNetNaming, List<Annotation> annotations = null) : base("sequence", dotNetNaming, annotations)
+        public Sequence(ITypeSymbol dataType, SequenceType defaultSeqType, List<Annotation> annotations = null) : base("sequence", annotations)
         {
             DataType = dataType;
             sequenceType = defaultSeqType;

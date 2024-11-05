@@ -83,7 +83,7 @@ namespace DotNetOrb.IdlCompiler.Symbols
             }
         }
 
-        public ValueType(string name, bool dotNetNaming, List<Annotation> annotations = null) : base(name, dotNetNaming, annotations)
+        public ValueType(string name, List<Annotation> annotations = null) : base(name, annotations)
         {
             Inherits = new List<ValueType>();
             Supports = new List<Interface>();            
@@ -497,7 +497,7 @@ namespace DotNetOrb.IdlCompiler.Symbols
             if (IsBoxed && BoxedValue != null)
             {
                 //var boxedType = NamingScope.Symbols.Values.OfType<IIDLSymbol>().FirstOrDefault() as ITypeSymbol;
-                stream.WriteLine($"{indent}type = CORBA.ORB.Init().CreateValueBoxTc(\"{RepositoryId}\", \"{Name}\", {BoxedValue.TypeCodeExp});");
+                stream.WriteLine($"{indent}type = CORBA.ORB.Init().CreateValueBoxTc(\"{RepositoryId}\", \"{(Compiler.TypeCodeFullNamespace ? FullName : Name)}\", {BoxedValue.TypeCodeExp});");
             }
             else
             {
@@ -511,12 +511,12 @@ namespace DotNetOrb.IdlCompiler.Symbols
                 {
                     concreteBase = $"{Base.FullHelperName}.Type()";
                 }
-                stream.Write($"{indent}type = CORBA.ORB.Init().CreateValueTc({FullHelperName}.Id(), \"{Name}\", {typeModifier}, {concreteBase}, new CORBA.ValueMember[] {{");                
+                stream.Write($"{indent}type = CORBA.ORB.Init().CreateValueTc({FullHelperName}.Id(), \"{(Compiler.TypeCodeFullNamespace ? FullName : Name)}\", {typeModifier}, {concreteBase}, new CORBA.ValueMember[] {{");                
                 foreach (IDLSymbol child in NamingScope.Symbols.Values)
                 {
                     if (child is StateMember m)
                     {
-                        stream.Write($"new CORBA.ValueMember(\"{m.Name}\", \"{m.RepositoryId}\", \"{Name}\", \"1.0\", {m.DataType.TypeCodeExp}, null, {(m.IsPublic ? 1 : 0)}), ");
+                        stream.Write($"new CORBA.ValueMember(\"{m.Name}\", \"{m.RepositoryId}\", \"{(Compiler.TypeCodeFullNamespace ? FullName : Name)}\", \"1.0\", {m.DataType.TypeCodeExp}, null, {(m.IsPublic ? 1 : 0)}), ");
                     }
                 }
                 stream.WriteLine($"}});");

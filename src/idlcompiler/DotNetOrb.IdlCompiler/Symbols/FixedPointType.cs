@@ -54,7 +54,7 @@ namespace DotNetOrb.IdlCompiler.Symbols
             }
         }
 
-        public FixedPointType(long totalDigits, long fractionalDigits, bool dotNetNaming, List<Annotation> annotations = null) : base("fixed", dotNetNaming, annotations)
+        public FixedPointType(long totalDigits, long fractionalDigits, List<Annotation> annotations = null) : base("fixed", annotations)
         {
             TotalDigits = totalDigits;
             FractionalDigits = fractionalDigits;            

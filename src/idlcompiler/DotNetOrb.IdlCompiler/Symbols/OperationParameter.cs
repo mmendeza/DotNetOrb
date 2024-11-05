@@ -19,14 +19,14 @@ namespace DotNetOrb.IdlCompiler.Symbols
         public ITypeSymbol DataType { get; set; }
         public ParameterDirection Direction { get; set; }
 
-        public OperationParameter(string name, bool dotNetNaming, List<Annotation> annotations = null) : base(name, dotNetNaming, annotations)
+        public OperationParameter(string name,   List<Annotation> annotations = null) : base(name, annotations)
         {
         }
 
         public override string GetMappedName(string prefix = "", string suffix = "")
         {
             var name = Name;
-            if (dotNetNaming)
+            if (Compiler.DotNetNaming)
             {
                 name = Utils.ToCamelCase(Name);
             }

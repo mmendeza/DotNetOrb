@@ -20,7 +20,7 @@ namespace DotNetOrb.IdlCompiler.Symbols
                 return false;
             }
         }
-        public ShortType(string name, bool dotNetNaming, List<Annotation> annotations = null) : base(name, dotNetNaming, annotations)
+        public ShortType(string name, List<Annotation> annotations = null) : base(name, annotations)
         {
 
         }

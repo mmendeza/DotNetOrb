@@ -10,7 +10,7 @@ namespace DotNetOrb.IdlCompiler.Symbols
         public ITypeSymbol DataType { get; set; }
         public bool IsPublic { get; set; }        
 
-        public StateMember(string name, bool dotNetNaming, List<Annotation> annotations = null) : base(name, dotNetNaming, annotations)
+        public StateMember(string name, List<Annotation> annotations = null) : base(name, annotations)
         {
         
         }

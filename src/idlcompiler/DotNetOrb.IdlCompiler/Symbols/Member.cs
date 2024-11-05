@@ -9,7 +9,7 @@ namespace DotNetOrb.IdlCompiler.Symbols
     {        
         public ITypeSymbol DataType { get; set; }
 
-        public Member(string name, Scope parentScope, bool dotNetNaming, List<Annotation> annotations = null) : base(name, dotNetNaming, annotations)
+        public Member(string name, Scope parentScope, List<Annotation> annotations = null) : base(name, annotations)
         {
         }
 

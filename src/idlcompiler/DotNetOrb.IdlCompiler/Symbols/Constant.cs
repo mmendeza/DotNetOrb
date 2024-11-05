@@ -12,7 +12,7 @@ namespace DotNetOrb.IdlCompiler.Symbols
         public ITypeSymbol DataType { get; set; }
         public Literal Value { get; set; }
 
-        public Constant(string name, bool dotNetNaming, List<Annotation> annotations = null) : base(name, dotNetNaming, annotations)
+        public Constant(string name, List<Annotation> annotations = null) : base(name, annotations)
         {
         }
 

@@ -70,7 +70,7 @@ namespace DotNetOrb.IdlCompiler.Symbols
             }
         }
 
-        public BitMask(string name, bool dotNetNaming, List<Annotation> annotations = null) : base(name, dotNetNaming, annotations)
+        public BitMask(string name, List<Annotation> annotations = null) : base(name, annotations)
         {
         }
 
@@ -166,7 +166,7 @@ namespace DotNetOrb.IdlCompiler.Symbols
             {
                 members.Add(e.Name);
             }
-            stream.WriteLine($"{indent}type = \"CORBA.ORB.Init().CreateEnumTc({FullHelperName}.Id(),\"{Name}\", new String[] {{{String.Join(", ", members)}}});");
+            stream.WriteLine($"{indent}type = \"CORBA.ORB.Init().CreateEnumTc({FullHelperName}.Id(),\"{(Compiler.TypeCodeFullNamespace ? FullName : Name)}\", new String[] {{{String.Join(", ", members)}}});");
         }
 
         private void GenerateHelper(DirectoryInfo currentDir)

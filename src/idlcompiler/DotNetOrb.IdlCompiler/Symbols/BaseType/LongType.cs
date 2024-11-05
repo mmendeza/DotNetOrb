@@ -20,7 +20,7 @@ namespace DotNetOrb.IdlCompiler.Symbols
                 return false;
             }
         }
-        public LongType(string name, bool dotNetNaming, List<Annotation> annotations = null) : base(name, dotNetNaming, annotations)
+        public LongType(string name, List<Annotation> annotations = null) : base(name, annotations)
         {
 
         }

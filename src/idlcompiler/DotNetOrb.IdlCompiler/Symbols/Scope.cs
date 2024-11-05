@@ -56,12 +56,12 @@ namespace DotNetOrb.IdlCompiler.Symbols
 
         public void AddPredefinedSymbols()
         {
-            var typeCode = new TypeCodeType("TypeCode", true);
-            var userException = new UserExceptionType(true);
+            var typeCode = new TypeCodeType("TypeCode");
+            var userException = new UserExceptionType();
             //var ob = new ObjectType("Object", true);
             //AddSymbolDefinition(typeCode);
             //AddSymbolDefinition(ob);
-            var corba = new Module("CORBA", true);
+            var corba = new Module("CORBA");
             AddSymbolDefinition(corba);
             corba.NamingScope.AddSymbolDefinition(typeCode);
             corba.NamingScope.AddSymbolDefinition(userException);
