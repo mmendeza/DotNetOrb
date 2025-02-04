@@ -20,6 +20,48 @@ namespace DotNetOrb.Core.GIOP
         public ulong RelativeRoundTripTimeout { get; set; }
         public ulong RelativeRequestTimeout { get; set; }
 
+        public InvocationPolicies(CORBA.Object obj)
+        {
+            var policy = obj._GetClientPolicy(REQUEST_START_TIME_POLICY_TYPE.Value);
+            if (policy != null)
+            {
+                RequestStartTime = ((IRequestStartTimePolicy)policy).StartTime;
+            }
+            policy = obj._GetClientPolicy(REQUEST_END_TIME_POLICY_TYPE.Value);
+            if (policy != null)
+            {
+                RequestEndTime = ((IRequestEndTimePolicy)policy).EndTime;
+            }
+            policy = obj._GetClientPolicy(REPLY_START_TIME_POLICY_TYPE.Value);
+            if (policy != null)
+            {
+                ReplyStartTime = ((IReplyStartTimePolicy)policy).StartTime;
+            }
+            policy = obj._GetClientPolicy(REPLY_END_TIME_POLICY_TYPE.Value);
+            if (policy != null)
+            {
+                ReplyEndTime = ((IReplyEndTimePolicy)policy).EndTime;
+            }
+            policy = obj._GetClientPolicy(RELATIVE_RT_TIMEOUT_POLICY_TYPE.Value);
+            if (policy != null)
+            {
+                RelativeRoundTripTimeout = ((IRelativeRoundtripTimeoutPolicy)policy).RelativeExpiry;
+            }
+            policy = obj._GetClientPolicy(RELATIVE_REQ_TIMEOUT_POLICY_TYPE.Value);
+            if (policy != null)
+            {
+                RelativeRequestTimeout = ((IRelativeRequestTimeoutPolicy)policy).RelativeExpiry;
+            }
+            if (RelativeRequestTimeout > 0)
+            {
+                RequestEndTime = Time.Earliest(Time.CorbaFuture(RelativeRequestTimeout), RequestEndTime);
+            }
+            if (RelativeRoundTripTimeout > 0)
+            {
+                ReplyEndTime = Time.Earliest(Time.CorbaFuture(RelativeRoundTripTimeout), ReplyEndTime);
+            }
+        }
+
         public InvocationPolicies(ICollection<IPolicy> policies)
         {
             foreach (var policy in policies)

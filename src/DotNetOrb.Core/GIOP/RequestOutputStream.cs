@@ -53,7 +53,9 @@ namespace DotNetOrb.Core.GIOP
             Operation = operation;
             ChannelHandler = channelHandler;
             GIOPMinor = giopMinor;
+            var policies = new InvocationPolicies(obj);            
             ServiceContextList = new List<ServiceContext>();
+            ServiceContextList.Add(policies.ToServiceContext());
             RequestId = channelHandler.GetRequestId();
             InitBuffer();
         }
@@ -66,7 +68,9 @@ namespace DotNetOrb.Core.GIOP
             Operation = operation;
             ChannelHandler = channelHandler;
             GIOPMinor = giopMinor;
+            var policies = new InvocationPolicies(obj);
             ServiceContextList = new List<ServiceContext>();
+            ServiceContextList.Add(policies.ToServiceContext());
             RequestId = channelHandler.GetRequestId();
             InitBuffer();
         }

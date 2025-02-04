@@ -64,11 +64,14 @@ namespace DotNetOrb.Core.Policies
 
                 for (int i = 0; i < ts.Length; i++)
                 {
-                    var policy = policyOverrides[ts[i]];
-                    if (policy != null)
+                    if (policyOverrides.ContainsKey(ts[i]))
                     {
-                        policyList.Add(policy);
-                    }
+                        var policy = policyOverrides[ts[i]];
+                        if (policy != null)
+                        {
+                            policyList.Add(policy);
+                        }
+                    }                    
                 }
             }
             var result = policyList.ToArray();
