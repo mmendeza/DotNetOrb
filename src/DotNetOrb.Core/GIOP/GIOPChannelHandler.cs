@@ -379,6 +379,7 @@ namespace DotNetOrb.Core.GIOP
                 var delay = invocationPolicies.RequestStartTime != null ? Time.MillisTo(invocationPolicies.RequestStartTime) : 0;
                 Action action = async () =>
                 {
+                    bool requestSent = false;
                     if (invocationPolicies.RequestEndTime != null)
                     {
                         var timeout = Time.MillisTo(invocationPolicies.RequestEndTime);
@@ -387,8 +388,11 @@ namespace DotNetOrb.Core.GIOP
                             var ct = new CancellationTokenSource(TimeSpan.FromMilliseconds(timeout));
                             ct.Token.Register(() =>
                             {
-                                tcs.TrySetException(new CORBA.Timeout("Request end time exceeded", 2, CompletionStatus.No));
-                                requests.Remove(stream.RequestId);
+                                if (!requestSent)
+                                {
+                                    tcs.TrySetException(new CORBA.Timeout("Request end time exceeded", 2, CompletionStatus.No));
+                                    requests.Remove(stream.RequestId);
+                                }
                             }, useSynchronizationContext: false);
                         }
                         else
@@ -401,6 +405,7 @@ namespace DotNetOrb.Core.GIOP
                     try
                     {
                         await channel.WriteAndFlushAsync(stream);
+                        requestSent = true;
                     }
                     catch (Exception ex)
                     {
