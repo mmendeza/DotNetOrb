@@ -430,6 +430,7 @@ namespace CORBA
         {
             return (character >= 'a' && character <= 'z')
                 || (character == '_')
+                || (character == ':')
                 || (character >= 'A' && character <= 'Z');
         }
 
@@ -437,6 +438,7 @@ namespace CORBA
         {
             return IsLegalStartChar(character)
                 || (character == '_')
+                || (character == ':')
                 || (character >= '0' && character <= '9');
         }
 
