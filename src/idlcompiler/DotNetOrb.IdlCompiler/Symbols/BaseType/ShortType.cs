@@ -31,11 +31,11 @@ namespace DotNetOrb.IdlCompiler.Symbols
             {
                 if (IsUnsigned)
                 {
-                    return 2;
+                    return 4;
                 }
                 else
                 {
-                    return 4;
+                    return 2;
                 }
             }            
         }
