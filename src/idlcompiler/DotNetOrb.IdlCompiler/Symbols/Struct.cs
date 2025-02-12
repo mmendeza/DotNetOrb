@@ -184,7 +184,7 @@ namespace DotNetOrb.IdlCompiler.Symbols
             {
                 if (symbol is Member m)
                 {
-                    stream.WriteLine($"{indent}\t[IdlName(\"{Name}\")]");
+                    stream.WriteLine($"{indent}\t[IdlName(\"{m.Name}\")]");
                     foreach (var att in m.MappedAttributes)
                     {
                         stream.WriteLine($"{indent}\t{att}");
