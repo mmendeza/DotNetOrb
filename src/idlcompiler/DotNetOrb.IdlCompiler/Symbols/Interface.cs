@@ -228,7 +228,7 @@ namespace DotNetOrb.IdlCompiler.Symbols
             bool hasImpl = false;
             foreach (IDLSymbol s in NamingScope.Symbols.Values)
             {
-                if (s is ITypeSymbol)
+                if (s is Constant || s is ITypeSymbol)
                 {
                     hasImpl = true;
                     break;
