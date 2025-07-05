@@ -12,7 +12,7 @@
     <PackageTags>CORBA;ORB;IDL;.NET</PackageTags>
     <RepositoryUrl>https://github.com/mmendeza/DotNetOrb</RepositoryUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <Version>1.0.1</Version>
+    <Version>1.0.3</Version>
   </PropertyGroup>
 
   <ItemGroup>
