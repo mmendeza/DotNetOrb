@@ -12,6 +12,10 @@
   </Target>
 
   <ItemGroup>
+    <PackageReference Include="System.Text.Json" Version="9.0.6" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\src\DotNetOrb.Core\DotNetOrb.Core.csproj" />
   </ItemGroup>
 

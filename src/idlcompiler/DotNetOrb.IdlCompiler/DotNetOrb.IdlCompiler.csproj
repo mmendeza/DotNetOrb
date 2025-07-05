@@ -4,7 +4,7 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
 	<AssemblyVersion>$(MajorVersion).0.0.0</AssemblyVersion>
-	<Version>1.0.4</Version>
+	<Version>1.0.5</Version>
 	<Title>DotNetOrb IDL Compiler</Title>
 	<Copyright>Copyright (c) DotNetOrb Team (dotnetorb@gmail.com)</Copyright>
 	<Authors>dotnetorb</Authors>
@@ -45,6 +45,7 @@
 
   <ItemGroup>
     <PackageReference Include="Antlr4.Runtime.Standard" Version="4.13.1" />
+    <PackageReference Include="System.Text.Json" Version="9.0.6" />
   </ItemGroup>
 
 </Project>

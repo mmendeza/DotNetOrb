@@ -34,7 +34,7 @@
     },
     "Test": {
       "commandName": "Project",
-      "commandLineArgs": "-i ..\\..\\..\\..\\DotNetOrb.Test\\idls\\\r\n-o ..\\..\\..\\..\\DotNetOrb.Test\\compiled_idls\\\r\n..\\..\\..\\..\\DotNetOrb.Test\\idls\\test.idl"
+      "commandLineArgs": "-i ..\\..\\..\\..\\..\\..\\test\\DotNetOrb.Test\\idls\\\r\n-o ..\\..\\..\\..\\..\\..\\test\\DotNetOrb.Test\\compiled_idls\\\r\n..\\..\\..\\..\\..\\..\\test\\DotNetOrb.Test\\idls\\test.idl"
     }
   }
 }

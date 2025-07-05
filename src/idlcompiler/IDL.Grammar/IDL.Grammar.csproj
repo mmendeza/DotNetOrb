@@ -44,5 +44,6 @@
 		<PackageReference Include="Antlr4BuildTasks" Version="12.8.0">
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>
+		<PackageReference Include="System.Text.Json" Version="9.0.6" />
 	</ItemGroup>
 </Project>
