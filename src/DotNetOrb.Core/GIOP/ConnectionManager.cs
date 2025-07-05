@@ -65,7 +65,7 @@ namespace DotNetOrb.Core.GIOP
                     {
                         IIOPProfile sslProfile = iiopProfile.ToNonSSL();
 
-                        clientConnection = clientConnections[sslProfile];
+                        clientConnections.TryGetValue(sslProfile, out clientConnection);
                     }
                 }
 
