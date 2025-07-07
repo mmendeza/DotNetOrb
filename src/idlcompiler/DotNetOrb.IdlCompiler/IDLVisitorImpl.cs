@@ -1175,7 +1175,19 @@ namespace DotNetOrb.IdlCompiler
             }
             else
             {
-                type = BaseType.CreateBaseType(constType.GetSourceText());
+                var typeName = constType.GetSourceText();
+                switch (typeName)
+                {
+                    case "string":
+                        type = new StringType();
+                        break;
+                    case "wstring":
+                        type = new WStringType();
+                        break;
+                    default:
+                        type = BaseType.CreateBaseType(typeName);
+                        break;
+                }
             }
             constant.DataType = type;
             constant.Value = GetConstantExpValue(context.const_exp(), scope);
