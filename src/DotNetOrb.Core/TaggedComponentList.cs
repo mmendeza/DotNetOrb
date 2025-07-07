@@ -228,21 +228,39 @@ namespace DotNetOrb.Core
                 {
                     try
                     {
-                        var instance = Activator.CreateInstance(helper);
-                        var methodInfo = helper.GetMethod("Read");
+                        var methodInfo = helper.GetMethod(
+                            "Read",
+                            BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static,
+                            null,
+                            new[] { typeof(CDRInputStream) },
+                            null);
+
                         if (methodInfo != null)
                         {
                             object[] parametersArray = new object[] { inputStream };
-                            result = methodInfo.Invoke(instance, parametersArray);
+                            object target = methodInfo.IsStatic ? null : Activator.CreateInstance(helper);
+                            result = methodInfo.Invoke(target, parametersArray);
                         }
                         else
                         {
-                            throw new RuntimeException("Helper " + helper.Name + " has no appropriate read() method.");
+                            throw new RuntimeException($"Helper {helper.Name} has no appropriate Read() method.");
                         }
+                    }
+                    catch (AmbiguousMatchException ex)
+                    {
+                        throw new RuntimeException($"Multiple 'Read' methods found in helper {helper.Name}.", ex);
+                    }
+                    catch (MissingMethodException ex)
+                    {
+                        throw new RuntimeException($"Cannot create instance of helper {helper.Name}. No default constructor?", ex);
+                    }
+                    catch (TargetInvocationException ex)
+                    {
+                        throw new RuntimeException($"Exception while invoking 'Read' on {helper.Name}: {ex.InnerException?.Message}", ex.InnerException ?? ex);
                     }
                     catch (Exception ex)
                     {
-                        throw new RuntimeException("Exception while reading component data: " + ex.Message, ex);
+                        throw new RuntimeException($"Unexpected error while processing helper {helper.Name}: {ex.Message}", ex);
                     }
                 }
             }
