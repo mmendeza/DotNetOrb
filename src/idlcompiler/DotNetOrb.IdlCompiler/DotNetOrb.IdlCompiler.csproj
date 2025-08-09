@@ -4,7 +4,7 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
 	<AssemblyVersion>$(MajorVersion).0.0.0</AssemblyVersion>
-	<Version>1.0.6</Version>
+	<Version>1.0.7</Version>
 	<Title>DotNetOrb IDL Compiler</Title>
 	<Copyright>Copyright (c) DotNetOrb Team (dotnetorb@gmail.com)</Copyright>
 	<Authors>dotnetorb</Authors>

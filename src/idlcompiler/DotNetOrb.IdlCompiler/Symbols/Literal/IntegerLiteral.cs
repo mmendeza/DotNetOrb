@@ -19,11 +19,11 @@ namespace DotNetOrb.IdlCompiler.Symbols
             }
             if (temp.StartsWith("0x") || temp.StartsWith("0X"))
             {
-                value = new Decimal(Convert.ToInt32(temp.Substring(2), 16));
+                value = new Decimal(Convert.ToInt64(temp.Substring(2), 16));
             }
             else if (temp.StartsWith("0"))
             {
-                value = new Decimal(Convert.ToInt32(temp, 8));
+                value = new Decimal(Convert.ToInt64(temp, 8));
             }
             else
             {
