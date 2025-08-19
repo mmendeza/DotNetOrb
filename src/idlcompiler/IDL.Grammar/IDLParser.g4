@@ -3,7 +3,7 @@ parser grammar IDLParser;
 options { tokenVocab=IDLLexer; }
 
 specification
-   : definition + EOF
+   : definition* EOF
    ;
 
 definition
