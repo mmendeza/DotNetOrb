@@ -34,13 +34,13 @@ namespace DotNetOrb.Core.IIOP
                 {
                     return hostName;
                 }
-                else if (host != null)
-                {
-                    return host.HostName;
-                }
                 else if (address != null)
                 {
                     return address.ToString();
+                }
+                else if (host != null)
+                {
+                    return host.HostName;
                 }
                 else
                 {
@@ -49,39 +49,38 @@ namespace DotNetOrb.Core.IIOP
             }
             set
             {
-                //try to parse address
-                try
+                if (string.IsNullOrEmpty(value))
                 {
-                    IPAddress ipAddress = IPAddress.Parse(value);
+                    hostName = null;
+                    address = null;
+                    host = null;
+                    IsWildcard = false;
+                    return;
+                }
+
+                if (IPAddress.TryParse(value, out var ipAddress))
+                {
+                    // Es una IP literal
+                    address = ipAddress;
+                    hostName = value;
+
                     if (ipAddress.Equals(IPAddress.Any) || ipAddress.Equals(IPAddress.IPv6Any))
                     {
                         IsWildcard = true;
                     }
-                    else
-                    {
-                        address = ipAddress;
-                        hostName = value;
-                    }
-                    try
-                    {
-                        host = Dns.GetHostEntry(value);
-                    }
-                    catch (SocketException)
-                    {
-                        //throw new CORBA.Internal("Unable to resolve host " + value);
-                    }
                 }
-                catch (FormatException)
+                else
                 {
-                    //try to resolve host
-                    if (!string.IsNullOrEmpty(value))
-                    {
-                        hostName = value;
-                    }
-                    IsWildcard = true;
+                    // Es un nombre → solo resolución directa
+                    hostName = value;
+                    IsWildcard = false;
                     try
                     {
-                        host = Dns.GetHostEntry(value);
+                        var addresses = Dns.GetHostAddresses(value);
+                        if (addresses.Length > 0)
+                        {
+                            address = addresses[0];
+                        }
                     }
                     catch (SocketException)
                     {
