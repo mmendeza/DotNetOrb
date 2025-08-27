@@ -7,6 +7,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Linq.Expressions;
 
 namespace DotNetOrb.Core.Config
 {
@@ -108,16 +109,12 @@ namespace DotNetOrb.Core.Config
             //Read environment variables
             IDictionary env = System.Environment.GetEnvironmentVariables();
             foreach (string key in env.Keys)
-            {
-                if (key.StartsWith("DotNetOrb"))
+            {                
+                var value = env[key];
+                if (value != null)
                 {
-                    var value = env[key];
-                    if (value != null)
-                    {
-                        settings.Add(key, value);
-                    }
-
-                }
+                    settings.Add(key, value);
+                }                
             }
 
             //Read custom app settings section
@@ -136,20 +133,27 @@ namespace DotNetOrb.Core.Config
 
             //Read appSettings.json
             var builder = new Microsoft.Extensions.Configuration.ConfigurationBuilder().AddJsonFile("appsettings.json");
-            var configuration = builder.Build();
-            var configSection = configuration.GetSection(id);
-            if (configSection != null)
+            try
             {
-                foreach (var kvp in configSection.AsEnumerable())
-                {                    
-                    if (kvp.Value != null)
+                var configuration = builder.Build();
+                var configSection = configuration.GetSection(id);
+                if (configSection != null)
+                {
+                    foreach (var kvp in configSection.AsEnumerable())
                     {
-                        //remove section name
-                        var index = kvp.Key.IndexOf(':');
-                        var name = kvp.Key.Substring(index + 1);
-                        settings.Add(name, kvp.Value);
+                        if (kvp.Value != null)
+                        {
+                            //remove section name
+                            var index = kvp.Key.IndexOf(':');
+                            var name = kvp.Key.Substring(index + 1);
+                            settings.Add(name, kvp.Value);
+                        }
                     }
                 }
+            }            
+            catch (FileNotFoundException ex)
+            {
+                //No configuration file found
             }
 
             //Add custom props

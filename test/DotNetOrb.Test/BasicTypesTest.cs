@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using DotNetOrb.Core;
+using PortableServer;
 using Test;
 
 namespace DotNetOrb.Test
@@ -16,19 +17,19 @@ namespace DotNetOrb.Test
         // This method will execute before all the tests in the class
         public static void BeforeClass(TestContext context)
         {
-            //System.Environment.SetEnvironmentVariable("OAAddress", "iiop://localhost:3001");
-            //orb = (ORB)ORB.Init();
-            //var poa = POAHelper.Narrow(orb.ResolveInitialReferences("RootPOA"));
-            //poa.ThePOAManager.Activate();
-
-            //CORBA.IObject o = poa.ServantToReference(new BasicTypesIfzImpl());
-            //var ior = orb.ObjectToString(o);
-            //testIfz = BasicTypesIfzHelper.Narrow(orb.StringToObject(ior));
-
             System.Environment.SetEnvironmentVariable("OAAddress", "iiop://localhost:3001");
-            orb = (ORB)ORB.Init();            
-            string serverIOR = File.ReadAllText("E:\\testior.txt");
-            testIfz = BasicTypesIfzHelper.Narrow(orb.StringToObject(serverIOR));
+            orb = (ORB)ORB.Init();
+            var poa = POAHelper.Narrow(orb.ResolveInitialReferences("RootPOA"));
+            poa.ThePOAManager.Activate();
+
+            CORBA.IObject o = poa.ServantToReference(new BasicTypesIfzImpl());
+            var ior = orb.ObjectToString(o);
+            testIfz = BasicTypesIfzHelper.Narrow(orb.StringToObject(ior));
+
+            //System.Environment.SetEnvironmentVariable("OAAddress", "iiop://localhost:3001");
+            //orb = (ORB)ORB.Init();            
+            //string serverIOR = File.ReadAllText("E:\\testior.txt");
+            //testIfz = BasicTypesIfzHelper.Narrow(orb.StringToObject(serverIOR));
         }
 
         [ClassCleanup]
