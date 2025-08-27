@@ -467,7 +467,8 @@ namespace DotNetOrb.Core.IIOP
 
                     GetSSLPort() == other.GetSSLPort() &&
                     primaryAddress.Equals(other.primaryAddress) &&
-                    GetAlternateAddresses().Equals(other.GetAlternateAddresses())
+                    GetAlternateAddresses().Count == other.GetAlternateAddresses().Count &&
+                    !GetAlternateAddresses().Except(other.GetAlternateAddresses()).Any()
                 ;
             }
             return false;
