@@ -866,7 +866,7 @@ namespace DotNetOrb.Core.POA
 
             lock (poaCreationLock)
             {
-                child = children[poaName];
+                children.TryGetValue(poaName, out child);
                 if (child != null && !child.IsDestructionApparent)
                 {
                     throw new AdapterAlreadyExists();
