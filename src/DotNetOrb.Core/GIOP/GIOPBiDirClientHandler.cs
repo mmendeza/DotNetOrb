@@ -75,7 +75,7 @@ namespace DotNetOrb.Core.GIOP
                         case MsgType11.Request:
                             {
                                 var bidirContext = context.GetAttribute(GIOPConnection.BiDirAttrKey).Get();
-                                if (bidirContext != null)
+                                if (bidirContext == null)
                                 {
                                     var request = (GIOPRequestMessage)msg;
                                     request.ServiceContextList.Add(bidirCtx);
