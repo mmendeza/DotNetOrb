@@ -36,7 +36,7 @@ namespace DotNetOrb.Core.GIOP
                                 var request = (GIOPRequestMessage)msg;
                                 foreach (var serviceCtx in request.ServiceContextList)
                                 {
-                                    if (serviceCtx.ContextId == TAG_CODE_SETS.Value)
+                                    if (serviceCtx.ContextId == BI_DIR_IIOP.Value)
                                     {
                                         using (var inputStream = new CDRInputStream(serviceCtx.ContextData))
                                         {
