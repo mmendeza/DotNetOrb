@@ -74,13 +74,12 @@ namespace DotNetOrb.Core.GIOP
                     {
                         case MsgType11.Request:
                             {
-                                var bidirCtx = context.GetAttribute(GIOPConnection.BiDirAttrKey).Get();
-                                if (bidirCtx == null)
+                                var bidirContext = context.GetAttribute(GIOPConnection.BiDirAttrKey).Get();
+                                if (bidirContext == null)
                                 {
                                     var request = (GIOPRequestMessage)msg;
                                     request.ServiceContextList.Add(bidirCtx);
                                     context.GetAttribute(GIOPConnection.BiDirAttrKey).Set(bidirCtx);
-
                                 }
                             }
                             break;
