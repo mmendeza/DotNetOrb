@@ -37,7 +37,7 @@ module MIOP
     {
 	Version miop_version;
 	Address the_address;
-	short the_port;
+	unsigned short the_port;
 	sequence<IOP::TaggedComponent> components;
     };
 };

@@ -105,7 +105,7 @@ namespace DotNetOrb.Core.IIOP
         {
             string addr = address;
             string host = "127.0.0.1"; //default to localhost
-            short port = 2809; // default IIOP port
+            ushort port = 2809; // default IIOP port
             int major = 1; // should be 1 by default. see 13.6.10.3
             int minor = 0; // should be 0 by default. see 13.6.10.3
             string errorstr = "Illegal IIOP protocol format in object address format: " + addr;
@@ -163,7 +163,7 @@ namespace DotNetOrb.Core.IIOP
                     {
                         try
                         {
-                            port = short.Parse(addr.Substring(ipv6SeperatorEnd + 2));
+                            port = ushort.Parse(addr.Substring(ipv6SeperatorEnd + 2));
                         }
                         catch (FormatException)
                         {
@@ -179,7 +179,7 @@ namespace DotNetOrb.Core.IIOP
                 {
                     try
                     {
-                        port = short.Parse(addr.Substring(sep + 1));
+                        port = ushort.Parse(addr.Substring(sep + 1));
                         host = addr.Substring(0, sep);
                     }
                     catch (FormatException)

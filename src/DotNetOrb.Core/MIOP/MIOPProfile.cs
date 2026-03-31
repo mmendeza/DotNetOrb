@@ -34,7 +34,7 @@ namespace DotNetOrb.Core.MIOP
             version = uipmc.MiopVersion;
         }
 
-        public MIOPProfile(string address, short port, string domainId, ulong groupId, Version groupVersion, uint groupRefVersion, IIOPProfile iiop)
+        public MIOPProfile(string address, ushort port, string domainId, ulong groupId, Version groupVersion, uint groupRefVersion, IIOPProfile iiop)
         {
 
             groupIIOPProfile = iiop;
@@ -337,7 +337,7 @@ namespace DotNetOrb.Core.MIOP
             {
                 try
                 {
-                    uipmc.ThePort = short.Parse(s.Substring(sep + 1));
+                    uipmc.ThePort = ushort.Parse(s.Substring(sep + 1));
                     uipmc.TheAddress = s.Substring(0, sep);
                 }
                 catch (Exception e)
