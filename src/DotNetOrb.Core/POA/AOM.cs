@@ -486,7 +486,7 @@ namespace DotNetOrb.Core.POA
                 }
                 catch (CORBA.SystemException e)
                 {
-                    if (logger.IsWarnEnabled)
+                    if (logger.IsInfoEnabled)
                     {
                         logger.Info("oid: " + POAUtil.Convert(oid) + "exception occurred during servant etherialisation: " + e.Message);
                     }

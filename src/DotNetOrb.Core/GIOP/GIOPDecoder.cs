@@ -168,7 +168,8 @@ namespace DotNetOrb.Core.GIOP
                                     }
                                     else
                                     {
-                                        logger.Error("Fragment not found for request id: " + message.RequestId);
+                                        if (logger.IsErrorEnabled)
+                                            logger.Error("Fragment not found for request id: " + message.RequestId);
                                     }
                                 }
                                 break;
@@ -191,7 +192,8 @@ namespace DotNetOrb.Core.GIOP
                                 break;
                             default:
                                 {
-                                    logger.Error("Received a unknow message Type: " + header.MessageType);
+                                    if (logger.IsErrorEnabled)
+                                        logger.Error("Received a unknow message Type: " + header.MessageType);
                                 }
                                 break;
                         }

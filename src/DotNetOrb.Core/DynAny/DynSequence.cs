@@ -334,17 +334,20 @@ namespace DotNetOrb.Core.DynAny
             }
             catch (InvalidValue iv)
             {
-                logger.Error("unable to create DynAny", iv);
+                if (logger.IsErrorEnabled)
+                    logger.Error("unable to create DynAny", iv);
                 throw UnexpectedException(iv);
             }
             catch (TypeMismatch itc)
             {
-                logger.Error("unable to create DynAny", itc);
+                if (logger.IsErrorEnabled)
+                    logger.Error("unable to create DynAny", itc);
                 throw UnexpectedException(itc);
             }
             catch (InconsistentTypeCode e)
             {
-                logger.Error("unable to create DynAny", e);
+                if (logger.IsErrorEnabled)
+                    logger.Error("unable to create DynAny", e);
                 throw UnexpectedException(e);
             }
         }

@@ -66,11 +66,13 @@ namespace DotNetOrb.Core.GIOP
                 {
                     var task = bootstrap.ConnectAsync(localAddress);
                     channel = task.Result;
-                    logger.Info("Opened client-side local transport");
+                    if (logger.IsInfoEnabled)
+                        logger.Info("Opened client-side local transport");
                 }
                 catch (Exception ex)
                 {
-                    logger.Error("Unable to open client-side local transport", ex);
+                    if (logger.IsErrorEnabled)
+                        logger.Error("Unable to open client-side local transport", ex);
                 }
             }
         }
@@ -83,11 +85,13 @@ namespace DotNetOrb.Core.GIOP
                 {
                     var task = channel.CloseAsync();
                     task.Wait();
-                    logger.Info("Closed client-side local transport");
+                    if (logger.IsInfoEnabled)
+                        logger.Info("Closed client-side local transport");
                 }
                 catch (AggregateException ex)
                 {
-                    logger.Error("Unable to close client-side local transport", ex.InnerException);
+                    if (logger.IsErrorEnabled)
+                        logger.Error("Unable to close client-side local transport", ex.InnerException);
                 }
                 finally
                 {

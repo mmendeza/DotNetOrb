@@ -151,11 +151,13 @@ namespace DotNetOrb.Core.IIOP
                 {
                     var task = bootstrap.BindAsync(endpoint);
                     channel = task.Result;
-                    logger.Info("Opened server-side TCP/IP transport: " + endpoint.ToString());
+                    if (logger.IsInfoEnabled)
+                        logger.Info("Opened server-side TCP/IP transport: " + endpoint.ToString());
                 }
                 catch (AggregateException ae)
                 {
-                    logger.Error("Unable to open server-side TCP/IP transport: " + endpoint.ToString(), ae.InnerException);
+                    if (logger.IsErrorEnabled)
+                        logger.Error("Unable to open server-side TCP/IP transport: " + endpoint.ToString(), ae.InnerException);
                     Task.Delay(retryInterval).Wait();
                 }
             }
@@ -174,11 +176,13 @@ namespace DotNetOrb.Core.IIOP
                     var task = channel.CloseAsync();
                     task.Wait();
                     IsClosed = true;
-                    logger.Info("Closed server-side TCP/IP transport: " + endpoint.ToString());
+                    if (logger.IsInfoEnabled)
+                        logger.Info("Closed server-side TCP/IP transport: " + endpoint.ToString());
                 }
                 catch (AggregateException ex)
                 {
-                    logger.Error("Unable to close server-side TCP/IP transport: " + endpoint.ToString(), ex.InnerException);
+                    if (logger.IsErrorEnabled)
+                        logger.Error("Unable to close server-side TCP/IP transport: " + endpoint.ToString(), ex.InnerException);
                 }
                 finally
                 {

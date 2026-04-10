@@ -290,7 +290,8 @@ namespace DotNetOrb.Core
                 }
                 catch (Exception e)
                 {
-                    logger.Error("Error in building IIOP-IOR", e);
+                    if (logger.IsErrorEnabled)
+                        logger.Error("Error in building IIOP-IOR", e);
                     throw new Unknown("Error in building IIOP-IOR");
                 }
             }
@@ -359,7 +360,8 @@ namespace DotNetOrb.Core
                 {
                     if (iiopProfile.Version.Minor == 0)
                     {
-                        logger.Debug("patching GIOP 1.0 profile to contain SSL information from the multiple components profile");
+                        if (logger.IsDebugEnabled)
+                            logger.Debug("patching GIOP 1.0 profile to contain SSL information from the multiple components profile");
                         iiopProfile.AddComponent(SSLIOP.TAG_SSL_SEC_TRANS.Value, ssl, typeof(SSLHelper));
                     }
                 }
@@ -569,7 +571,8 @@ namespace DotNetOrb.Core
                 }
                 catch (Exception e)
                 {
-                    logger.Error("Invalid corbaloc URL " + corbaLoc.KeyString, e);
+                    if (logger.IsErrorEnabled)
+                        logger.Error("Invalid corbaloc URL " + corbaLoc.KeyString, e);
                     throw new ArgumentException("Invalid corbaloc: URL");
                 }
             }
@@ -637,7 +640,8 @@ namespace DotNetOrb.Core
             }
             catch (Exception e)
             {
-                logger.Error("Invalid object reference", e);
+                if (logger.IsErrorEnabled)
+                    logger.Error("Invalid object reference", e);
 
                 throw new ArgumentException("Invalid object reference: " + objectReference);
             }

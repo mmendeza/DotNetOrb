@@ -1871,7 +1871,8 @@ namespace DotNetOrb.Core.POA
                         {
                             if (implName == null)
                             {
-                                logger.Error("Cannot create a persistent poa. The implname property has not been set.");
+                                if (logger.IsErrorEnabled)
+                                    logger.Error("Cannot create a persistent poa. The implname property has not been set.");
                                 return i;
                             }
                         }

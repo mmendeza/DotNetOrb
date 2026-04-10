@@ -160,10 +160,11 @@ namespace DotNetOrb.InterfaceRepository
             }
                 catch (java.lang.Throwable e )
                 {
-                this.logger.error("Caught exception", e);
+                    if (this.logger.IsErrorEnabled)
+                        this.logger.error("Caught exception", e);
+                }
             }
         }
-    }
 
         if(dirs != null)
         {
@@ -213,7 +214,8 @@ namespace DotNetOrb.InterfaceRepository
                         }
                     catch (Exception e )
                     {
-                        this.logger.error("Caught Exception", e);
+                        if (this.logger.IsErrorEnabled)
+                            this.logger.error("Caught Exception", e);
                     }
                 }
             }

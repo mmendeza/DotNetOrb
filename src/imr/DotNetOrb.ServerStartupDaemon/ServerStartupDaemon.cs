@@ -109,14 +109,16 @@ namespace DotNetOrb.ServerStartupDaemon
                         if (line != null)
                         {
                             Console.WriteLine(outPrefix + line);
-                            logger.Debug(outPrefix + line);
+                            if (logger.IsDebugEnabled)
+                                logger.Debug(outPrefix + line);
                         }
                     }
                 });
             }
             catch (Exception ex)
             {
-                logger.Error("Server startup failed", ex);
+                if (logger.IsErrorEnabled)
+                    logger.Error("Server startup failed", ex);
                 throw new ServerStartupFailed(ex.ToString());
             }
         }

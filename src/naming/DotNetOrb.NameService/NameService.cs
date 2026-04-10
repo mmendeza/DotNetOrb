@@ -79,7 +79,8 @@ namespace DotNetOrb.NameService
                     }
                     catch (UnknownServerName n)
                     {
-                        logger.Warn("Unknown Server name", n);
+                        if (logger.IsWarnEnabled)
+                            logger.Warn("Unknown Server name", n);
                     }
 
                     if (info == null)
@@ -93,7 +94,8 @@ namespace DotNetOrb.NameService
                 }
                 catch (Exception e)
                 {
-                    logger.Warn("Unexpected exception", e);
+                    if (logger.IsWarnEnabled)
+                        logger.Warn("Unexpected exception", e);
                 }
             }
         }
@@ -160,12 +162,14 @@ namespace DotNetOrb.NameService
                     if (printIOR)
                     {
                         Console.WriteLine("SERVER IOR: " + orb.ObjectToString(obj));
-                        logger.Info("SERVER IOR: " + orb.ObjectToString(obj));
+                        if (logger.IsInfoEnabled)
+                            logger.Info("SERVER IOR: " + orb.ObjectToString(obj));
                     }
                 }
                 catch (Exception e)
                 {
-                    logger.Error("unexpected exception", e);
+                    if (logger.IsErrorEnabled)
+                        logger.Error("unexpected exception", e);
                     throw new RuntimeException(e.Message);
                 }
 
@@ -194,12 +198,14 @@ namespace DotNetOrb.NameService
             }
             catch (ConfigException e)
             {
-                logger.Error(e);
+                if (logger.IsErrorEnabled)
+                    logger.Error(e);
                 //usage();
             }
             catch (Exception e)
             {
-                logger.Error(e);
+                if (logger.IsErrorEnabled)
+                    logger.Error(e);
                 System.Environment.Exit(1);
             }
         }
