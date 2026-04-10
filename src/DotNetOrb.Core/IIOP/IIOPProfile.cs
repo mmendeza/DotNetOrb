@@ -79,7 +79,7 @@ namespace DotNetOrb.Core.IIOP
         }
 
 
-        public new void Configure(IConfiguration config)
+        public override void Configure(IConfiguration config)
         {
             base.Configure(config);
 
