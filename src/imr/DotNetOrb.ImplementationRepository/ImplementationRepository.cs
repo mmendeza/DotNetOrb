@@ -159,7 +159,8 @@ namespace DotNetOrb.ImplementationRepository
                     }
                     catch (Exception ex)
                     {
-                        logger.Warn("Failed to read ServerTable -- creating an empty one");
+                        if (logger.IsWarnEnabled)
+                            logger.Warn("Failed to read ServerTable -- creating an empty one");
 
                         serverTable = new ServerTable();
                         SaveServerTable(tableFile);
@@ -168,7 +169,8 @@ namespace DotNetOrb.ImplementationRepository
             }
             catch (FileOpFailed ex)
             {
-                logger.Error("Failed to read ServerTable", ex);
+                if (logger.IsErrorEnabled)
+                    logger.Error("Failed to read ServerTable", ex);
             }
 
 
@@ -180,7 +182,8 @@ namespace DotNetOrb.ImplementationRepository
             //set up server table backup file
             if (backupFileStr.Length == 0)
             {
-                logger.Warn("No backup file specified!. No backup file will be created");
+                if (logger.IsWarnEnabled)
+                    logger.Warn("No backup file specified!. No backup file will be created");
             }
             else
             {
@@ -269,7 +272,8 @@ namespace DotNetOrb.ImplementationRepository
                 }
                 catch (FileOpFailed ex)
                 {
-                    logger.Error("Exception while saving server table", ex);
+                    if (logger.IsErrorEnabled)
+                        logger.Error("Exception while saving server table", ex);
                 }
                 finally
                 {
@@ -294,7 +298,8 @@ namespace DotNetOrb.ImplementationRepository
                     }
                     catch (ThreadInterruptedException) { }
 
-                    logger.Debug("ImR: IMR write thread waking up to save server table... ");
+                    if (logger.IsDebugEnabled)
+                        logger.Debug("ImR: IMR write thread waking up to save server table... ");
                 }
             }
         }
@@ -316,7 +321,8 @@ namespace DotNetOrb.ImplementationRepository
             }
             catch (Exception e)
             {
-                logger.Error("Exception while saving server table", e);
+                if (logger.IsErrorEnabled)
+                    logger.Error("Exception while saving server table", e);
                 throw new FileOpFailed();
             }
             updatePending = false;
@@ -412,7 +418,8 @@ namespace DotNetOrb.ImplementationRepository
             }
             catch (ConfigurationException e)
             {
-                logger.Error("Error while configuring address/profile", e);
+                if (logger.IsErrorEnabled)
+                    logger.Error("Error while configuring address/profile", e);
             }
 
             if (!_oldPoaState)
@@ -440,7 +447,8 @@ namespace DotNetOrb.ImplementationRepository
                     }
                     catch (Exception _e)
                     {
-                        logger.Info("Exception while waiting for object", _e);
+                        if (logger.IsInfoEnabled)
+                            logger.Info("Exception while waiting for object", _e);
                     }
                 }
             }
@@ -465,7 +473,8 @@ namespace DotNetOrb.ImplementationRepository
             }
             catch (IOException ex)
             {
-                logger.Error("Exception while writing new location", ex);
+                if (logger.IsErrorEnabled)
+                    logger.Error("Exception while writing new location", ex);
 
                 SendSysException(new Unknown(ex.ToString()), channelHandler, requestId, giopMinor);
             }
@@ -484,7 +493,8 @@ namespace DotNetOrb.ImplementationRepository
             }
             catch (IOException _e)
             {
-                logger.Error("Exception while sending SystemException to client", _e);
+                if (logger.IsErrorEnabled)
+                    logger.Error("Exception while sending SystemException to client", _e);
             }
         }
 
@@ -511,7 +521,8 @@ namespace DotNetOrb.ImplementationRepository
             }
             catch (ConfigurationException e)
             {
-                logger.Error("Failed to configure", e);
+                if (logger.IsErrorEnabled)
+                    logger.Error("Failed to configure", e);
             }
 
             if (logger.IsDebugEnabled)
@@ -558,7 +569,8 @@ namespace DotNetOrb.ImplementationRepository
             }
             catch (Exception ex)
             {
-                logger.Debug("Exception while checking server active", ex);
+                if (logger.IsDebugEnabled)
+                    logger.Debug("Exception while checking server active", ex);
                 result = false;
             }
             finally
@@ -623,7 +635,8 @@ namespace DotNetOrb.ImplementationRepository
                     {
                         server.IsRestarting = false;
 
-                        logger.Error("Exception while restarting server", e);
+                        if (logger.IsErrorEnabled)
+                            logger.Error("Exception while restarting server", e);
 
                         // sth wrong with daemon, remove from table
                         serverTable.RemoveHost(server.Host);
@@ -727,7 +740,8 @@ namespace DotNetOrb.ImplementationRepository
 
             if (checkObjectLiveness)
             {
-                logger.Debug("ImR: Checking servers");
+                if (logger.IsDebugEnabled)
+                    logger.Debug("ImR: Checking servers");
 
                 servers = serverTable.GetServers();
 
@@ -796,7 +810,8 @@ namespace DotNetOrb.ImplementationRepository
             }
             catch (Exception e)
             {
-                logger.Error("Exception while getting system load", e);
+                if (logger.IsErrorEnabled)
+                    logger.Error("Exception while getting system load", e);
                 throw new InvalidSSDRef();
             }
             updatePending = true;
@@ -872,7 +887,8 @@ namespace DotNetOrb.ImplementationRepository
 
                 serverTable.AddPOA(name, _poa);
 
-                logger.Debug("ImR: new poa registered");
+                if (logger.IsDebugEnabled)
+                    logger.Debug("ImR: new poa registered");
             }
             else
             {
@@ -917,7 +933,8 @@ namespace DotNetOrb.ImplementationRepository
                     {
                         throw new DuplicatePOAName("POA " + name + " has already been registered for server " + _poa.Server.Name);
                     }
-                    logger.Debug("ImR: Remapping server/port");
+                    if (logger.IsDebugEnabled)
+                        logger.Debug("ImR: Remapping server/port");
                 }
 
                 _poa.Reactivate(host, (int)port);
@@ -1019,9 +1036,11 @@ namespace DotNetOrb.ImplementationRepository
             }
             catch (FileOpFailed f)
             {
-                logger.Error("ImR: Failed to save backup table.", f);
+                if (logger.IsErrorEnabled)
+                    logger.Error("ImR: Failed to save backup table.", f);
             }
-            logger.Debug("ImR: Finished shutting down");
+            if (logger.IsDebugEnabled)
+                logger.Debug("ImR: Finished shutting down");
         }
 
         /// <summary>

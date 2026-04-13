@@ -55,11 +55,13 @@ namespace DotNetOrb.Core.GIOP
                 CodeSetChar = CodeSet.GetNegotiatedCodeSet(orb, info, /* wide */ false);
                 CodeSetWChar = CodeSet.GetNegotiatedCodeSet(orb, info, /* wide */ true);
 
-                logger.Info("Negotiated char codeset of " + CodeSetChar + " and wchar of " + CodeSetWChar);
+                if (logger.IsInfoEnabled)
+                    logger.Info("Negotiated char codeset of " + CodeSetChar + " and wchar of " + CodeSetWChar);
             }
             else
             {
-                logger.Debug("No CodeSetComponentInfo in IOR. Will use default CodeSets");
+                if (logger.IsDebugEnabled)
+                    logger.Debug("No CodeSetComponentInfo in IOR. Will use default CodeSets");
 
                 IsTCSNegotiated = true;
             }

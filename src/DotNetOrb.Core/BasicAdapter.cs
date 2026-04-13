@@ -169,13 +169,15 @@ namespace DotNetOrb.Core
             {
                 request.SystemException = new Unknown(e.ToString());
                 request.Reply();
-                logger.Warn("unexpected exception", e);
+                if (logger.IsWarnEnabled)
+                    logger.Warn("unexpected exception", e);
             }
             catch (Exception e)
             {
                 request.SystemException = new Unknown(e.ToString());
                 request.Reply();
-                logger.Error("unexpected exception", e);
+                if (logger.IsErrorEnabled)
+                    logger.Error("unexpected exception", e);
             }
         }
 

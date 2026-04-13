@@ -85,13 +85,15 @@ namespace DotNetOrb.Core
                 maxBuiltinRetries = config.GetAsInteger("DotNetOrb.MaxBuiltinRetries", 0);
                 if (maxBuiltinRetries < 0)
                 {
-                    logger.Error("Configuration error - max builtin retries < 0");
+                		if (logger.IsErrorEnabled)
+                        logger.Error("Configuration error - max builtin retries < 0");
                     throw new CORBA.Internal("Configuration error - max builtin retries < 0");
                 }
             }
             catch (ConfigException ex)
             {
-                logger.Error("Configuration exception retrieving max builtin retries", ex);
+                if (logger.IsErrorEnabled)
+                    logger.Error("Configuration exception retrieving max builtin retries", ex);
                 throw new CORBA.Internal("Configuration exception retrieving max builtin retries" + ex);
             }
             disconnectAfterNonRecoverableSystemException = config.GetAsBoolean("DotNetOrb.Connection.Client.DisconnectAfterSystemexception", true);
@@ -102,7 +104,8 @@ namespace DotNetOrb.Core
             }
             catch (ConfigException ex)
             {
-                logger.Error("Configuration exception retrieving giop minor version", ex);
+                if (logger.IsErrorEnabled)
+                    logger.Error("Configuration exception retrieving giop minor version", ex);
                 throw new CORBA.Internal("Configuration exception retrieving giop minor version" + ex);
             }
 
@@ -112,7 +115,8 @@ namespace DotNetOrb.Core
             }
             catch (ConfigException ex)
             {
-                logger.Error("Configuration exception retrieving default sync scope ", ex);
+                if (logger.IsErrorEnabled)
+                    logger.Error("Configuration exception retrieving default sync scope ", ex);
                 throw new CORBA.Internal("Configuration exception retrieving default sync scope " + ex);
             }
         }
@@ -724,7 +728,8 @@ namespace DotNetOrb.Core
                         }
                         else
                         {
-                            logger.Debug("Invoke: RemarshalException");
+                            if (logger.IsDebugEnabled)
+                                logger.Debug("Invoke: RemarshalException");
                             // RequestOutputStream has been created for
                             // another connection, so try again
                             throw new RemarshalException();
@@ -784,7 +789,8 @@ namespace DotNetOrb.Core
             }
             catch (CORBA.SystemException ex)
             {
-                logger.Debug("Delegate.Invoke: SystemException", ex);
+                if (logger.IsDebugEnabled)
+                    logger.Debug("Delegate.Invoke: SystemException", ex);
                 if (!isLocal && channelToUse.Connection is ClientConnection cc)
                 {
                     Disconnect(cc);
@@ -858,7 +864,8 @@ namespace DotNetOrb.Core
                     }
                     else
                     {
-                        logger.Debug("Invoke: RemarshalException");
+                        if (logger.IsDebugEnabled)
+                            logger.Debug("Invoke: RemarshalException");
                         // RequestOutputStream has been created for
                         // another connection, so try again
                         throw new RemarshalException();
@@ -911,7 +918,8 @@ namespace DotNetOrb.Core
                     }
                     else if (ex is CORBA.SystemException)
                     {
-                        logger.Debug("Delegate.Invoke: SystemException", ex);
+                        if (logger.IsDebugEnabled)
+                            logger.Debug("Delegate.Invoke: SystemException", ex);
                         if (!isLocal && channelToUse?.Connection is ClientConnection cc)
                         {
                             Disconnect(cc);
@@ -966,7 +974,8 @@ namespace DotNetOrb.Core
                     return;
                 }
 
-                logger.Debug("Releasing the connection...");
+                if (logger.IsDebugEnabled)
+                    logger.Debug("Releasing the connection...");
 
                 if (currentChannel.Connection is ClientConnection clientConnection)
                 {

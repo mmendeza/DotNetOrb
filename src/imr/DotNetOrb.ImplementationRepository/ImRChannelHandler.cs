@@ -211,7 +211,8 @@ namespace DotNetOrb.ImplementationRepository
                 {
                     if (t.IsFaulted)
                     {
-                        logger.Error("Unable to close channel" + channel.RemoteAddress.ToString(), t.Exception?.InnerException);
+                        if (logger.IsErrorEnabled)
+                            logger.Error("Unable to close channel" + channel.RemoteAddress.ToString(), t.Exception?.InnerException);
                     }
                 });
                 task.Wait();

@@ -41,7 +41,8 @@ namespace DotNetOrb.ImRManager
                 }
                 catch (UnknownServerName n)
                 {
-                    logger.Warn("Unknown Server name", n);
+                    if (logger.IsWarnEnabled)
+                        logger.Warn("Unknown Server name", n);
                 }
 
                 if (info == null)
@@ -55,7 +56,8 @@ namespace DotNetOrb.ImRManager
             }
             catch (Exception e)
             {
-                logger.Warn("unexpected exception", e);
+                if (logger.IsWarnEnabled)
+                    logger.Warn("unexpected exception", e);
             }
         }
 
@@ -95,7 +97,8 @@ namespace DotNetOrb.ImRManager
             }
             catch (Exception e)
             {
-                logger.Warn("unexpected exception", e);
+                if (logger.IsWarnEnabled)
+                    logger.Warn("unexpected exception", e);
             }
 
             return "";

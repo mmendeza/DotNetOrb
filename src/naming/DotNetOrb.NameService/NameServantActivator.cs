@@ -50,13 +50,15 @@ namespace DotNetOrb.NameService
                 }
                 else
                 {
-                    logger.Error("Invalid servant type. Expected NamingContext");
+                    if (logger.IsErrorEnabled)
+                        logger.Error("Invalid servant type. Expected NamingContext");
                 }
                 
             }
             catch (IOException io)
             {
-                logger.Error("Error opening output file " + NameService.filePrefix + oidStr, io);
+                if (logger.IsErrorEnabled)
+                    logger.Error("Error opening output file " + NameService.filePrefix + oidStr, io);
             }
         }
 

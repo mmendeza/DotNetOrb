@@ -57,7 +57,8 @@ namespace DotNetOrb.Core.GIOP
                                                     }
                                                     catch (ConfigException ce)
                                                     {
-                                                        logger.Warn("Configuration Exception", ce);
+                                                        if (logger.IsWarnEnabled)
+                                                            logger.Warn("Configuration Exception", ce);
                                                     }
                                                     if (i == 0)
                                                     {

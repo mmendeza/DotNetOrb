@@ -274,7 +274,8 @@ namespace DotNetOrb.Core.IIOP
                     iaddr.Configure(config);
                     if (!iaddr.FromString(addr))
                     {
-                        logger.Warn("could not decode " + addr + " from DotNetOrb.IIOP.AlternateAddresses");
+                        if (logger.IsWarnEnabled)
+                            logger.Warn("could not decode " + addr + " from DotNetOrb.IIOP.AlternateAddresses");
                         continue;
                     }
                     else
@@ -376,7 +377,8 @@ namespace DotNetOrb.Core.IIOP
                 }
                 catch (ConfigurationException ex)
                 {
-                    logger.Error("Error configuring address", ex);
+                    if (logger.IsErrorEnabled)
+                        logger.Error("Error configuring address", ex);
                     throw new CORBA.Internal("Error configuring address" + ex);
                 }
             }
@@ -420,7 +422,8 @@ namespace DotNetOrb.Core.IIOP
                 }
                 catch (ConfigurationException ex)
                 {
-                    logger.Error("Error configuring address", ex);
+                    if (logger.IsErrorEnabled)
+                        logger.Error("Error configuring address", ex);
                     throw new CORBA.Internal("Error configuring address" + ex);
                 }
             }
@@ -632,7 +635,8 @@ namespace DotNetOrb.Core.IIOP
             }
             catch (Exception ex)
             {
-                logger.Info("Not able to process security mech. component");
+                if (logger.IsInfoEnabled)
+                    logger.Info("Not able to process security mech. component");
             }
 
             TLS_SEC_TRANS tls = null;
@@ -654,7 +658,8 @@ namespace DotNetOrb.Core.IIOP
                 }
                 catch (Exception e)
                 {
-                    logger.Warn("Error parsing TLS_SEC_TRANS: " + e);
+                    if (logger.IsWarnEnabled)
+                        logger.Warn("Error parsing TLS_SEC_TRANS: " + e);
                 }
             }
             return tls;
@@ -709,7 +714,8 @@ namespace DotNetOrb.Core.IIOP
                 }
                 catch (ConfigurationException ex)
                 {
-                    logger.Error("Error configuring address", ex);
+                    if (logger.IsErrorEnabled)
+                        logger.Error("Error configuring address", ex);
                     throw new CORBA.Internal("Error configuring address" + ex);
                 }
 

@@ -314,7 +314,8 @@ namespace DotNetOrb.Core.POA
         {
             lock (syncObject)
             {
-                logger.Debug("reset a previous completion call");
+                if (logger.IsDebugEnabled)
+                    logger.Debug("reset a previous completion call");
 
                 waitForCompletionCalled = false;
                 /* maybe somebody waits for completion */

@@ -715,7 +715,8 @@ namespace DotNetOrb.Core.DynAny
                 }
                 catch (IOException e)
                 {
-                    logger.Error("unable to close stream", e);
+                    if (logger.IsErrorEnabled)
+                        logger.Error("unable to close stream", e);
                 }
             }
         }
@@ -728,7 +729,8 @@ namespace DotNetOrb.Core.DynAny
 
         protected CORBA.Internal UnexpectedException(Exception cause)
         {
-            logger.Debug("An unexpected error occured", cause);
+            if (logger.IsDebugEnabled)
+                logger.Debug("An unexpected error occured", cause);
             return new CORBA.Internal(cause.ToString());
         }
 

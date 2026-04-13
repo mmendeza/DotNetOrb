@@ -151,7 +151,8 @@ namespace DotNetOrb.InterfaceRepository
                 }                
                 catch (Exception e)
                 {
-                    logger.Error("Caught Exception", e);
+                    if (logger.IsErrorEnabled)
+                        logger.Error("Caught Exception", e);
                 }
                 return null;
             }
@@ -237,7 +238,8 @@ namespace DotNetOrb.InterfaceRepository
                     servant = new CORBA.ConstantDefPOATie((CORBA.IConstantDefOperations)containedObject);
                     break;
                 default:
-                    logger.Warn("WARNING, createContainedReference returns null for dk " + containedObject.DefKind);
+                    if (logger.IsWarnEnabled)
+                        logger.Warn("WARNING, createContainedReference returns null for dk " + containedObject.DefKind);
                     return null;
             }
 
@@ -249,7 +251,8 @@ namespace DotNetOrb.InterfaceRepository
             }
             catch (Exception e)
             {
-                logger.Error("unexpected exception", e);
+                if (logger.IsErrorEnabled)
+                    logger.Error("unexpected exception", e);
                 return null;
             }
         }

@@ -165,7 +165,8 @@ namespace DotNetOrb.Core.IIOP
                         }
                         catch (AggregateException ae)
                         {
-                            logger.Error("Unable to open client-side TCP/IP transport: " + endpoint, ae.InnerException);
+                            if (logger.IsErrorEnabled)
+                                logger.Error("Unable to open client-side TCP/IP transport: " + endpoint, ae.InnerException);
                         }
                     }
                     if (!IsConnected)
@@ -187,7 +188,8 @@ namespace DotNetOrb.Core.IIOP
                 }
                 catch (AggregateException ae)
                 {
-                    logger.Error("Unable to open client-side TCP/IP transport: " + endpoint, ae.InnerException);
+                    if (logger.IsErrorEnabled)
+                        logger.Error("Unable to open client-side TCP/IP transport: " + endpoint, ae.InnerException);
                 }
             }
         }
@@ -200,14 +202,16 @@ namespace DotNetOrb.Core.IIOP
                 {
                     if (t.IsFaulted)
                     {
-                        logger.Error("Unable to close channel" + channel.RemoteAddress.ToString(), t.Exception?.InnerException);
+                        if (logger.IsErrorEnabled)
+                            logger.Error("Unable to close channel" + channel.RemoteAddress.ToString(), t.Exception?.InnerException);
                     }
                 });
                 task.Wait();
             }
             catch (Exception ex)
             {
-                logger.Error("Unable to close client-side TCP/IP transport", ex);
+                if (logger.IsErrorEnabled)
+                    logger.Error("Unable to close client-side TCP/IP transport", ex);
             }
             finally
             {

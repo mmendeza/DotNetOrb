@@ -326,7 +326,8 @@ namespace DotNetOrb.NameService
                 }
                 catch (Exception e)
                 {
-                    logger.Error("unexpected exception", e);
+                    if (logger.IsErrorEnabled)
+                        logger.Error("unexpected exception", e);
                     throw new CORBA.Internal(e.ToString());
                 }
                 bi = BindingIteratorHelper.Narrow(o);

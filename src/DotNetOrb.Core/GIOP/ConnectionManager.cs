@@ -86,13 +86,15 @@ namespace DotNetOrb.Core.GIOP
                     }
                     clientConnection = factory.CreateConnection(profile);
 
-                    logger.Debug($"ClientConnectionManager: created new {clientConnection}");
+                    if (logger.IsDebugEnabled)
+                        logger.Debug($"ClientConnectionManager: created new {clientConnection}");
 
                     clientConnections.Add(profile, clientConnection);
                 }
                 else
                 {
-                    logger.Debug($"ClientConnectionManager: found {clientConnection}");
+                    if (logger.IsDebugEnabled)
+                        logger.Debug($"ClientConnectionManager: found {clientConnection}");
                 }
 
                 clientConnection.IncClients();

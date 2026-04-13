@@ -157,7 +157,8 @@ namespace DotNetOrb.Core.GIOP
                     configurable.Configure(configuration);
                 }
 
-                logger.Debug("created GIOPConnection Factory: " + className);
+                if (logger.IsDebugEnabled)
+                    logger.Debug("created GIOPConnection Factory: " + className);
 
                 return (IConnectionFactory)instance;
             }

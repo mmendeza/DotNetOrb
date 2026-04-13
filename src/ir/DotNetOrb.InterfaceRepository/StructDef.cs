@@ -145,7 +145,8 @@ namespace DotNetOrb.InterfaceRepository
             }
             catch (Exception e)
             {
-                logger.error("Caught Exception", e);
+                if (logger.IsErrorEnabled)
+                    logger.error("Caught Exception", e);
                 throw new INTF_REPOS(ErrorMsg.IR_Not_Implemented,
                                       org.omg.CORBA.CompletionStatus.COMPLETED_NO);
             }
@@ -233,9 +234,10 @@ namespace DotNetOrb.InterfaceRepository
                     contained.put(containedRef.name(), containedRef);
                     containedLocals.put(containedRef.name(), containedObject);
                 }
-                    catch (Exception e )
-                    {
-                    logger.error("Caught Exception", e);
+                catch (Exception e )
+                {
+                    if (logger.IsErrorEnabled)
+                        logger.error("Caught Exception", e);
                 }
             }
         }

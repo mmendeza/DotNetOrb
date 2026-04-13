@@ -355,7 +355,8 @@ namespace DotNetOrb.Core.DSI
                         }
                         catch (Exception e)
                         {
-                            logger.Info("DSI arguments: Caught exception ", e);
+                            if (logger.IsInfoEnabled)
+                                logger.Info("DSI arguments: Caught exception ", e);
                         }
                     }
                 }*/
@@ -451,11 +452,13 @@ namespace DotNetOrb.Core.DSI
                 }
                 catch (AggregateException ae)
                 {
-                    logger.Info("Error replying to request!", ae.InnerException);
+                    if (logger.IsInfoEnabled)
+                        logger.Info("Error replying to request!", ae.InnerException);
                 }
                 catch (Exception ioe)
                 {
-                    logger.Info("Error replying to request!", ioe);
+                    if (logger.IsInfoEnabled)
+                        logger.Info("Error replying to request!", ioe);
                 }
                 finally
                 {

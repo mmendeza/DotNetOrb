@@ -28,11 +28,13 @@ namespace DotNetOrb.Core.DynAny
             }
             catch (InvalidValue iv)
             {
-                logger.Error("unable to create DynAny", iv);
+                if (logger.IsErrorEnabled)
+                    logger.Error("unable to create DynAny", iv);
             }
             catch (TypeMismatch itc)
             {
-                logger.Error("unable to create DynAny", itc);
+                if (logger.IsErrorEnabled)
+                    logger.Error("unable to create DynAny", itc);
             }
             throw new InconsistentTypeCode();
         }
@@ -102,7 +104,8 @@ namespace DotNetOrb.Core.DynAny
             }
             catch (TypeMismatch itc)
             {
-                logger.Debug("unexpected exception during create_dyn_any_fromtype_code", itc);
+                if (logger.IsDebugEnabled)
+                    logger.Debug("unexpected exception during create_dyn_any_fromtype_code", itc);
                 throw new InconsistentTypeCode();
             }
         }

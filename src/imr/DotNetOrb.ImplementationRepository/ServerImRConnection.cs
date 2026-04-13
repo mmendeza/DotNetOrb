@@ -144,11 +144,13 @@ namespace DotNetOrb.ImplementationRepository
                 {
                     var task = bootstrap.BindAsync(endpoint);
                     channel = task.Result;
-                    logger.Info("Opened ImR server TCP/IP transport: " + endpoint.ToString());
+                    if (logger.IsInfoEnabled)
+                        logger.Info("Opened ImR server TCP/IP transport: " + endpoint.ToString());
                 }
                 catch (AggregateException ae)
                 {
-                    logger.Error("Unable to open ImR server TCP/IP transport: " + endpoint.ToString(), ae.InnerException);
+                    if (logger.IsErrorEnabled)
+                        logger.Error("Unable to open ImR server TCP/IP transport: " + endpoint.ToString(), ae.InnerException);
                     Task.Delay(retryInterval).Wait();
                 }
             }
@@ -167,11 +169,13 @@ namespace DotNetOrb.ImplementationRepository
                     var task = channel.CloseAsync();
                     task.Wait();
                     IsClosed = true;
-                    logger.Info("Closed ImR server TCP/IP transport: " + endpoint.ToString());
+                    if (logger.IsInfoEnabled)
+                        logger.Info("Closed ImR server TCP/IP transport: " + endpoint.ToString());
                 }
                 catch (AggregateException ex)
                 {
-                    logger.Error("Unable to close ImR server TCP/IP transport: " + endpoint.ToString(), ex.InnerException);
+                    if (logger.IsErrorEnabled)
+                        logger.Error("Unable to close ImR server TCP/IP transport: " + endpoint.ToString(), ex.InnerException);
                 }
                 finally
                 {

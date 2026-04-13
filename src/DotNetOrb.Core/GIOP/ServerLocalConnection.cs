@@ -65,11 +65,13 @@ namespace DotNetOrb.Core.GIOP
                 {
                     var task = bootstrap.BindAsync(localAddress);
                     channel = task.Result;
-                    logger.Info("Opened server-side local channel");
+                    if (logger.IsInfoEnabled)
+                        logger.Info("Opened server-side local channel");
                 }
                 catch (AggregateException ae)
                 {
-                    logger.Error("Unable to open server-side local channel", ae.InnerException);
+                    if (logger.IsErrorEnabled)
+                        logger.Error("Unable to open server-side local channel", ae.InnerException);
                 }
             }
         }
@@ -83,11 +85,13 @@ namespace DotNetOrb.Core.GIOP
                     var task = channel.CloseAsync();
                     task.Wait();
                     IsClosed = true;
-                    logger.Info("Closed server-side local channel");
+                    if (logger.IsInfoEnabled)
+                        logger.Info("Closed server-side local channel");
                 }
                 catch (AggregateException ae)
                 {
-                    logger.Error("Unable to close server-side local channel", ae.InnerException);
+                    if (logger.IsErrorEnabled)
+                        logger.Error("Unable to close server-side local channel", ae.InnerException);
                 }
                 finally
                 {
