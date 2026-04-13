@@ -140,11 +140,10 @@ namespace DotNetOrb.Core.CDR
         /// </summary>
         public static CodeSet GetCodeSet(string name)
         {
-            string ucName = name.ToUpper();
             for (int i = 0; i < KnownEncodings.Length; i++)
             {
                 CodeSet codeset = KnownEncodings[i];
-                if (codeset.Name.Equals(ucName)) return codeset;
+                if (codeset.Name.Equals(name, StringComparison.OrdinalIgnoreCase)) return codeset;
             }
 
             try
