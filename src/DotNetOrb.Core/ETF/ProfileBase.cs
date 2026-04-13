@@ -25,7 +25,7 @@ namespace DotNetOrb.Core.ETF
         protected string corbalocStr = null;
         protected ILogger logger;
 
-        public void Configure(IConfiguration configuration)
+        public virtual void Configure(IConfiguration configuration)
         {
             if (configuration == null)
             {

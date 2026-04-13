@@ -39,7 +39,7 @@ namespace DotNetOrb.Core.IIOP
         /// </summary>
         public IProfile DemarshalProfile(ref TaggedProfile taggedProfile, out TaggedComponent[] components)
         {
-            ProfileBase profile = new IIOPProfile();
+            IIOPProfile profile = new IIOPProfile();
 
             profile.Configure(configuration);
 
