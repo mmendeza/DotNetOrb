@@ -31,7 +31,6 @@ namespace DotNetOrb.Core.IIOP
         private int idleTimeout;
         protected int noOfRetries = 5;
         protected int retryInterval = 0;
-        protected X509Certificate2 tlsCertificate = null;
 
         private IIOPAddress? address;
         private IPEndPoint? endpoint;
@@ -85,13 +84,23 @@ namespace DotNetOrb.Core.IIOP
                 isSSL = SSLPort != -1;
             }
 
+            ClientTlsSettings? clientTlsSettings = null;
             if (isSSL)
             {
-                //TODO Retrieve certificate from X509Store ??
-                var certPath = config.GetValue("DotNetOrb.IIOP.SSL.Certificate");
-                var pwd = config.GetValue("DotNetOrb.IIOP.SSL.CertificatePassword");
-                tlsCertificate = new X509Certificate2(certPath, pwd);
-                //targetHost = tlsCertificate.GetNameInfo(X509NameType.DnsName, false);
+                if ((clientSupported & EstablishTrustInClient.Value) != 0)
+                {
+                    //TODO Retrieve certificate from X509Store ??
+                    var certPath = config.GetValue("DotNetOrb.IIOP.SSL.Certificate");
+                    var certPwd = config.GetValue("DotNetOrb.IIOP.SSL.CertificatePassword");
+                    var tlsCertificate = new X509Certificate2(certPath, certPwd);
+
+                    var targetHost = address?.HostName; //ToDo: tlsCertificate.GetNameInfo(X509NameType.DnsName, false)
+                    clientTlsSettings = new ClientTlsSettings(targetHost, new List<X509Certificate> { tlsCertificate });
+                }
+                else
+                {
+                    clientTlsSettings = new ClientTlsSettings(address?.HostName);
+                }
             }
 
 
@@ -105,23 +114,14 @@ namespace DotNetOrb.Core.IIOP
                    .Handler(new ActionChannelInitializer<ISocketChannel>(channel =>
                    {
                        IChannelPipeline pipeline = channel.Pipeline;
-                       ClientTlsSettings settings;
-                       if ((clientSupported & EstablishTrustInClient.Value) != 0 && tlsCertificate != null)
-                       {
-                           settings = new ClientTlsSettings(address?.HostName, new List<X509Certificate>() { tlsCertificate });
-                       }
-                       else
-                       {
-                           settings = new ClientTlsSettings(address?.HostName);
-                       }
-                       if (tlsCertificate != null)
+                       if (clientTlsSettings != null)
                        {
                            var tls = channel.Pipeline.Get<TlsHandler>();
                            if (tls != null)
                            {
                                channel.Pipeline.Remove(tls);
                            }
-                           channel.Pipeline.AddFirst(new TlsHandler(stream => new SslStream(stream, true, (sender, certificate, chain, errors) => true), settings));
+                           channel.Pipeline.AddFirst(new TlsHandler(stream => new SslStream(stream, true, (sender, certificate, chain, errors) => true), clientTlsSettings));
                        }
                        if (idleTimeout > 0)
                        {
