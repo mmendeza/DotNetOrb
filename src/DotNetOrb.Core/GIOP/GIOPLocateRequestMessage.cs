@@ -21,7 +21,7 @@ namespace DotNetOrb.Core.GIOP
             {
                 throw new CORBA.Marshal("Not a Locate request!");
             }
-            CDRInputStream input = new CDRInputStream(ORB, content, Header.GIOPVersion.Minor, Header.IsLittleEndian);
+            CDRInputStream input = new CDRInputStream(ORB, this.content, Header.GIOPVersion.Minor, Header.IsLittleEndian);
             switch (Header.GIOPVersion.Minor)
             {
                 case 0:
