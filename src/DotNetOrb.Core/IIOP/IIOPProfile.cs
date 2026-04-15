@@ -410,6 +410,8 @@ namespace DotNetOrb.Core.IIOP
         public override object Clone()
         {
             IIOPProfile result = new IIOPProfile();
+            result.Configure(configuration);
+
             result.primaryAddress = new IIOPAddress(primaryAddress.HostName, primaryAddress.Port);
             result.isSSLSet = isSSLSet;
             result.ssl = ssl;
