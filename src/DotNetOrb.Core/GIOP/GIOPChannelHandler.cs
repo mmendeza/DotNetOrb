@@ -245,6 +245,7 @@ namespace DotNetOrb.Core.GIOP
                         {
                             var locateRequest = (GIOPLocateRequestMessage)message;
                             locateRequest.Retain();
+
                             var inputStream = new LocateRequestInputStream(orb, locateRequest.RequestId, locateRequest.Header.GIOPVersion.Minor, locateRequest.Header.IsLittleEndian, locateRequest.Content, locateRequest.Target);
                             var codeSet = context.GetAttribute(GIOPConnection.TCSAttrKey).Get();
                             if (codeSet != null)
@@ -256,32 +257,41 @@ namespace DotNetOrb.Core.GIOP
                             {
                                 inputStream.CodeSetWChar = codeSetW;
                             }
-                            ServerRequest serverRequest = null;
+                            
                             try
                             {
-                                var requestStream = new RequestInputStream(orb, locateRequest.RequestId, locateRequest.Header.GIOPVersion.Minor, locateRequest.Header.IsLittleEndian, "_non_existent", inputStream.Buffer, true, inputStream.Target, new ServiceContext[0]);
-                                serverRequest = new ServerRequest(orb, requestStream, this);
+                                var inputObjectKey = ParsedIOR.ExtractObjectKey(inputStream.Target, orb);
+                                var mapObjectKey = orb.MapObjectKey(inputObjectKey);
+                                var isMapped = !mapObjectKey.SequenceEqual(inputObjectKey);
 
-                                if (!serverRequest.ObjectKey.SequenceEqual(ParsedIOR.ExtractObjectKey(inputStream.Target, orb)))
+                                if (isMapped)
                                 {
-                                    CORBA.Object fwd = orb.GetReference(orb.GetRootPOA(), serverRequest.ObjectKey, null, true);
+                                    CORBA.Object fwd = orb.GetReference(orb.GetRootPOA(), mapObjectKey, null, true);
 
                                     if (logger.IsDebugEnabled)
-                                    {
-                                        logger.Debug("Sending locate reply with object forward to " + orb.ObjectToString(fwd));
-                                    }
+                                        logger.Debug("Sending locate reply with 'object forward' to " + orb.ObjectToString(fwd));
 
                                     var lrOut = new LocateReplyOutputStream(orb, inputStream.RequestId, LocateStatusType12.OBJECT_FORWARD, inputStream.GiopMinor);
-
                                     lrOut.WriteObject(fwd);
 
-                                    context.WriteAndFlushAsync(lrOut).ContinueWith(x =>
+                                    SendLocateReplyAsync(lrOut).ContinueWith(x =>
                                     {
                                         fwd._Release();
                                     });
-                                    return;
                                 }
-                                DeliverRequest(serverRequest);
+                                else
+                                {
+                                    CORBA.Object here = orb.GetReference(orb.GetRootPOA(), inputObjectKey, null, true);
+
+                                    if (logger.IsDebugEnabled)
+                                        logger.Debug("Sending locate reply with 'object here'");
+
+                                    var lrOut = new LocateReplyOutputStream(orb, inputStream.RequestId, LocateStatusType12.OBJECT_HERE, inputStream.GiopMinor);
+                                    SendLocateReplyAsync(lrOut).ContinueWith(x =>
+                                    {
+                                        here._Release();
+                                    });
+                                }
                             }
                             catch (POAInternalException pie)
                             {
@@ -289,7 +299,7 @@ namespace DotNetOrb.Core.GIOP
                                     logger.Warn("Received a request with a non DotNetOrb object key");
 
                                 var lrOut = new LocateReplyOutputStream(orb, inputStream.RequestId, LocateStatusType12.UNKNOWN_OBJECT, inputStream.GiopMinor);
-                                context.WriteAndFlushAsync(lrOut);
+                                SendLocateReplyAsync(lrOut);
                             }
                         }
                         break;
