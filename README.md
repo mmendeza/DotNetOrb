@@ -130,6 +130,7 @@ Currently supported codesets:
 |DotNetOrb.Security.SSL.IsSupported|Must be "true" to activate ssl support|true/false|
 |DotNetOrb.Security.SSL.Client.SupportedOptions|SSL client supported options|20|
 |DotNetOrb.Security.SSL.Client.RequiredOptions|SSL client required options|1|
+|DotNetOrb.Security.SSL.Client.TrafficCaptureDirectory|Directory where .pcap capture files are written|
 |DotNetOrb.Security.SSL.Server.SupportedOptions|SSL server supported options|40|
 |DotNetOrb.Security.SSL.Server.RequiredOptions|SSL server required options|60|
 |DotNetOrb.IIOP.SSL.Certificate|Path to certificate file|

@@ -85,6 +85,7 @@ namespace DotNetOrb.Core.IIOP
             }
 
             ClientTlsSettings? clientTlsSettings = null;
+            DirectoryInfo? clientTlsTrafficCaptureDirectory = null;
             if (isSSL)
             {
                 if ((clientSupported & EstablishTrustInClient.Value) != 0)
@@ -101,6 +102,7 @@ namespace DotNetOrb.Core.IIOP
                 {
                     clientTlsSettings = new ClientTlsSettings(address?.HostName);
                 }
+                clientTlsTrafficCaptureDirectory = ClientIIOPTrafficCaptureHandler.ValidateDirectory(config.GetValue("DotNetOrb.Security.SSL.Client.TrafficCaptureDirectory", string.Empty));
             }
 
 
@@ -122,6 +124,8 @@ namespace DotNetOrb.Core.IIOP
                                channel.Pipeline.Remove(tls);
                            }
                            channel.Pipeline.AddFirst(new TlsHandler(stream => new SslStream(stream, true, (sender, certificate, chain, errors) => true), clientTlsSettings));
+                           if (clientTlsTrafficCaptureDirectory != null)
+                               channel.Pipeline.AddLast(new ClientIIOPTrafficCaptureHandler(clientTlsTrafficCaptureDirectory, channel));
                        }
                        if (idleTimeout > 0)
                        {
