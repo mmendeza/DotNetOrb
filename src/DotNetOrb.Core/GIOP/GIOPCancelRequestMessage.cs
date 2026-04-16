@@ -15,7 +15,7 @@ namespace DotNetOrb.Core.GIOP
             this.content.AddComponent(content);
             this.content.SetWriterIndex(this.content.WriterIndex + content.ReadableBytes);
             Header = new GIOPHeader(this.content);
-            CDRInputStream input = new CDRInputStream(ORB, content, Header.GIOPVersion.Minor, Header.IsLittleEndian);
+            CDRInputStream input = new CDRInputStream(ORB, this.content, Header.GIOPVersion.Minor, Header.IsLittleEndian);
             RequestId = input.ReadULong();
         }
 
