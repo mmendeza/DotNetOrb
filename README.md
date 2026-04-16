@@ -84,7 +84,7 @@ Configuration options can be set in different ways:
 |Property|Description|Example|
 |--|--|--|
 |OAAddress|\<protocol>://\<address>|iiop://myhost:3001|
-|OASSLAdress|\<protocol>://\<address>|iiop://myhost:443|
+|OASSLAddress|\<protocol>://\<address>|iiop://myhost:443|
 |OAIAddr|IP address|myhost|
 |OAPort|Port|3001|
 |OASSLPort|SSL Port|443|
@@ -125,7 +125,7 @@ Currently supported codesets:
 ### Security
 |Property|Description|Example|
 |--|--|--|
-|OASSLAdress|\<protocol>://\<address>|iiop://myhost:443|
+|OASSLAddress|\<protocol>://\<address>|iiop://myhost:443|
 |OASSLPort|SSL Port|443|
 |DotNetOrb.Security.SSL.IsSupported|Must be "true" to activate ssl support|true/false|
 |DotNetOrb.Security.SSL.Client.SupportedOptions|SSL client supported options|20|
