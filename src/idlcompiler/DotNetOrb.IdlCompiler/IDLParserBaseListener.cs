@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from D:/DotNetOrb/src/idlcompiler/IDL.Grammar/IDLParser.g4 by ANTLR 4.13.1
+// Generated from D:/GitHub/wuerzi2000/DotNetOrb/src/idlcompiler/IDL.Grammar/IDLParser.g4 by ANTLR 4.13.1
 
 // Unreachable code detected
 #pragma warning disable 0162
@@ -504,6 +504,30 @@ public partial class IDLParserBaseListener : IIDLParserListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitLiteral([NotNull] IDLParser.LiteralContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="IDLParser.string_literal_adjacent"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterString_literal_adjacent([NotNull] IDLParser.String_literal_adjacentContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="IDLParser.string_literal_adjacent"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitString_literal_adjacent([NotNull] IDLParser.String_literal_adjacentContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="IDLParser.wide_string_literal_adjacent"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterWide_string_literal_adjacent([NotNull] IDLParser.Wide_string_literal_adjacentContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="IDLParser.wide_string_literal_adjacent"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitWide_string_literal_adjacent([NotNull] IDLParser.Wide_string_literal_adjacentContext context) { }
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="IDLParser.positive_int_const"/>.
 	/// <para>The default implementation does nothing.</para>
