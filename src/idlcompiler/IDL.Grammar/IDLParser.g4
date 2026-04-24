@@ -189,9 +189,16 @@ primary_expr
    ;
 
 literal
-   : (HEX_LITERAL | INTEGER_LITERAL | OCTAL_LITERAL | STRING_LITERAL | WIDE_STRING_LITERAL | CHARACTER_LITERAL | WIDE_CHARACTER_LITERAL | FIXED_PT_LITERAL | FLOATING_PT_LITERAL | BOOLEAN_LITERAL)
+   : (HEX_LITERAL | INTEGER_LITERAL | OCTAL_LITERAL | string_literal_adjacent | wide_string_literal_adjacent | CHARACTER_LITERAL | WIDE_CHARACTER_LITERAL | FIXED_PT_LITERAL | FLOATING_PT_LITERAL | BOOLEAN_LITERAL)
    ;
 
+string_literal_adjacent
+   : STRING_LITERAL+
+   ;
+wide_string_literal_adjacent
+   : WIDE_STRING_LITERAL+
+   ;
+   
 positive_int_const
    : const_exp
    ;

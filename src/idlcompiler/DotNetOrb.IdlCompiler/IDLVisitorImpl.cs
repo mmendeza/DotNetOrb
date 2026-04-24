@@ -1770,30 +1770,65 @@ namespace DotNetOrb.IdlCompiler
 
         private Literal GetLiteralValue(IDLParser.LiteralContext context, Scope scope)
         {
-            if (context.ChildCount > 0 && context.children[0] is ITerminalNode node)
+            if (context.ChildCount > 0)
             {
-                switch (node.Symbol.Type)
+                if (context.children[0] is ITerminalNode node)
                 {
-                    case IDLParser.OCTAL_LITERAL:
-                    case IDLParser.HEX_LITERAL:
-                    case IDLParser.INTEGER_LITERAL:
-                        return new IntegerLiteral(node.Symbol.Text);
-                    case IDLParser.STRING_LITERAL:
-                        return new StringLiteral(node.Symbol.Text.Trim('"'), false);
-                    case IDLParser.WIDE_STRING_LITERAL:
-                        return new StringLiteral(node.Symbol.Text.Substring(1).Trim('"'), true);
-                    case IDLParser.CHARACTER_LITERAL:
-                        return new CharLiteral(node.Symbol.Text.Trim('\''), false);
-                    case IDLParser.WIDE_CHARACTER_LITERAL:
-                        return new CharLiteral(node.Symbol.Text.Substring(1).Trim('\''), true);
-                    case IDLParser.FIXED_PT_LITERAL:
-                    case IDLParser.FLOATING_PT_LITERAL:
-                        return new FloatLiteral(node.Symbol.Text);
-                    case IDLParser.BOOLEAN_LITERAL:
-                        return new BooleanLiteral(node.Symbol.Text);
+                    switch (node.Symbol.Type)
+                    {
+                        case IDLParser.OCTAL_LITERAL:
+                        case IDLParser.HEX_LITERAL:
+                        case IDLParser.INTEGER_LITERAL:
+                            return new IntegerLiteral(node.Symbol.Text);
+                        case IDLParser.STRING_LITERAL:
+                            return new StringLiteral(TerminalNode2String(node), false);
+                        case IDLParser.WIDE_STRING_LITERAL:
+                            return new StringLiteral(TerminalNode2WString(node), true);
+                        case IDLParser.CHARACTER_LITERAL:
+                            return new CharLiteral(node.Symbol.Text.Trim('\''), false);
+                        case IDLParser.WIDE_CHARACTER_LITERAL:
+                            return new CharLiteral(node.Symbol.Text.Substring(1).Trim('\''), true);
+                        case IDLParser.FIXED_PT_LITERAL:
+                        case IDLParser.FLOATING_PT_LITERAL:
+                            return new FloatLiteral(node.Symbol.Text);
+                        case IDLParser.BOOLEAN_LITERAL:
+                            return new BooleanLiteral(node.Symbol.Text);
+                    }
+                }
+                else if (context.children[0] is IDLParser.String_literal_adjacentContext strCtx)
+                {
+                    if (strCtx.STRING_LITERAL().Length == 1)
+                        return new StringLiteral(TerminalNode2String(strCtx.STRING_LITERAL()[0]), false);
+
+                    var sb = new StringBuilder();
+                    foreach (var strNode in strCtx.STRING_LITERAL())
+                    {
+                        sb.Append(TerminalNode2String(strNode));
+                    }
+                    return new StringLiteral(sb.ToString(), false);
+                }
+                else if (context.children[0] is IDLParser.Wide_string_literal_adjacentContext wstrCtx)
+                {
+                    if (wstrCtx.WIDE_STRING_LITERAL().Length == 1)
+                        return new StringLiteral(TerminalNode2WString(wstrCtx.WIDE_STRING_LITERAL()[0]), true);
+
+                    var sb = new StringBuilder();
+                    foreach (var wstrNode in wstrCtx.WIDE_STRING_LITERAL())
+                    {
+                        sb.Append(TerminalNode2WString(wstrNode));
+                    }
+                    return new StringLiteral(sb.ToString(), true);
                 }
             }
             throw new IdlCompilerException("Literal type not supported");
+        }
+        private static string TerminalNode2String(ITerminalNode node)
+        {
+            return node.Symbol.Text.Trim('"');
+        }
+        private static string TerminalNode2WString(ITerminalNode node)
+        {
+            return node.Symbol.Text.Substring(1).Trim('"');
         }
 
         private List<Annotation> GetAnnotations(IDLParser.AnnappsContext annapps, Scope scope)
