@@ -39,8 +39,10 @@ DIRECITVE_NEW_LINE=38
 DIRECTIVE_TEXT_NEW_LINE=39
 TEXT=40
 SLASH=41
-SEMICOLON=42
+StringEnd=42
+SEMICOLON=43
 '#'=1
+'"'=42
 'pragma'=5
 'prefix'=6
 'defined'=8
@@ -63,4 +65,4 @@ SEMICOLON=42
 '>'=27
 '<='=28
 '>='=29
-';'=42
+';'=43

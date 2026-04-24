@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from D:/DotNetOrb/src/idlcompiler/IDL.Grammar/IDLPreprocessorParser.g4 by ANTLR 4.13.1
+// Generated from D:/GitHub/wuerzi2000/DotNetOrb/src/idlcompiler/IDL.Grammar/IDLPreprocessorParser.g4 by ANTLR 4.13.1
 
 // Unreachable code detected
 #pragma warning disable 0162
@@ -43,7 +43,7 @@ public partial class IDLPreprocessorParser : Parser {
 		AND=24, OR=25, LT=26, GT=27, LE=28, GE=29, DIRECTIVE_WHITESPACES=30, DIRECTIVE_STRING=31, 
 		CONDITIONAL_SYMBOL=32, DECIMAL_LITERAL=33, FLOAT=34, NEW_LINE=35, DIRECTIVE_COMMENT=36, 
 		DIRECTIVE_LINE_COMMENT=37, DIRECITVE_NEW_LINE=38, DIRECTIVE_TEXT_NEW_LINE=39, 
-		TEXT=40, SLASH=41, SEMICOLON=42;
+		TEXT=40, SLASH=41, StringEnd=42, SEMICOLON=43;
 	public const int
 		RULE_idlDocument = 0, RULE_text = 1, RULE_code = 2, RULE_include = 3, 
 		RULE_pragma = 4, RULE_directive = 5, RULE_directive_text = 6, RULE_preprocessor_expression = 7;
@@ -57,7 +57,7 @@ public partial class IDLPreprocessorParser : Parser {
 		"'if'", "'elif'", "'else'", "'undef'", "'ifdef'", "'ifndef'", "'endif'", 
 		null, null, "'error'", "'!'", "'('", "')'", "'=='", "'!='", "'&&'", "'||'", 
 		"'<'", "'>'", "'<='", "'>='", null, null, null, null, null, null, null, 
-		null, null, null, null, null, "';'"
+		null, null, null, null, null, "'\"'", "';'"
 	};
 	private static readonly string[] _SymbolicNames = {
 		null, "SHARP", "CODE", "IMPORT", "INCLUDE", "PRAGMA", "PREFIX", "DEFINE", 
@@ -66,7 +66,7 @@ public partial class IDLPreprocessorParser : Parser {
 		"AND", "OR", "LT", "GT", "LE", "GE", "DIRECTIVE_WHITESPACES", "DIRECTIVE_STRING", 
 		"CONDITIONAL_SYMBOL", "DECIMAL_LITERAL", "FLOAT", "NEW_LINE", "DIRECTIVE_COMMENT", 
 		"DIRECTIVE_LINE_COMMENT", "DIRECITVE_NEW_LINE", "DIRECTIVE_TEXT_NEW_LINE", 
-		"TEXT", "SLASH", "SEMICOLON"
+		"TEXT", "SLASH", "StringEnd", "SEMICOLON"
 	};
 	public static readonly IVocabulary DefaultVocabulary = new Vocabulary(_LiteralNames, _SymbolicNames);
 
@@ -1245,7 +1245,7 @@ public partial class IDLPreprocessorParser : Parser {
 	}
 
 	private static int[] _serializedATN = {
-		4,1,42,128,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,6,2,7,
+		4,1,43,128,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,6,2,7,
 		7,7,1,0,5,0,18,8,0,10,0,12,0,21,9,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,
 		1,1,1,1,1,1,1,1,1,1,1,1,1,3,1,38,8,1,1,2,4,2,41,8,2,11,2,12,2,42,1,3,1,
 		3,1,3,1,4,1,4,1,4,1,4,1,4,3,4,53,8,4,1,5,1,5,1,5,1,5,1,5,1,5,1,5,3,5,62,

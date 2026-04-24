@@ -32,8 +32,15 @@ LINE_COMMENT:             '//' ~[\r\n]*                              -> type(COD
 SLASH:                    '/'                                        -> type(CODE);
 CHARACTER_LITERAL:        '\'' (EscapeSequence | ~('\''|'\\')) '\''  -> type(CODE);
 QUOTE_STRING:             '\'' (EscapeSequence | ~('\''|'\\'))* '\'' -> type(CODE);
-STRING:                   StringFragment                             -> type(CODE);
+STRING:                   '"'                                        -> type(CODE), pushMode(STRING_MODE);
 CODE:                     ~[#'"/]+;
+
+mode STRING_MODE;
+//'"' (~('\\' | '"') | '\\' .)* '"';
+StringEnd:                '"'                                        -> type(CODE), popMode ;
+StringLineContinuation:   '\\' '\r'? '\n'                            -> type(CODE), channel(HIDDEN);
+StringEscape:             '\\' .                                     -> type(CODE);
+StringChar:               ~["\\\r\n]                                 -> type(CODE);
 
 mode DIRECTIVE_MODE;
 

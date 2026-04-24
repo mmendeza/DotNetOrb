@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Xml;
 
 namespace DotNetOrb.IdlCompiler
 {
@@ -49,8 +50,7 @@ namespace DotNetOrb.IdlCompiler
 
         public override string VisitText([NotNull] IDLPreprocessorParser.TextContext context)
         {
-            //String result = tokensStream.GetText(context);
-            var result = context.GetSourceText();
+            var result = context.GetText();
             bool directive = false;
             if (context.directive() != null)
             {
