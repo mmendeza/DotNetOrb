@@ -24,6 +24,7 @@ namespace DotNetOrb.IdlCompiler
         public static bool Ami = false;
         public static bool DotNetNaming = true;
         public static bool TypeCodeFullNamespace = false;
+        public static bool ReproducibleOutputHeader = false;
 
         public static void PrintHelp()
         {
@@ -42,6 +43,7 @@ namespace DotNetOrb.IdlCompiler
             Console.WriteLine("-ami                                     generate async methods");
             Console.WriteLine("-naming_scheme [dotnet | idl]            respect original idl names or convert to dotnet naming (default)");
             Console.WriteLine("-full-typecode-namespaces                add full namespace to typecode name");
+            Console.WriteLine("-reproducible                            generate reproducible output header (without version and timestamp)");
         }
 
         static void Main(string[] args)
@@ -300,6 +302,11 @@ namespace DotNetOrb.IdlCompiler
                 {
                     i++;
                     TypeCodeFullNamespace = true;
+                }
+                else if (args[i].Equals("-reproducible"))
+                {
+                    i++;
+                    ReproducibleOutputHeader = true;
                 }
                 else
                 {
