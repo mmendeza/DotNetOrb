@@ -251,6 +251,9 @@ To compile the idl we use the DotNetOrb.IdlCompiler tool:
     -sequence_type [array | list]            type of sequence fields: array (default) or List
     -ami                                     generate async methods
     -naming_scheme [dotnet | idl]            respect original idl names or convert to dotnet naming (default)
+    -full-typecode-namespaces                add full namespace to typecode name
+    -reproducible                            generate reproducible output header (without version and timestamp)
+
 
 ```bash
 DotNerOrb.IdlCompiler -o .\compiled_idls chat.idl
