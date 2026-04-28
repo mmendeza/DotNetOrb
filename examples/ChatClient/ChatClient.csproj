@@ -7,16 +7,20 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="$(SolutionDir)\src\idlcompiler\DotNetOrb.IdlCompiler\bin\Debug\net8.0\DotNetOrb.IdlCompiler.exe -o $(ProjectDir)compiled_idls $(ProjectDir)chat.idl" />
-  </Target>
-
   <ItemGroup>
     <PackageReference Include="System.Text.Json" Version="9.0.6" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\DotNetOrb.Core\DotNetOrb.Core.csproj" />
+    <ProjectReference Include="..\..\src\idlcompiler\DotNetOrb.IdlCompiler\DotNetOrb.IdlCompiler.csproj">
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <SkipGetTargetFrameworkProperties>true</SkipGetTargetFrameworkProperties>
+    </ProjectReference>
   </ItemGroup>
+
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="$(SolutionDir)\src\idlcompiler\DotNetOrb.IdlCompiler\bin\$(Configuration)\$(TargetFramework)\DotNetOrb.IdlCompiler.exe -o $(ProjectDir)compiled_idls $(ProjectDir)chat.idl" />
+  </Target>
 
 </Project>

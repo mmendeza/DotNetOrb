@@ -19,10 +19,14 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\DotNetOrb.Core\DotNetOrb.Core.csproj" />
+    <ProjectReference Include="..\..\src\idlcompiler\DotNetOrb.IdlCompiler\DotNetOrb.IdlCompiler.csproj">
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <SkipGetTargetFrameworkProperties>true</SkipGetTargetFrameworkProperties>
+    </ProjectReference>
   </ItemGroup>
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="$(SolutionDir)\src\idlcompiler\DotNetOrb.IdlCompiler\bin\Debug\net8.0\DotNetOrb.IdlCompiler.exe -i $(ProjectDir)idls -o $(ProjectDir)compiled_idls $(ProjectDir)idls\*.idl" />
+    <Exec Command="$(SolutionDir)\src\idlcompiler\DotNetOrb.IdlCompiler\bin\$(Configuration)\$(TargetFramework)\DotNetOrb.IdlCompiler.exe -i $(ProjectDir)idls -o $(ProjectDir)compiled_idls $(ProjectDir)idls\*.idl" />
   </Target>
 
 </Project>
