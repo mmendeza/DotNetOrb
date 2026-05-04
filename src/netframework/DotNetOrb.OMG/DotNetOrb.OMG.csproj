@@ -10,7 +10,7 @@
     <RootNamespace>DotNetOrb.OMG</RootNamespace>
     <AssemblyName>DotNetOrb.OMG</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <LangVersion>11.0</LangVersion>
+    <LangVersion>12.0</LangVersion>
     <Nullable>enable</Nullable>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
