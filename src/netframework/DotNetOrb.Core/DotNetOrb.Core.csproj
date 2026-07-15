@@ -10,7 +10,7 @@
     <RootNamespace>DotNetOrb.Core</RootNamespace>
     <AssemblyName>DotNetOrb.Core</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <LangVersion>11.0</LangVersion>
+    <LangVersion>12.0</LangVersion>
     <Nullable>enable</Nullable>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -369,6 +369,9 @@
     </Compile>
     <Compile Include="..\..\DotNetOrb.Core\IIOP\ClientIIOPConnection.cs">
       <Link>IIOP\ClientIIOPConnection.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DotNetOrb.Core\IIOP\ClientIIOPTrafficCaptureHandler.cs">
+      <Link>IIOP\ClientIIOPTrafficCaptureHandler.cs</Link>
     </Compile>
     <Compile Include="..\..\DotNetOrb.Core\IIOP\CommonInteroperabilityOptions.cs">
       <Link>IIOP\CommonInteroperabilityOptions.cs</Link>
