@@ -444,7 +444,9 @@ namespace DotNetOrb.Core
                 {
                     if (host != null || port != -1)
                     {
-                        address = new IIOPAddress(host, port);
+                        // not new IIOPAddress(host, port): that turns a port of -1 (not set) into 65535,
+                        // which then replaces the real port when the IOR is patched
+                        address = new IIOPAddress();
                         address.Configure(configuration);
                         if (host != null)
                         {
