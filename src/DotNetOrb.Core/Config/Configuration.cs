@@ -31,11 +31,13 @@ namespace DotNetOrb.Core.Config
                 id = props["ORBid"];
             }
             //Parse command line parameters
+            //Only arguments starting with -ORB or -DotNetOrb. are for the ORB, anything else belongs to the application
             var args = System.Environment.GetCommandLineArgs();
             Dictionary<string, string> argsDict = new Dictionary<string, string>();
             if (args != null)
             {
-                for (int i = 0; i < args.Length; i++)
+                // args[0] is the program itself
+                for (int i = 1; i < args.Length; i++)
                 {
                     if (args[i] == null)
                     {
@@ -51,37 +53,30 @@ namespace DotNetOrb.Core.Config
                                 throw new Initialize("ORBID cannot be null");
                             }
                             id = id.Trim();
-                            i++;
-                            break;
                         }
                         else
                         {
                             throw new Initialize("Invalid number of arguments to ORB.init");
                         }
                     }
-                    if (string.Equals(args[i], "-ORBInitRef", StringComparison.OrdinalIgnoreCase))
+                    else if (string.Equals(args[i], "-ORBInitRef", StringComparison.OrdinalIgnoreCase))
                     {
                         if (i + 1 < args.Length)
                         {
                             var value = args[++i];
-                            if (value != null)
+                            var parts = value == null ? new string[0] : value.Split('=', 2);
+                            if (parts.Length < 2)
                             {
-                                var parts = value.Split('=');
-                                if (parts.Length > 1)
-                                {
-                                    argsDict.Add("ORBInitRef." + parts[0], parts[1]);
-                                }
-                                throw new Initialize("Invalid ORBInitRef format -ORBInitRef " + parts[0] + ". it should be -ORBInitRef name=value.");
+                                throw new Initialize("Invalid ORBInitRef format -ORBInitRef " + value + ". it should be -ORBInitRef name=value.");
                             }
-                            i++;
-                            break;
+                            argsDict["ORBInitRef." + parts[0]] = parts[1];
                         }
                         else
                         {
                             throw new Initialize("Invalid ORBInitRef format. It should be -ORBInitRef name=value.");
                         }
                     }
-                    if (args[i].StartsWith("-"))
+                    else if (args[i].StartsWith("-ORB", StringComparison.OrdinalIgnoreCase) || args[i].StartsWith("-DotNetOrb.", StringComparison.OrdinalIgnoreCase))
                     {
                         // Strip the leading '-'.
                         var arg = args[i].Substring(1);
@@ -92,16 +87,13 @@ namespace DotNetOrb.Core.Config
                             {
                                 value = value.Trim();
                             }
-                            argsDict.Add(arg, value);
-                            i++;
-                            break;
+                            argsDict[arg] = value;
                         }
                         else
                         {
                             throw new Initialize("Invalid number of arguments to ORB.init");
                         }
                     }
-
                 }
             }
 
@@ -114,7 +106,7 @@ namespace DotNetOrb.Core.Config
                 var value = env[key];
                 if (value != null)
                 {
-                    settings.Add(key, value);
+                    settings[key] = value;
                 }                
             }
 
@@ -127,7 +119,7 @@ namespace DotNetOrb.Core.Config
                     var value = section[key];
                     if (value != null)
                     {
-                        settings.Add(key, value);
+                        settings[key] = value;
                     }
                 }
             }
@@ -147,7 +139,7 @@ namespace DotNetOrb.Core.Config
                             //remove section name
                             var index = kvp.Key.IndexOf(':');
                             var name = kvp.Key.Substring(index + 1);
-                            settings.Add(name, kvp.Value);
+                            settings[name] = kvp.Value;
                         }
                     }
                 }
@@ -165,7 +157,7 @@ namespace DotNetOrb.Core.Config
                     var value = props[key];
                     if (value != null)
                     {
-                        settings.Add(key, value);
+                        settings[key] = value;
                     }
                 }
             }
@@ -175,7 +167,7 @@ namespace DotNetOrb.Core.Config
                 var value = argsDict[key];
                 if (value != null)
                 {
-                    settings.Add(key, value);
+                    settings[key] = value;
                 }
             }
         }
@@ -479,9 +471,9 @@ namespace DotNetOrb.Core.Config
                             return Activator.CreateInstance(loggerType, type) as ILogger;
                         foreach (var asm in AppDomain.CurrentDomain.GetAssemblies())
                         {
-                            type = asm.GetType(strFullyQualifiedName);
-                            if (type != null)
-                                return Activator.CreateInstance(type, type) as ILogger;
+                            loggerType = asm.GetType(strFullyQualifiedName);
+                            if (loggerType != null)
+                                return Activator.CreateInstance(loggerType, type) as ILogger;
                         }
                     }
                 }
