@@ -56,7 +56,8 @@ interface_export
    | attr_decl SEMICOLON
    | op_decl SEMICOLON
    | type_id_decl SEMICOLON?
-   | type_prefix_decl SEMICOLON?     
+   | type_prefix_decl SEMICOLON?
+   | SHARP pragma
    ;
 
 interface_inheritance_spec
@@ -402,6 +403,7 @@ annotation_export
    | enum_type SEMICOLON
    | const_decl SEMICOLON
    | type_def SEMICOLON
+   | SHARP version_pragma
    ;
 
 annotation_member
@@ -418,7 +420,8 @@ annotation_forward_dcl
    ;
 
 bitset_type
-   : annapps KW_BITSET ID (COLON scoped_name)? LEFT_BRACE bitfield + RIGHT_BRACE
+   : annapps KW_BITSET ID (COLON scoped_name)? LEFT_BRACE
+     (SHARP version_pragma)* (bitfield (SHARP version_pragma)*)+ RIGHT_BRACE
    ;
 
 bitfield
@@ -430,7 +433,9 @@ bitfield_spec
    ;
 
 bitmask_type
-   : annapps KW_BITMASK ID LEFT_BRACE bit_value (COMMA bit_value)* RIGHT_BRACE
+   : annapps KW_BITMASK ID LEFT_BRACE (SHARP version_pragma)* bit_value
+     ((SHARP version_pragma)* COMMA (SHARP version_pragma)* bit_value)*
+     (SHARP version_pragma)* RIGHT_BRACE
    ;
 
 bit_value
@@ -447,6 +452,7 @@ member_list
 
 member
    : annapps type_spec declarators SEMICOLON
+   | SHARP version_pragma
    ;
 
 union_type
@@ -464,7 +470,7 @@ switch_type_spec
    ;
 
 switch_body
-   : case_stmt +
+   : (SHARP version_pragma)* (case_stmt (SHARP version_pragma)*)+
    ;
 
 case_stmt
@@ -481,7 +487,9 @@ element_spec
    ;
 
 enum_type
-   : annapps KW_ENUM ID LEFT_BRACE enumerator (COMMA enumerator)* RIGHT_BRACE
+   : annapps KW_ENUM ID LEFT_BRACE (SHARP version_pragma)* enumerator
+     ((SHARP version_pragma)* COMMA (SHARP version_pragma)* enumerator)*
+     (SHARP version_pragma)* RIGHT_BRACE
    ;
 
 enumerator
@@ -775,7 +783,11 @@ annotation_appl_param
 pragma
     : PRAGMA_PREFIX STRING_LITERAL                          #pragma_prefix
     | PRAGMA_ID scoped_name STRING_LITERAL                  #pragma_id
-    | PRAGMA_VERSION SCOPED_NAME VERSION_NUM                #pragma_version
+    | version_pragma                                       #pragma_version
+    ;
+
+version_pragma
+    : PRAGMA_VERSION SCOPED_NAME VERSION_NUM
     ;
 
 line

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from G:/DotNetOrb/DotNetOrb/src/idlcompiler/IDL.Grammar/IDLParser.g4 by ANTLR 4.13.1
+// Generated from H:/DotNetOrb/DotNetOrb/src/idlcompiler/IDL.Grammar/IDLParser.g4 by ANTLR 4.13.1
 
 // Unreachable code detected
 #pragma warning disable 0162
@@ -2046,6 +2046,18 @@ public partial class IDLParserBaseListener : IIDLParserListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitPragma_version([NotNull] IDLParser.Pragma_versionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="IDLParser.version_pragma"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterVersion_pragma([NotNull] IDLParser.Version_pragmaContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="IDLParser.version_pragma"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitVersion_pragma([NotNull] IDLParser.Version_pragmaContext context) { }
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="IDLParser.line"/>.
 	/// <para>The default implementation does nothing.</para>

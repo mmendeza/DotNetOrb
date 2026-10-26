@@ -107,8 +107,10 @@ namespace DotNetOrb.IdlCompiler
             }
             Console.WriteLine("Including " + fileToInclude.FullName + "...");
             var errorListener = new ErrorListener();
-            errorListener.CurrentFile = fileToInclude.Name;
+            errorListener.CurrentFile = fileToInclude.FullName;
             var preLexer = new IDLPreprocessorLexer(new AntlrFileStream(fileToInclude.FullName));
+            preLexer.RemoveErrorListeners();
+            preLexer.AddErrorListener(errorListener);
             var preTokens = new CommonTokenStream(preLexer);
             var preParser = new IDLPreprocessorParser(preTokens);
             preParser.RemoveErrorListeners();
@@ -121,6 +123,8 @@ namespace DotNetOrb.IdlCompiler
                 var result = preVisitor.Visit(preTree);
                 var stream = new AntlrInputStream(result);
                 var lexer = new IDLLexer(stream);
+                lexer.RemoveErrorListeners();
+                lexer.AddErrorListener(errorListener);
                 var tokens = new CommonTokenStream(lexer);
                 var parser = new IDLParser(tokens);
                 parser.RemoveErrorListeners();
@@ -134,12 +138,12 @@ namespace DotNetOrb.IdlCompiler
                 }
                 else
                 {
-                    Console.WriteLine(parser.NumberOfSyntaxErrors + " syntax errors");
+                    throw new IdlCompilerException(parser.NumberOfSyntaxErrors + " syntax errors");
                 }
             }
             else
             {
-                Console.WriteLine(preParser.NumberOfSyntaxErrors + " syntax errors");                
+                throw new IdlCompilerException(preParser.NumberOfSyntaxErrors + " syntax errors");
             }
             return true;
         }
@@ -159,8 +163,10 @@ namespace DotNetOrb.IdlCompiler
                     Console.WriteLine("importing " + fileName + "...");
                     var fileToInclude = new FileInfo(fileName);
                     var errorListener = new ErrorListener();
-                    errorListener.CurrentFile = fileToInclude.Name;
+                    errorListener.CurrentFile = fileToInclude.FullName;
                     var preLexer = new IDLPreprocessorLexer(new AntlrFileStream(fileToInclude.FullName));
+                    preLexer.RemoveErrorListeners();
+                    preLexer.AddErrorListener(errorListener);
                     var preTokens = new CommonTokenStream(preLexer);
                     var preParser = new IDLPreprocessorParser(preTokens);
                     preParser.RemoveErrorListeners();
@@ -173,6 +179,8 @@ namespace DotNetOrb.IdlCompiler
                         var result = preVisitor.Visit(preTree);
                         var stream = new AntlrInputStream(result);
                         var lexer = new IDLLexer(stream);
+                        lexer.RemoveErrorListeners();
+                        lexer.AddErrorListener(errorListener);
                         var tokens = new CommonTokenStream(lexer);
                         var parser = new IDLParser(tokens);
                         parser.RemoveErrorListeners();
@@ -186,12 +194,12 @@ namespace DotNetOrb.IdlCompiler
                         }
                         else
                         {
-                            Console.WriteLine(parser.NumberOfSyntaxErrors + " syntax errors");
+                            throw new IdlCompilerException(parser.NumberOfSyntaxErrors + " syntax errors");
                         }
                     }
                     else
                     {
-                        Console.WriteLine(preParser.NumberOfSyntaxErrors + " syntax errors");
+                        throw new IdlCompilerException(preParser.NumberOfSyntaxErrors + " syntax errors");
                     }
                 }
             }
@@ -609,6 +617,7 @@ namespace DotNetOrb.IdlCompiler
                     var exports = definition.annotation_body().annotation_export();
                     foreach (var export in exports)
                     {
+                        ApplyPragmaVersions(export, annotationType.NamingScope);
                         var member = export.annotation_member();
                         if (member != null)
                         {
@@ -758,10 +767,18 @@ namespace DotNetOrb.IdlCompiler
 
         public override bool VisitPragma_version([NotNull] IDLParser.Pragma_versionContext context)
         {
-            var name = context.SCOPED_NAME().GetText();
-            var version = context.VERSION_NUM().GetText();
-            currentScope.Versions[name] = version;
+            ApplyPragmaVersions(context, currentScope);
             return true;
+        }
+
+        private void ApplyPragmaVersions(ParserRuleContext context, Scope scope)
+        {
+            foreach (var pragma in context.GetRuleContexts<IDLParser.Version_pragmaContext>())
+            {
+                var name = pragma.SCOPED_NAME().GetText();
+                var version = pragma.VERSION_NUM().GetText();
+                scope.Versions[name] = version;
+            }
         }
 
         private void GetInheritance(Symbols.ValueType valueType, IDLParser.Value_inheritance_specContext context)
@@ -1226,6 +1243,11 @@ namespace DotNetOrb.IdlCompiler
         {
             foreach (var memberCtx in members)
             {
+                if (memberCtx.version_pragma() != null)
+                {
+                    ApplyPragmaVersions(memberCtx, scope);
+                    continue;
+                }
                 ITypeSymbol memberSymbolType = GetTypeSymbol(memberCtx.type_spec(), scope);
                 foreach (var declaratorCtx in memberCtx.declarators().declarator())
                 {
@@ -1290,6 +1312,7 @@ namespace DotNetOrb.IdlCompiler
                 union.Discriminator = BaseType.CreateBaseType(switchType.GetSourceText());
             }
             var switchBody = context.switch_body();
+            ApplyPragmaVersions(switchBody, union.NamingScope);
             var stmts = switchBody.case_stmt();
             foreach (var stmt in stmts)
             {
@@ -1397,6 +1420,7 @@ namespace DotNetOrb.IdlCompiler
             }
             SetTypeInfo(enumeration);
             scope.AddSymbolDefinition(enumeration);
+            ApplyPragmaVersions(context, scope);
             var enumerators = context.enumerator();
             foreach (var e in enumerators)
             {
@@ -1420,6 +1444,7 @@ namespace DotNetOrb.IdlCompiler
             var bitSet = new BitSet(context.ID().GetText(), annapps);
             scope.AddSymbolDefinition(bitSet);
             SetTypeInfo(bitSet);
+            ApplyPragmaVersions(context, bitSet.NamingScope);
             var scopedName = context.scoped_name();
             if (scopedName != null)
             {
@@ -1513,6 +1538,7 @@ namespace DotNetOrb.IdlCompiler
             }
             scope.AddSymbolDefinition(bitMask);
             SetTypeInfo(bitMask);
+            ApplyPragmaVersions(context, scope);
             var bitValues = context.bit_value();
             foreach (var bv in bitValues)
             {

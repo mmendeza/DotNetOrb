@@ -380,3 +380,4 @@ mode PRAGMA_VERSION_MODE;
 
 SCOPED_NAME: (DOUBLE_COLON)? ID (DOUBLE_COLON ID)*;
 VERSION_NUM: ('0' | '1' .. '9' '0' .. '9'*) '.' ('0' | '1' .. '9' '0' .. '9'*) -> mode(DEFAULT_MODE);
+PRAGMA_VERSION_WS: [ \t]+ -> channel(HIDDEN);

@@ -7,11 +7,16 @@ using System.IO;
 
 namespace DotNetOrb.IdlCompiler
 {
-    internal class ErrorListener : BaseErrorListener
+    internal class ErrorListener : BaseErrorListener, IAntlrErrorListener<int>
     {
         public int LineDelta {  get; set; }
 
         public string CurrentFile { get; set; }
+
+        public void SyntaxError(TextWriter output, IRecognizer recognizer, int offendingSymbol, int line, int charPositionInLine, string msg, RecognitionException e)
+        {
+            Console.Error.WriteLine(CurrentFile + " line " + (line - LineDelta) + ":" + charPositionInLine + " " + msg);
+        }
 
         public override void SyntaxError(TextWriter output, IRecognizer recognizer, IToken offendingSymbol, int line, int charPositionInLine, string msg, RecognitionException e)
         {

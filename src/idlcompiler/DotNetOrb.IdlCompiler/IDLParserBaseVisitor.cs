@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from G:/DotNetOrb/DotNetOrb/src/idlcompiler/IDL.Grammar/IDLParser.g4 by ANTLR 4.13.1
+// Generated from H:/DotNetOrb/DotNetOrb/src/idlcompiler/IDL.Grammar/IDLParser.g4 by ANTLR 4.13.1
 
 // Unreachable code detected
 #pragma warning disable 0162
@@ -1708,6 +1708,16 @@ public partial class IDLParserBaseVisitor<Result> : AbstractParseTreeVisitor<Res
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	public virtual Result VisitPragma_version([NotNull] IDLParser.Pragma_versionContext context) { return VisitChildren(context); }
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="IDLParser.version_pragma"/>.
+	/// <para>
+	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+	/// on <paramref name="context"/>.
+	/// </para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	public virtual Result VisitVersion_pragma([NotNull] IDLParser.Version_pragmaContext context) { return VisitChildren(context); }
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="IDLParser.line"/>.
 	/// <para>

@@ -110,8 +110,10 @@ namespace DotNetOrb.IdlCompiler
             {
                 Console.WriteLine("Preprocessing file " + file.Name + " ...");
                 var errorListener = new ErrorListener();
-                errorListener.CurrentFile = file.Name;
+                errorListener.CurrentFile = file.FullName;
                 var preLexer = new IDLPreprocessorLexer(new AntlrFileStream(file.FullName));
+                preLexer.RemoveErrorListeners();
+                preLexer.AddErrorListener(errorListener);
                 var preTokens = new CommonTokenStream(preLexer);
                 var preParser = new IDLPreprocessorParser(preTokens);                
                 preParser.RemoveErrorListeners();
@@ -125,6 +127,8 @@ namespace DotNetOrb.IdlCompiler
                     Console.WriteLine("Extracting namespaces from file " + file.Name + ". Symbol count: " + symbolTable.Count + "...");
                     var input = new AntlrInputStream(result);
                     var lexer = new IDLLexer(input);
+                    lexer.RemoveErrorListeners();
+                    lexer.AddErrorListener(errorListener);
                     var tokens = new CommonTokenStream(lexer);
                     var parser = new IDLParser(tokens);
                     parser.RemoveErrorListeners();
@@ -147,12 +151,12 @@ namespace DotNetOrb.IdlCompiler
                     }
                     else
                     {
-                        Console.WriteLine(parser.NumberOfSyntaxErrors + " syntax errors");
+                        throw new IdlCompilerException(parser.NumberOfSyntaxErrors + " syntax errors");
                     }
                 }
                 else
                 {
-                    Console.WriteLine(preParser.NumberOfSyntaxErrors + " syntax errors");
+                    throw new IdlCompilerException(preParser.NumberOfSyntaxErrors + " syntax errors");
                 }
             }
             catch (IdlCompilerException ex)
@@ -165,10 +169,12 @@ namespace DotNetOrb.IdlCompiler
                 {
                     Console.WriteLine(ex.Message);
                 }
+                Environment.Exit(1);
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Error processing file: " + file.Name + ": " + ex.Message);
+                Environment.Exit(1);
             }
         }
 
@@ -179,8 +185,10 @@ namespace DotNetOrb.IdlCompiler
             {
                 Console.WriteLine("Preprocessing file " + file.Name + " ...");
                 var errorListener = new ErrorListener();
-                errorListener.CurrentFile = file.Name;
+                errorListener.CurrentFile = file.FullName;
                 var preLexer = new IDLPreprocessorLexer(new AntlrFileStream(file.FullName));
+                preLexer.RemoveErrorListeners();
+                preLexer.AddErrorListener(errorListener);
                 var preTokens = new CommonTokenStream(preLexer);
                 var preParser = new IDLPreprocessorParser(preTokens);
                 preParser.RemoveErrorListeners();
@@ -194,6 +202,8 @@ namespace DotNetOrb.IdlCompiler
                     Console.WriteLine("Processing file " + file.Name + " ...");
                     var stream = new AntlrInputStream(result);
                     var lexer = new IDLLexer(stream);
+                    lexer.RemoveErrorListeners();
+                    lexer.AddErrorListener(errorListener);
                     var tokens = new CommonTokenStream(lexer);
                     var parser = new IDLParser(tokens);
                     parser.RemoveErrorListeners();
@@ -207,12 +217,12 @@ namespace DotNetOrb.IdlCompiler
                     }
                     else
                     {
-                        Console.WriteLine(parser.NumberOfSyntaxErrors + " syntax errors");
+                        throw new IdlCompilerException(parser.NumberOfSyntaxErrors + " syntax errors");
                     }
                 }
                 else
                 {
-                    Console.WriteLine(preParser.NumberOfSyntaxErrors + " syntax errors");
+                    throw new IdlCompilerException(preParser.NumberOfSyntaxErrors + " syntax errors");
                 }
             }
             catch (IdlCompilerException ex)
