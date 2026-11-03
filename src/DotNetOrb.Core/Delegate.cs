@@ -586,7 +586,7 @@ namespace DotNetOrb.Core
         {
             lock (bindSync)
             {
-                return pior.IOR;
+                return GetParsedIOR().IOR;
             }
         }
 
