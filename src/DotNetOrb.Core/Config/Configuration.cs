@@ -64,7 +64,7 @@ namespace DotNetOrb.Core.Config
                         if (i + 1 < args.Length)
                         {
                             var value = args[++i];
-                            var parts = value == null ? new string[0] : value.Split('=', 2);
+                            var parts = value == null ? new string[0] : value.Split(new[] { '=' }, 2);
                             if (parts.Length < 2)
                             {
                                 throw new Initialize("Invalid ORBInitRef format -ORBInitRef " + value + ". it should be -ORBInitRef name=value.");
